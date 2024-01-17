@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "902940088412",
+    "project_id": "shiftsync-attendance",
+    "storage_bucket": "shiftsync-attendance.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:902940088412:android:f67798ab73b02cdbc4ae99",
+        "android_client_info": {
+          "package_name": "com.example.shiftsync_attendance"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJL0_mCTOB1GizAFNwoXaId12qrvx8Y-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
