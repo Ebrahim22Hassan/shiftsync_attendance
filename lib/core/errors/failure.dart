@@ -15,6 +15,15 @@ class ServerFailure extends Failure {
   List<Object?> get props => [error];
 }
 
+class AuthFailure extends Failure {
+  final String message;
+
+  AuthFailure({required this.message});
+
+  @override
+  List<Object?> get props => [message];
+}
+
 class EmptyCacheFailure extends Failure {
   @override
   List<Object?> get props => [];
