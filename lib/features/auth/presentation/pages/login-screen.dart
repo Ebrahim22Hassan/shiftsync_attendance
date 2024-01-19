@@ -93,8 +93,8 @@ class LoginScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  const BoxShadow(
+                                boxShadow: const [
+                                  BoxShadow(
                                       color: Color.fromRGBO(143, 148, 251, .2),
                                       blurRadius: 20.0,
                                       offset: Offset(0, 10)
@@ -146,8 +146,7 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                           const Gap(15),
-                          const Text("Forgot Password?", style: TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),),
-                      
+                          // const Text("Forgot Password?", style: TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),),
                           const Gap(30),
                           SizedBox(
                             width: width,
