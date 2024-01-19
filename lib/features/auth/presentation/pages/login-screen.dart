@@ -140,20 +140,22 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                       const Gap(15),
-                      Container(
+                      const Text("Forgot Password?", style: TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),),
+
+                      const Gap(30),
+                      SizedBox(
                         width: width,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                          const Text("Don\'t have an account?",style: TextStyle(color: Colors.grey,fontSize: 14),),
-                          // const Gap(10),
-                          TextButton(
-                              onPressed: (){},
-                              child: const Text("REGISTER NOW",style: TextStyle(color: Colors.purpleAccent,fontWeight: FontWeight.bold),))
-                        ],),
+                            const Text("Don\'t have an account?",style: TextStyle(color: Colors.grey,fontSize: 14),),
+                            // const Gap(10),
+                            TextButton(
+                                onPressed: (){},
+                                child: const Text("REGISTER NOW",style: TextStyle(color: Colors.deepPurpleAccent,fontWeight: FontWeight.bold),))
+                          ],),
                       ),
-                      const Gap(30),
-                      const Text("Forgot Password?", style: TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),)
+
                     ],
                   ),
                 )
