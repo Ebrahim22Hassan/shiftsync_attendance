@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 
 import '../widgets/flutter_neumorphic.dart';
+import '../widgets/my_custom_bottom_navigation_bar.dart';
 import '../widgets/slider_button.dart';
 
 class HomePage extends StatelessWidget {
@@ -28,16 +29,18 @@ class HomePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Welcome",
+                        "Hey Employee!",
                         style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                            color: Colors.grey),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            ),
                       ),
                       Text(
-                        "Employee",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
+                        "Good Morning, Mark Your attendance",
+                        style:TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 10,
+                            color: Colors.grey),
                       ),
                     ],
                   ),
@@ -52,109 +55,164 @@ class HomePage extends StatelessWidget {
                   )
                 ],
               ),
-              const Gap(35),
-
-              const Text(
-                "Today's Status",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              const Gap(10),
+              const Gap(55),
               const SizedBox(
-                height: 200,
-                child: Card(
-                  elevation: 1.2,
-                  child: Padding(
-                    padding: EdgeInsets.all(60),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              children: [
-                                Text(
-                                  "Check In",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 16,
-                                      color: Colors.grey),
-                                ),
-                                Text(
-                                  "09:30",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  "Check Out",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 16,
-                                      color: Colors.grey),
-                                ),
-                                Text(
-                                  "02:30",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              const Gap(10),
-              const MyCustomSliderButton(),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-
-                  Text(
-                    formattedDate,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 16),
-                  ),
-                  Row(
-                    children: [
-
-                      Text(
-                        formattedTime,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16),
-                      ),
-                      const Text(
-                        " Sat",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                width: double.infinity,
+                  child: Center(child: Text("09:00 AM",style: TextStyle(fontSize: 26,fontWeight: FontWeight.w500),))),
+              const Gap(5),
+              const SizedBox(
+                width: double.infinity,
+                  child: Center(child: Text("Oct 26,2022 - Wednesday",style: TextStyle(fontSize: 10,fontWeight: FontWeight.w400),))),
               const Gap(35),
+              Container(
+                height: 250,
+                width: double.infinity,
+                color: Colors.grey,
+              ),
+              const Gap(45),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
 
-              // Today's Status
-
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(children: [
+                      Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/clock_in.png")
+                          )
+                        ),
+                      ),
+                      Text("--:--"),
+                      Text("Check In"),
+                    ],),
+                    Column(children: [
+                      Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/clock_out.png")
+                          )
+                        ),
+                      ),
+                      Text("--:--"),
+                      Text("Check Out"),
+                    ],),
+                    Column(children: [
+                      Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/total_hrs.png")
+                          )
+                        ),
+                      ),
+                      Text("--:--"),
+                      Text("Total hrs"),
+                    ],),
+                ],),
+              )
+              // const Text(
+              //   "Today's Status",
+              //   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              // ),
+              // const Gap(10),
+              // const SizedBox(
+              //   height: 200,
+              //   child: Card(
+              //     elevation: 1.2,
+              //     child: Padding(
+              //       padding: EdgeInsets.all(60),
+              //       child: Column(
+              //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //         children: [
+              //           Row(
+              //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //             children: [
+              //               Column(
+              //                 children: [
+              //                   Text(
+              //                     "Check In",
+              //                     style: TextStyle(
+              //                         fontWeight: FontWeight.w600,
+              //                         fontSize: 16,
+              //                         color: Colors.grey),
+              //                   ),
+              //                   Text(
+              //                     "09:30",
+              //                     style: TextStyle(
+              //                         fontWeight: FontWeight.bold,
+              //                         fontSize: 16),
+              //                   ),
+              //                 ],
+              //               ),
+              //               Column(
+              //                 children: [
+              //                   Text(
+              //                     "Check Out",
+              //                     style: TextStyle(
+              //                         fontWeight: FontWeight.w600,
+              //                         fontSize: 16,
+              //                         color: Colors.grey),
+              //                   ),
+              //                   Text(
+              //                     "02:30",
+              //                     style: TextStyle(
+              //                         fontWeight: FontWeight.bold,
+              //                         fontSize: 16),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ],
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // const Gap(10),
+              // const MyCustomSliderButton(),
+              // Column(
+              //   crossAxisAlignment: CrossAxisAlignment.start,
+              //   children: [
+              //
+              //     Text(
+              //       formattedDate,
+              //       style: const TextStyle(
+              //           fontWeight: FontWeight.bold, fontSize: 16),
+              //     ),
+              //     Row(
+              //       children: [
+              //
+              //         Text(
+              //           formattedTime,
+              //           style: const TextStyle(
+              //               fontWeight: FontWeight.bold, fontSize: 16),
+              //         ),
+              //         const Text(
+              //           " Sat",
+              //           style: TextStyle(
+              //               fontWeight: FontWeight.bold, fontSize: 16),
+              //         ),
+              //       ],
+              //     ),
+              //   ],
+              // ),
+              //
             ],
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        height: 80,
-       decoration: BoxDecoration(
-         color: Colors.blue,
-         borderRadius: BorderRadius.only(topLeft: Radius.circular(40),topRight: Radius.circular(40))
-       ),
-      ),
+      bottomNavigationBar:const MyCustomBottomNavigationBar()
     );
   }
 }
+
