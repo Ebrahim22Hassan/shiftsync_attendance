@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:shiftsync_attendance/features/auth/presentation/pages/register_screen.dart';
 import 'package:shiftsync_attendance/features/auth/presentation/widgets/custom_Text_Form_Field.dart';
+import 'package:shiftsync_attendance/features/auth/presentation/pages/home_page.dart';
 
 import '../../../../core/widgets/conditional_builder.dart';
 
@@ -130,19 +132,24 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                           const Gap(30),
-                          Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                gradient: const LinearGradient(
-                                    colors: [
-                                      Color.fromRGBO(143, 148, 251, 1),
-                                      Color.fromRGBO(143, 148, 251, .6),
-                                    ]
-                                )
-                            ),
-                            child: const Center(
-                              child: Text("Login", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                          GestureDetector(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+                            },
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  gradient: const LinearGradient(
+                                      colors: [
+                                        Color.fromRGBO(143, 148, 251, 1),
+                                        Color.fromRGBO(143, 148, 251, .6),
+                                      ]
+                                  )
+                              ),
+                              child: const Center(
+                                child: Text("Login", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                              ),
                             ),
                           ),
                           const Gap(15),
@@ -156,7 +163,10 @@ class LoginScreen extends StatelessWidget {
                                 const Text("Don\'t have an account?",style: TextStyle(color: Colors.grey,fontSize: 14),),
                                 // const Gap(10),
                                 TextButton(
-                                    onPressed: (){},
+                                    onPressed: (){
+
+                                   Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
+                                    },
                                     child: const Text("REGISTER NOW",style: TextStyle(color: Colors.deepPurpleAccent,fontWeight: FontWeight.bold),))
                               ],),
                           ),
