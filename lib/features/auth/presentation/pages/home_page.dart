@@ -63,12 +63,12 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 width: double.infinity,
                   child: Center(child: Text("Oct 26,2022 - Wednesday",style: TextStyle(fontSize: 10,fontWeight: FontWeight.w400),))),
-              const Gap(35),
+              const Gap(65),
               Container(
 
                 child: MyCustomNeumorphicButton(),
               ),
-              const Gap(45),
+              const Gap(90),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
