@@ -1,41 +1,162 @@
 part of 'auth_cubit.dart';
 
-class AuthState extends Equatable {
-  final bool isLoading;
-  final User? user;
-  final String errorMessage;
-  final String otp;
 
-  const AuthState({
-    required this.isLoading,
-    required this.user,
-    required this.errorMessage,
-    required this.otp,
-  });
+abstract class AuthState extends Equatable {
+  const AuthState();
+}
 
-  factory AuthState.initial() {
-    return const AuthState(
-      isLoading: false,
-      user: null,
-      errorMessage: '',
-      otp: '',
-    );
-  }
+class AuthInitial extends AuthState {
+  @override
+  List<Object> get props => [];
+}
 
-  AuthState copyWith({
-    bool? isLoading,
-    User? user,
-    String? errorMessage,
-    String? otp,
-  }) {
-    return AuthState(
-      isLoading: isLoading ?? this.isLoading,
-      user: user ?? this.user,
-      errorMessage: errorMessage ?? this.errorMessage,
-      otp: otp ?? this.otp,
-    );
-  }
+class LoginLoadingState extends AuthState {
+  @override
+  List<Object> get props => [];
+}
+
+class LoginSuccessState extends AuthState {
+  final AuthEntity authEntity;
+
+  const LoginSuccessState(this.authEntity);
 
   @override
-  List<Object?> get props => [isLoading, user, errorMessage, otp];
+  List<Object> get props => [authEntity];
+}
+
+class LoginFailureState extends AuthState {
+  final String errorMessage;
+
+  const LoginFailureState(this.errorMessage);
+
+  @override
+  List<Object> get props => [errorMessage];
+}
+
+class RegisterLoadingState extends AuthState {
+  @override
+  List<Object> get props => [];
+}
+
+class RegisterSuccessState extends AuthState {
+  final AuthEntity authEntity;
+
+  const RegisterSuccessState(this.authEntity);
+
+  @override
+  List<Object> get props => [authEntity];
+}
+
+class RegisterFailureState extends AuthState {
+  final String errorMessage;
+
+  const RegisterFailureState(this.errorMessage);
+
+  @override
+  List<Object> get props => [errorMessage];
+}
+
+class ForgotPasswordLoadingState extends AuthState {
+  @override
+  List<Object> get props => [];
+}
+
+class ForgotPasswordFailureState extends AuthState {
+  final String errorMessage;
+
+  const ForgotPasswordFailureState(this.errorMessage);
+
+  @override
+  List<Object> get props => [errorMessage];
+}
+
+class VerifyOtpLoadingState extends AuthState {
+  @override
+  List<Object> get props => [];
+}
+
+
+class VerifyOtpResendOtpCodeForgetPasswordLoadingState extends AuthState {
+  @override
+  List<Object> get props => [];
+}
+
+class LogoutLoadingState extends AuthState {
+  @override
+  List<Object> get props => [];
+}
+
+class LogoutSuccessState extends AuthState {
+  @override
+  List<Object> get props => [];
+}
+
+class LogoutFailureState extends AuthState {
+  final String errorMessage;
+
+  const LogoutFailureState(this.errorMessage);
+
+  @override
+  List<Object> get props => [errorMessage];
+}
+
+
+class DeleteAccountLoadingState extends AuthState {
+  @override
+  List<Object> get props => [];
+}
+
+class DeleteAccountSuccessState extends AuthState {
+  @override
+  List<Object> get props => [];
+}
+
+class DeleteAccountFailureState extends AuthState {
+  final String error;
+
+  const DeleteAccountFailureState(this.error);
+
+  @override
+  List<Object> get props => [error];
+}
+
+class ResendOtpLoadingState extends AuthState {
+  @override
+  List<Object> get props => [];
+}
+
+
+class SetNewPasswordLoadingState extends AuthState {
+  @override
+  List<Object> get props => [];
+}
+
+class SetNewPasswordSuccessState extends AuthState {
+
+  @override
+  List<Object> get props => [];
+}
+
+class SetNewPasswordFailureState extends AuthState {
+  final String errorMessage;
+
+  const SetNewPasswordFailureState(this.errorMessage);
+
+  @override
+  List<Object> get props => [errorMessage];
+}
+
+class ChangePasswordVisibilityState extends AuthState {
+  final bool isPasswordVisible;
+
+  const ChangePasswordVisibilityState(this.isPasswordVisible);
+
+  @override
+  List<Object> get props => [isPasswordVisible];
+}
+
+
+class DropdownState extends AuthState {
+  @override
+  List<Object?> get props => [];
 }

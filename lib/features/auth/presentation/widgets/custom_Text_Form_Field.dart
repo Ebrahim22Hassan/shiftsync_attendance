@@ -1,20 +1,21 @@
+
+
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
-
-  final TextEditingController controller;
+  TextEditingController? controller;
   final String label;
-   IconData? suffixIcon;
+  IconData? suffixIcon;
   final IconData prefixIcon;
   final TextInputType keyboardType;
 
-   CustomTextFormField({Key? key,
-    required this.controller,
-    required this.label,
+  CustomTextFormField(
+      {super.key,
+      this.controller,
+      required this.label,
       this.suffixIcon,
-    required this.prefixIcon,
-    required this.keyboardType})
-      : super(key: key);
+      required this.prefixIcon,
+      required this.keyboardType});
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +30,13 @@ class CustomTextFormField extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: TextFormField(
-        controller:controller ,
-        keyboardType: keyboardType ,
+        controller: controller,
+        keyboardType: keyboardType,
         decoration: InputDecoration(
-          label: Text(label),
-          suffixIcon: Icon(suffixIcon),
-          prefixIcon: Icon(prefixIcon),
-          border: const OutlineInputBorder()
-        ),
+            label: Text(label),
+            suffixIcon: Icon(suffixIcon),
+            prefixIcon: Icon(prefixIcon),
+            border: const OutlineInputBorder()),
       ),
     );
   }

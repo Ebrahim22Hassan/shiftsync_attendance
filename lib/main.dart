@@ -1,15 +1,22 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shiftsync_attendance/features/auth/presentation/pages/login-screen.dart';
+import 'core/services/di.dart';
+import 'features/auth/presentation/cubit/auth_cubit.dart';
 import 'features/auth/presentation/pages/register_screen.dart';
 import 'features/auth/presentation/pages/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await init();
 }
 
 class MyApp extends StatelessWidget {
@@ -17,14 +24,28 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        // useMaterial3: true,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthCubit>(
+          create: (context) => di<AuthCubit>(),
+        ),
+      ],
+      child: SafeArea(
+        top: false,
+        bottom: false,
+        minimum: Platform.isAndroid
+            ? EdgeInsets.zero
+            : const EdgeInsets.only(bottom: 10),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            // useMaterial3: true,
+          ),
+          home:  LoginScreen(),
+        ),
       ),
-      home:  LoginScreen(),
     );
   }
 }

@@ -12,10 +12,13 @@ abstract class FirebaseAuthRemoteDataSource {
   });
 
   Future<User?> signInWithEmailAndPassword(String email, String password);
+
   Future<void> forgetPassword(String email); // Add this method
-  Future<void> resetPassword(String email, String newPassword, String code); // Add this method
+  Future<void> resetPassword(
+      String email, String newPassword, String code); // Add this method
   Future<void> logout(); // Add this method
-  Future<void> setNewPassword(String oldPassword, String newPassword); // Add this method
+  Future<void> setNewPassword(
+      String oldPassword, String newPassword); // Add this method
   Future<void> deleteAccount(); // Add this method
   Future<void> sendOtp(String phoneNumber); // Add this method
   Future<void> verifyOtp(String otp); // Add this method
@@ -25,7 +28,8 @@ abstract class FirebaseAuthRemoteDataSource {
 class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
   final FirebaseAuth _firebaseAuth;
 
-  FirebaseAuthRemoteDataSourceImpl(this._firebaseAuth);
+  FirebaseAuthRemoteDataSourceImpl({required FirebaseAuth firebaseAuth})
+      : _firebaseAuth = firebaseAuth;
 
   @override
   Future<User?> registerWithEmailAndPassword({
@@ -37,13 +41,26 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
     required String email,
     required String password,
   }) async {
-    return null;
+    try {
+      final UserCredential userCredential =
+          await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
 
-    // ... (implementation)
+      // Additional logic to store user information in your database if needed
+
+      return userCredential.user;
+    } catch (e) {
+      // Handle registration failure, e.g., email already in use
+      print('Error during registration: $e');
+      return null;
+    }
   }
 
   @override
-  Future<User?> signInWithEmailAndPassword(String email, String password) async {
+  Future<User?> signInWithEmailAndPassword(
+      String email, String password) async {
     return null;
 
     // ... (implementation)
@@ -55,7 +72,8 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
   }
 
   @override
-  Future<void> resetPassword(String email, String newPassword, String code) async {
+  Future<void> resetPassword(
+      String email, String newPassword, String code) async {
     // ... (implementation)
   }
 
