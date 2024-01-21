@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 
-import '../widgets/flutter_neumorphic.dart';
+import '../widgets/my_custom_neumorophic_button.dart';
 import '../widgets/my_custom_bottom_navigation_bar.dart';
 import '../widgets/slider_button.dart';
 
@@ -65,9 +65,8 @@ class HomePage extends StatelessWidget {
                   child: Center(child: Text("Oct 26,2022 - Wednesday",style: TextStyle(fontSize: 10,fontWeight: FontWeight.w400),))),
               const Gap(35),
               Container(
-                height: 250,
-                width: double.infinity,
-                color: Colors.grey,
+
+                child: MyCustomNeumorphicButton(),
               ),
               const Gap(45),
               Padding(
