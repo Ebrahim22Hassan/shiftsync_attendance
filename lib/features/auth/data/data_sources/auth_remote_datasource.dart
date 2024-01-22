@@ -2,8 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class FirebaseAuthRemoteDataSource {
   Future<User?> registerWithEmailAndPassword({
-    required String firstName,
-    required String secondName,
+    required String fullName,
     required String phone,
     required String gender,
     required String position,
@@ -33,8 +32,7 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
 
   @override
   Future<User?> registerWithEmailAndPassword({
-    required String firstName,
-    required String secondName,
+    required String fullName,
     required String phone,
     required String gender,
     required String position,

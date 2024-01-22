@@ -11,8 +11,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Either<Failure, User?>> registerWithEmailAndPassword({
-    required String firstName,
-    required String secondName,
+    required String fullName,
     required String phone,
     required String gender,
     required String position,
@@ -21,8 +20,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }) async {
     try {
       final User? user = await firebaseAuthRemoteDataSource.registerWithEmailAndPassword(
-        firstName: firstName,
-        secondName: secondName,
+        fullName: fullName,
         phone: phone,
         gender: gender,
         position: position,

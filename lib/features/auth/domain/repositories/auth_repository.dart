@@ -4,8 +4,7 @@ import '../../../../core/errors/failure.dart';
 
 abstract class AuthRepository {
   Future<Either<Failure, User?>> registerWithEmailAndPassword({
-    required String firstName,
-    required String secondName,
+    required String fullName,
     required String phone,
     required String gender,
     required String position,

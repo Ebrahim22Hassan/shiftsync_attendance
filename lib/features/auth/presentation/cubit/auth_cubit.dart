@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,31 +54,9 @@ class AuthCubit extends Cubit<AuthState> {
   bool hasError = false;
   String currentText = "";
 
-  Future<void> loginWithEmailAndPassword(
-      String emailOrPhone, String password) async {
-    try {
-      emit(LoginLoadingState());
-
-      final result = await loginUseCase.call(
-          emailOrPhone: emailOrPhone, password: password);
-
-      result.fold(
-        (failure) {
-          emit(const LoginFailureState('Login failed'));
-        },
-        (authEntity) {
-          emit(LoginSuccessState(authEntity as AuthEntity));
-        },
-      );
-    } catch (e) {
-      emit(const LoginFailureState('Login failed'));
-    }
-  }
-
   Future<void> register({
-    required String firstName,
-    required String secondName,
-    required String phone,
+    required String fullName,
+    required String phoneNum,
     required String gender,
     required String position,
     required String email,
@@ -87,9 +66,8 @@ class AuthCubit extends Cubit<AuthState> {
       emit(RegisterLoadingState());
 
       final result = await registerUseCase.call(
-        firstName: firstName,
-        secondName: secondName,
-        phone: phone,
+        fullName: fullName,
+        phone: phoneNum,
         gender: gender,
         position: position,
         email: email,
@@ -103,8 +81,8 @@ class AuthCubit extends Cubit<AuthState> {
         (user) {
           final authEntity = AuthEntity(
               id: user?.uid ?? '',
-              fullName: user?.displayName,
-              phoneNum: user?.phoneNumber,
+              fullName: fullName,
+              phoneNum: phoneNum,
               email: user?.email ?? '',
               gender: gender,
               position: position);
@@ -113,6 +91,65 @@ class AuthCubit extends Cubit<AuthState> {
       );
     } catch (e) {
       emit(const RegisterFailureState('Registration failed'));
+    }
+  }
+
+  Future<void> saveUserDataToFirestore(AuthEntity authEntity) async {
+    try {
+      final userCollection = FirebaseFirestore.instance.collection('users');
+
+      await userCollection.doc(authEntity.id).set({
+        'id': authEntity.id,
+        'fullName': authEntity.fullName,
+        'phoneNum': authEntity.phoneNum,
+        'email': authEntity.email,
+        'gender': authEntity.gender,
+        'position': authEntity.position,
+      });
+    } catch (e) {
+      print('Error saving user data to Firestore: $e');
+    }
+  }
+
+  Future<void> signInWithEmailAndPassword(String email, String password) async {
+    try {
+      emit(LoginLoadingState());
+
+      final result = await loginUseCase.call(
+        email: email,
+        password: password,
+      );
+
+      result.fold(
+            (failure) {
+          emit(const LoginFailureState('Login failed'));
+        },
+            (authEntity) {
+          emit(LoginSuccessState(authEntity as AuthEntity));
+        },
+      );
+    } catch (e) {
+      emit(const LoginFailureState('Login failed'));
+    }
+  }
+  Future<void> loginWithEmailAndPassword(
+      String emailOrPhone, String password) async {
+    try {
+      emit(LoginLoadingState());
+
+      final result = await loginUseCase.call(
+          email: emailOrPhone, password: password);
+
+      result.fold(
+            (failure) {
+          emit(const LoginFailureState('Login failed'));
+        },
+            (authEntity) {
+          emit(LoginSuccessState(authEntity as AuthEntity));
+        },
+      );
+    } catch (e) {
+      emit(const LoginFailureState('Login failed'));
     }
   }
 }
