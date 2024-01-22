@@ -110,7 +110,6 @@ class AuthCubit extends Cubit<AuthState> {
       print('Error saving user data to Firestore: $e');
     }
   }
-
   Future<void> signInWithEmailAndPassword(String email, String password) async {
     try {
       emit(LoginLoadingState());

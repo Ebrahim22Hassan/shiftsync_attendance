@@ -3,7 +3,9 @@ import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:gap/gap.dart';
 
 class MyCustomNeumorphicButton extends StatefulWidget {
-  MyCustomNeumorphicButton({Key? key}) : super(key: key);
+  final String buttonText;
+
+  MyCustomNeumorphicButton({Key? key, required this.buttonText}) : super(key: key);
 
   @override
   State<MyCustomNeumorphicButton> createState() =>
@@ -11,9 +13,9 @@ class MyCustomNeumorphicButton extends StatefulWidget {
 }
 
 class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton> {
-  @override
   bool isClicked = false;
 
+  @override
   Widget build(BuildContext context) {
     Color background = const Color(0xffF9F5F6);
     Offset offset = isClicked ? const Offset(10, 10) : const Offset(26, 26);
@@ -27,8 +29,8 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton> {
         },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
-          height: 160,
-          width: 160,
+          height: 100,
+          width: 100,
           decoration: BoxDecoration(
             color: background,
             shape: BoxShape.circle, // Uncomment this line for a circular shape
@@ -48,16 +50,16 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton> {
               ),
             ],
           ),
-          child: const Column(
+          child: Column(
             children: [
-              Gap(40),
+              Gap(12),
               SizedBox(
                 height: 50,
                 child: Image(
                   image: AssetImage("assets/images/touch_in.png"),
                 ),
               ),
-              Text("Check In")
+              Text(widget.buttonText,style: TextStyle(fontSize: 10),) // Use the buttonText property here
             ],
           ),
         ),
