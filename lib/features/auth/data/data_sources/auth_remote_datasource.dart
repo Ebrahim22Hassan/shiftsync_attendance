@@ -10,7 +10,7 @@ abstract class FirebaseAuthRemoteDataSource {
     required String password,
   });
 
-  Future<User?> signInWithEmailAndPassword(String email, String password);
+  Future<User?> loginWithEmailAndPassword(String email, String password);
 
   Future<void> forgetPassword(String email); // Add this method
   Future<void> resetPassword(
@@ -57,11 +57,20 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
   }
 
   @override
-  Future<User?> signInWithEmailAndPassword(
+  Future<User?> loginWithEmailAndPassword(
       String email, String password) async {
-    return null;
-
-    // ... (implementation)
+    try {
+      final UserCredential userCredential =
+      await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return userCredential.user;
+    } catch (e) {
+      // Handle login failure, e.g., invalid credentials
+      print('Error during login: $e');
+      return null;
+    }
   }
 
   @override

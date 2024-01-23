@@ -11,7 +11,7 @@ abstract class AuthRepository {
     required String email,
     required String password,
   });
-  Future<Either<Failure, User?>> signInWithEmailAndPassword(String email, String password);
+  Future<Either<Failure, User?>> loginWithEmailAndPassword(String email, String password);
   Future<Either<Failure, Unit>> forgetPassword(String email);
   Future<Either<Failure, Unit>> resetPassword(String email, String newPassword, String code);
   Future<Either<Failure, Unit>> logout();

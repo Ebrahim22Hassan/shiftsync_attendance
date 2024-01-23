@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shiftsync_attendance/features/auth/presentation/pages/login-screen.dart';
 import 'core/services/di.dart';
 import 'features/auth/presentation/cubit/auth_cubit.dart';
 import 'features/auth/presentation/pages/register_screen.dart';
@@ -42,7 +41,7 @@ class MyApp extends StatelessWidget {
             // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             // useMaterial3: true,
           ),
-          home: const HomePage(),
+          home: const RegisterScreen(),
         ),
       ),
     );

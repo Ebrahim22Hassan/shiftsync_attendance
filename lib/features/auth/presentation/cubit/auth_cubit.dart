@@ -110,40 +110,19 @@ class AuthCubit extends Cubit<AuthState> {
       print('Error saving user data to Firestore: $e');
     }
   }
-  Future<void> signInWithEmailAndPassword(String email, String password) async {
-    try {
-      emit(LoginLoadingState());
 
-      final result = await loginUseCase.call(
-        email: email,
-        password: password,
-      );
-
-      result.fold(
-            (failure) {
-          emit(const LoginFailureState('Login failed'));
-        },
-            (authEntity) {
-          emit(LoginSuccessState(authEntity as AuthEntity));
-        },
-      );
-    } catch (e) {
-      emit(const LoginFailureState('Login failed'));
-    }
-  }
   Future<void> loginWithEmailAndPassword(
-      String emailOrPhone, String password) async {
+      {required String email, required String password}) async {
     try {
       emit(LoginLoadingState());
 
-      final result = await loginUseCase.call(
-          email: emailOrPhone, password: password);
+      final result = await loginUseCase.call(email: email, password: password);
 
       result.fold(
-            (failure) {
+        (failure) {
           emit(const LoginFailureState('Login failed'));
         },
-            (authEntity) {
+        (authEntity) {
           emit(LoginSuccessState(authEntity as AuthEntity));
         },
       );

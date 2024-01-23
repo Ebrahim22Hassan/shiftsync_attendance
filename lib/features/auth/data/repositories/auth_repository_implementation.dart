@@ -34,9 +34,9 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, User?>> signInWithEmailAndPassword(String email, String password) async {
+  Future<Either<Failure, User?>> loginWithEmailAndPassword(String email, String password) async {
     try {
-      final User? user = await firebaseAuthRemoteDataSource.signInWithEmailAndPassword(email, password);
+      final User? user = await firebaseAuthRemoteDataSource.loginWithEmailAndPassword(email, password);
       return Right(user);
     } catch (e) {
       return Left(AuthFailure(message: 'Login failed'));

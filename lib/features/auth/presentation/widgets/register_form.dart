@@ -6,7 +6,7 @@ import '../../../../core/widgets/alerts.dart';
 import '../../../../core/widgets/conditional_builder.dart';
 import '../cubit/auth_cubit.dart';
 import '../pages/home_page.dart';
-import '../pages/login-screen.dart';
+import '../pages/login_screen.dart';
 import 'custom_Text_Form_Field.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -86,7 +86,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 condition: state is RegisterFailureState ||
                     state is! RegisterLoadingState,
                 fallback: (context) => const CircularProgressIndicator(),
-                builder:  (context) => Center(
+                builder: (context) => Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -114,7 +114,8 @@ class _RegisterFormState extends State<RegisterForm> {
                               text: 'pleaseThePhoneNumberMustBe9Digits',
                               state: ToastStates.error,
                             );
-                          } else if (!authCubit.phoneRegister.text.startsWith('5')) {
+                          } else if (!authCubit.phoneRegister.text
+                              .startsWith('5')) {
                             context.toast(
                               text: 'pleaseThePhoneNumberMustStartWith5',
                               state: ToastStates.error,
@@ -124,7 +125,8 @@ class _RegisterFormState extends State<RegisterForm> {
                               text: 'pleaseEnterYourEmail',
                               state: ToastStates.error,
                             );
-                          } else if (authCubit.email.text.contains(regExp) != true) {
+                          } else if (authCubit.email.text.contains(regExp) !=
+                              true) {
                             context.toast(
                               text: 'pleaseEnterValidEmail',
                               state: ToastStates.error,
@@ -165,27 +167,30 @@ class _RegisterFormState extends State<RegisterForm> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (context) => LoginScreen()),
-                          );
-                        },
-                        child: RichText(
-                          text: const TextSpan(
-                            text: 'Already have an account? ',
-                            style: TextStyle(color: Colors.black),
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: 'LOGIN',
-                                style: TextStyle(
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "Already have an account?",
+                              style: TextStyle(color: Colors.grey, fontSize: 14),
+                            ),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                             const LoginScreen()));
+                                },
+                                child: const Text(
+                                  "LOGIN",
+                                  style: TextStyle(
+                                      color: Colors.deepPurpleAccent,
+                                      fontWeight: FontWeight.bold),
+                                ))
+                          ],
                         ),
                       ),
                     ],

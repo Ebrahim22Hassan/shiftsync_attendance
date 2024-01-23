@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:shiftsync_attendance/features/auth/presentation/pages/home_page.dart';
-import 'package:shiftsync_attendance/features/auth/presentation/pages/login-screen.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 import 'package:swipeable_button_view/swipeable_button_view.dart';
 
@@ -14,6 +12,7 @@ class MyCustomSliderButton extends StatefulWidget {
 
 class _MyCustomSliderButtonState extends State<MyCustomSliderButton> {
 
+  bool isFinished = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -78,3 +77,4 @@ class _MyCustomSliderButtonState extends State<MyCustomSliderButton> {
     // );
   }
 }
+
