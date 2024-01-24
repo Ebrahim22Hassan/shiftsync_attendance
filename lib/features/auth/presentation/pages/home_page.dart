@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
-import 'package:shiftsync_attendance/map_sample.dart';
+import 'package:shiftsync_attendance/features/auth/presentation/widgets/map_sample.dart';
 import '../widgets/my_custom_map_widget.dart';
 import '../widgets/my_custom_neumorophic_button.dart';
 import '../widgets/my_custom_bottom_navigation_bar.dart';
@@ -118,7 +118,7 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              const Gap(45),
+              const Gap(25),
 // MapSample(),
               MyCustomMapWidget(),
               const Gap(40),

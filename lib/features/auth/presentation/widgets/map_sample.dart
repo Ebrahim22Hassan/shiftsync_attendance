@@ -20,9 +20,10 @@ class _MapSampleState extends State<MapSample> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-
+    height: 295,
+      width: 295,
       child: GoogleMap(
-        mapType: MapType.hybrid,
+        mapType: MapType.normal,
         initialCameraPosition: _kGooglePlex,
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
