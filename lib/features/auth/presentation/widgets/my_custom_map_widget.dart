@@ -54,7 +54,6 @@ class _MyCustomMapWidgetState extends State<MyCustomMapWidget> {
                 ],
               ),
             ),
-
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
               child: const MapSample(),
