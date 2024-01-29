@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart'hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
-import 'package:gap/gap.dart';
-import 'package:shiftsync_attendance/features/auth/presentation/widgets/map_sample.dart';
+import 'package:shiftsync_attendance/features/attendance/presentation/widgets/map_sample.dart';
 
 class MyCustomMapWidget extends StatefulWidget {
    MyCustomMapWidget({Key? key}) : super(key: key);

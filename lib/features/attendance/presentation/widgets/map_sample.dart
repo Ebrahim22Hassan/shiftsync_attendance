@@ -7,7 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../../core/services/location_helper.dart';
 
 class MapSample extends StatefulWidget {
-  const MapSample({Key? key}) : super(key: key);
+  const MapSample({super.key});
 
   @override
   State<MapSample> createState() => _MapSampleState();

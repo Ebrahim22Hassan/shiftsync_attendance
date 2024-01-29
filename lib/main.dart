@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/services/di.dart';
 import 'features/auth/presentation/cubit/auth_cubit.dart';
+import 'features/attendance/presentation/pages/home_page.dart';
+import 'features/auth/presentation/pages/profile_screen.dart';
 import 'features/auth/presentation/pages/register_screen.dart';
-import 'features/auth/presentation/pages/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'features/auth/presentation/widgets/map_sample.dart';
+import 'features/attendance/presentation/widgets/map_sample.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
             // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             // useMaterial3: true,
           ),
-          home: const HomePage(),
+          home: const ProfileScreen(),
         ),
       ),
     );

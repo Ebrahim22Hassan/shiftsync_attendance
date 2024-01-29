@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import '../../../../core/widgets/conditional_builder.dart';
 import '../cubit/auth_cubit.dart';
-import '../pages/home_page.dart';
+import '../../../attendance/presentation/pages/home_page.dart';
 import '../pages/register_screen.dart';
+import 'custom_auth_button.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -80,7 +81,10 @@ class _LoginFormState extends State<LoginForm> {
                 ConditionalBuilder(
                   condition: state is! LoginLoadingState,
                   fallback: (context) => const CircularProgressIndicator(),
-                  builder: (context) => GestureDetector(
+                  builder: (context) => CustomAuthButton(
+                    formKey: formKey,
+                    authText: "Login",
+                    authCubit: authCubit,
                     onTap: () {
                       // Close the keyboard
                       FocusScope.of(context).unfocus();
@@ -101,30 +105,14 @@ class _LoginFormState extends State<LoginForm> {
                         print("NOT VALID");
                       }
                     },
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        gradient: const LinearGradient(colors: [
-                          Color.fromRGBO(143, 148, 251, 1),
-                          Color.fromRGBO(143, 148, 251, .6),
-                        ]),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          "Login",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
                   ),
                 ),
-                const Gap(15),
-                // const Text("Forgot Password?", style: TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),),
                 const Gap(30),
+                const Text(
+                  "Forgot Password?",
+                  style: TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),
+                ),
+                const Gap(20),
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: Row(

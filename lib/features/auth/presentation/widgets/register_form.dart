@@ -5,9 +5,10 @@ import 'package:shiftsync_attendance/core/extensions/toast_extenstion.dart';
 import '../../../../core/widgets/alerts.dart';
 import '../../../../core/widgets/conditional_builder.dart';
 import '../cubit/auth_cubit.dart';
-import '../pages/home_page.dart';
+import '../../../attendance/presentation/pages/home_page.dart';
 import '../pages/login_screen.dart';
 import 'custom_Text_Form_Field.dart';
+import 'custom_auth_button.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});
@@ -81,122 +82,95 @@ class _RegisterFormState extends State<RegisterForm> {
                   label: "Password",
                   prefixIcon: Icons.person,
                   keyboardType: TextInputType.text),
-              const Gap(20),
+              const Gap(40),
               ConditionalBuilder(
                 condition: state is RegisterFailureState ||
                     state is! RegisterLoadingState,
                 fallback: (context) => const CircularProgressIndicator(),
-                builder: (context) => Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Gap(20),
-                      GestureDetector(
-                        onTap: () {
-                          //close keyboard
-                          FocusScope.of(context).unfocus();
-                          Pattern pattern =
-                              r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                          RegExp regExp = RegExp(pattern.toString());
-                          if (authCubit.name.text.isEmpty) {
-                            context.toast(
-                              text: 'pleaseEnterYourName',
-                              state: ToastStates.error,
-                            );
-                          } else if (authCubit.phoneRegister.text.isEmpty) {
-                            context.toast(
-                              text: 'pleaseEnterYourPhoneNumber',
-                              state: ToastStates.error,
-                            );
-                          } else if (authCubit.phoneRegister.text.length < 9) {
-                            context.toast(
-                              text: 'pleaseThePhoneNumberMustBe9Digits',
-                              state: ToastStates.error,
-                            );
-                          } else if (!authCubit.phoneRegister.text
-                              .startsWith('5')) {
-                            context.toast(
-                              text: 'pleaseThePhoneNumberMustStartWith5',
-                              state: ToastStates.error,
-                            );
-                          } else if (authCubit.email.text.isEmpty) {
-                            context.toast(
-                              text: 'pleaseEnterYourEmail',
-                              state: ToastStates.error,
-                            );
-                          } else if (authCubit.email.text.contains(regExp) !=
-                              true) {
-                            context.toast(
-                              text: 'pleaseEnterValidEmail',
-                              state: ToastStates.error,
-                            );
-                          } else if (authCubit.passwordRegister.text.isEmpty) {
-                            context.toast(
-                              text: 'pleaseEnterYourPassword',
-                              state: ToastStates.error,
-                            );
-                          } else {
-                            authCubit.register(
-                              fullName: authCubit.name.text,
-                              phoneNum: authCubit.phoneRegister.text,
-                              gender: 'male',
-                              position: authCubit.position.text,
-                              email: authCubit.email.text,
-                              password: authCubit.passwordRegister.text,
-                            );
-                          }
-                        },
-                        child: Container(
-                          height: 50,
-                          width: MediaQuery.of(context).size.width / 1.22,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              gradient: const LinearGradient(colors: [
-                                Color.fromRGBO(143, 148, 251, 1),
-                                Color.fromRGBO(143, 148, 251, .6),
-                              ])),
-                          child: const Center(
-                            child: Text(
-                              "Sign Up",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              "Already have an account?",
-                              style: TextStyle(color: Colors.grey, fontSize: 14),
-                            ),
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                             const LoginScreen()));
-                                },
-                                child: const Text(
-                                  "LOGIN",
-                                  style: TextStyle(
-                                      color: Colors.deepPurpleAccent,
-                                      fontWeight: FontWeight.bold),
-                                ))
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                builder: (context) => CustomAuthButton(
+                  formKey: formKey,
+                  authText: "Register",
+                  authCubit: authCubit,
+                  onTap: () {
+                    //close keyboard
+                    FocusScope.of(context).unfocus();
+                    Pattern pattern =
+                        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                    RegExp regExp = RegExp(pattern.toString());
+                    if (authCubit.name.text.isEmpty) {
+                      context.toast(
+                        text: 'pleaseEnterYourName',
+                        state: ToastStates.error,
+                      );
+                    } else if (authCubit.phoneRegister.text.isEmpty) {
+                      context.toast(
+                        text: 'pleaseEnterYourPhoneNumber',
+                        state: ToastStates.error,
+                      );
+                    } else if (authCubit.phoneRegister.text.length < 9) {
+                      context.toast(
+                        text: 'pleaseThePhoneNumberMustBe9Digits',
+                        state: ToastStates.error,
+                      );
+                    } else if (!authCubit.phoneRegister.text.startsWith('5')) {
+                      context.toast(
+                        text: 'pleaseThePhoneNumberMustStartWith5',
+                        state: ToastStates.error,
+                      );
+                    } else if (authCubit.email.text.isEmpty) {
+                      context.toast(
+                        text: 'pleaseEnterYourEmail',
+                        state: ToastStates.error,
+                      );
+                    } else if (authCubit.email.text.contains(regExp) != true) {
+                      context.toast(
+                        text: 'pleaseEnterValidEmail',
+                        state: ToastStates.error,
+                      );
+                    } else if (authCubit.passwordRegister.text.isEmpty) {
+                      context.toast(
+                        text: 'pleaseEnterYourPassword',
+                        state: ToastStates.error,
+                      );
+                    } else {
+                      authCubit.register(
+                        fullName: authCubit.name.text,
+                        phoneNum: authCubit.phoneRegister.text,
+                        gender: 'male',
+                        position: authCubit.position.text,
+                        email: authCubit.email.text,
+                        password: authCubit.passwordRegister.text,
+                      );
+                    }
+                  },
                 ),
-              )
+              ),
+              const Gap(20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Already have an account?",
+                      style: TextStyle(color: Colors.grey, fontSize: 14),
+                    ),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginScreen()));
+                        },
+                        child: const Text(
+                          "LOGIN",
+                          style: TextStyle(
+                              color: Colors.deepPurpleAccent,
+                              fontWeight: FontWeight.bold),
+                        ))
+                  ],
+                ),
+              ),
             ],
           ),
         );
