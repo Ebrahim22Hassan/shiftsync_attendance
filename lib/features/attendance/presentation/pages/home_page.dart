@@ -64,76 +64,82 @@ class HomePage extends StatelessWidget {
               //   width: double.infinity,
               //     child: Center(child: Text("Oct 26,2022 - Wednesday",style: TextStyle(fontSize: 10,fontWeight: FontWeight.w400),))),
 
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
+          // MapSample(),
+              Expanded(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      children: [
-                        Container(
-                          height: 50,
-                          width: 50,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                      "assets/images/clock_in.png"))),
-                        ),
-                        const Text("--:--"),
-                        const Text("Check In"),
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            children: [
+                              Container(
+                                height: 50,
+                                width: 50,
+                                decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            "assets/images/clock_in.png"))),
+                              ),
+                              const Text("--:--"),
+                              const Text("Check In"),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Container(
+                                height: 50,
+                                width: 50,
+                                decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            "assets/images/clock_out.png"))),
+                              ),
+                              const Text("--:--"),
+                              const Text("Check Out"),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Container(
+                                height: 50,
+                                width: 50,
+                                decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            "assets/images/total_hrs.png"))),
+                              ),
+                              const Text("--:--"),
+                              const Text("Total hrs"),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                    Column(
-                      children: [
-                        Container(
-                          height: 50,
-                          width: 50,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                      "assets/images/clock_out.png"))),
-                        ),
-                        const Text("--:--"),
-                        const Text("Check Out"),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Container(
-                          height: 50,
-                          width: 50,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                      "assets/images/total_hrs.png"))),
-                        ),
-                        const Text("--:--"),
-                        const Text("Total hrs"),
-                      ],
+                    MyCustomMapWidget(),
+                    // MyCustomSliderButton(),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(horizontal: 45),
+                      child: Row(
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          MyCustomNeumorphicButton(buttonText: "Check In"),
+                          Expanded(child: Container()),
+                          MyCustomNeumorphicButton(buttonText: "Check Out"),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
-              const Gap(25),
-          // MapSample(),
-              MyCustomMapWidget(),
-              const Gap(40),
-              // MyCustomSliderButton(),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 45),
-                child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    MyCustomNeumorphicButton(buttonText: "Check In"),
-                    Expanded(child: Container()),
-                    MyCustomNeumorphicButton(buttonText: "Check Out"),
-                  ],
-                ),
-              ),
+
               // const Gap(90),
 
               // const Text(

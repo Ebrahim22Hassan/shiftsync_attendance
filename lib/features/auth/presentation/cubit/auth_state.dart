@@ -56,30 +56,6 @@ class RegisterFailureState extends AuthState {
   List<Object> get props => [errorMessage];
 }
 
-class ForgotPasswordLoadingState extends AuthState {
-  @override
-  List<Object> get props => [];
-}
-
-class ForgotPasswordFailureState extends AuthState {
-  final String errorMessage;
-
-  const ForgotPasswordFailureState(this.errorMessage);
-
-  @override
-  List<Object> get props => [errorMessage];
-}
-
-class VerifyOtpLoadingState extends AuthState {
-  @override
-  List<Object> get props => [];
-}
-
-
-class VerifyOtpResendOtpCodeForgetPasswordLoadingState extends AuthState {
-  @override
-  List<Object> get props => [];
-}
 
 class LogoutLoadingState extends AuthState {
   @override
@@ -100,6 +76,29 @@ class LogoutFailureState extends AuthState {
   List<Object> get props => [errorMessage];
 }
 
+class ForgotPasswordLoadingState extends AuthState {
+  @override
+  List<Object> get props => [];
+}
+
+class ForgotPasswordFailureState extends AuthState {
+  final String errorMessage;
+
+  const ForgotPasswordFailureState(this.errorMessage);
+
+  @override
+  List<Object> get props => [errorMessage];
+}
+
+class VerifyOtpLoadingState extends AuthState {
+  @override
+  List<Object> get props => [];
+}
+
+class VerifyOtpResendOtpCodeForgetPasswordLoadingState extends AuthState {
+  @override
+  List<Object> get props => [];
+}
 
 class DeleteAccountLoadingState extends AuthState {
   @override

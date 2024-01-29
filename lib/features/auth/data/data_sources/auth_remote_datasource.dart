@@ -12,10 +12,11 @@ abstract class FirebaseAuthRemoteDataSource {
 
   Future<User?> loginWithEmailAndPassword(String email, String password);
 
+  Future<void> logout();
+
   Future<void> forgetPassword(String email); // Add this method
   Future<void> resetPassword(
       String email, String newPassword, String code); // Add this method
-  Future<void> logout(); // Add this method
   Future<void> setNewPassword(
       String oldPassword, String newPassword); // Add this method
   Future<void> deleteAccount(); // Add this method
@@ -57,11 +58,10 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
   }
 
   @override
-  Future<User?> loginWithEmailAndPassword(
-      String email, String password) async {
+  Future<User?> loginWithEmailAndPassword(String email, String password) async {
     try {
       final UserCredential userCredential =
-      await _firebaseAuth.signInWithEmailAndPassword(
+          await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -74,6 +74,17 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
   }
 
   @override
+  Future<void> logout() async {
+    try {
+      await _firebaseAuth.signOut();
+    } catch (e) {
+      // Handle logout failure
+      print('Error during logout: $e');
+      rethrow; // You can throw an exception or handle it according to your app's logic
+    }
+  }
+
+  @override
   Future<void> forgetPassword(String email) async {
     // ... (implementation)
   }
@@ -81,11 +92,6 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
   @override
   Future<void> resetPassword(
       String email, String newPassword, String code) async {
-    // ... (implementation)
-  }
-
-  @override
-  Future<void> logout() async {
     // ... (implementation)
   }
 

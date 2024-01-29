@@ -43,6 +43,17 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
+
+  @override
+  Future<Either<Failure, Unit>> logout() async {
+    try {
+      await firebaseAuthRemoteDataSource.logout();
+      return const Right(unit);
+    } catch (e) {
+      return Left(AuthFailure(message: 'Logout failed'));
+    }
+  }
+
   @override
   Future<Either<Failure, Unit>> forgetPassword(String email) async {
     try {
@@ -60,16 +71,6 @@ class AuthRepositoryImpl implements AuthRepository {
       return const Right(unit);
     } catch (e) {
       return Left(AuthFailure(message: 'Password reset failed'));
-    }
-  }
-
-  @override
-  Future<Either<Failure, Unit>> logout() async {
-    try {
-      await firebaseAuthRemoteDataSource.logout();
-      return const Right(unit);
-    } catch (e) {
-      return Left(AuthFailure(message: 'Logout failed'));
     }
   }
 

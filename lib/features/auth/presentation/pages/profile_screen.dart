@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:shiftsync_attendance/features/auth/presentation/pages/login_screen.dart';
 import 'package:shiftsync_attendance/features/auth/presentation/widgets/custom_auth_button.dart';
 
 import '../cubit/auth_cubit.dart';
@@ -29,10 +31,35 @@ class ProfileScreen extends StatelessWidget {
                 width: widthC,
               ),
               const Gap(20),
-              CustomAuthButton(
-                authCubit: authCubit,
-                authText: "Logout",
-                onTap: () {},
+              BlocConsumer<AuthCubit, AuthState>(
+                listener: (context, state) {
+                  if (state is LogoutSuccessState) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()),
+                    );
+                  } else if (state is LogoutFailureState) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Logout failed: ${state.errorMessage}'),
+                      ),
+                    );
+                  }
+                },
+                builder: (context, state) {
+                  if (state is LogoutLoadingState) {
+                    return const CircularProgressIndicator();
+                  } else {
+                    return CustomAuthButton(
+                      authCubit: authCubit,
+                      authText: "Logout",
+                      onTap: () {
+                        BlocProvider.of<AuthCubit>(context).logout();
+                      },
+                    );
+                  }
+                },
               )
             ],
           ),

@@ -130,4 +130,23 @@ class AuthCubit extends Cubit<AuthState> {
       emit(const LoginFailureState('Login failed'));
     }
   }
+
+  Future<void> logout() async {
+    try {
+      emit(LogoutLoadingState());
+
+      final result = await logoutUseCase.call();
+
+      result.fold(
+            (failure) {
+          emit(const LogoutFailureState('Logout failed'));
+        },
+            (success) {
+          emit(LogoutSuccessState());
+        },
+      );
+    } catch (e) {
+      emit(const LogoutFailureState('Logout failed'));
+    }
+  }
 }
