@@ -29,8 +29,8 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton> {
         },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
-          height: 100,
-          width: 100,
+          height: 200,
+          width: 200,
           decoration: BoxDecoration(
             color: background,
             shape: BoxShape.circle, // Uncomment this line for a circular shape
@@ -52,14 +52,14 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton> {
           ),
           child: Column(
             children: [
-              Gap(12),
-              SizedBox(
-                height: 50,
+              const Gap(50),
+              const SizedBox(
+                height: 70,
                 child: Image(
                   image: AssetImage("assets/images/touch_in.png"),
                 ),
               ),
-              Text(widget.buttonText,style: TextStyle(fontSize: 10),) // Use the buttonText property here
+              Text(widget.buttonText,style: const TextStyle(fontSize: 18),) // Use the buttonText property here
             ],
           ),
         ),

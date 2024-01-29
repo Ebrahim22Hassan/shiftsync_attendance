@@ -60,6 +60,7 @@ dependencies:
   cloud_firestore: ^4.14.0
   slide_to_act: ^2.0.2
   google_maps_flutter: ^2.5.3
+  salomon_bottom_bar: ^3.3.2
 
 
 
