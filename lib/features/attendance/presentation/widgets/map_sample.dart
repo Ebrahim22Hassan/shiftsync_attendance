@@ -28,22 +28,36 @@ class _MapSampleState extends State<MapSample> {
       bearing: 0,
       tilt: 0,
       zoom: 17);
-
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
-  final Completer<GoogleMapController> _controller = Completer<GoogleMapController>();
+  final Completer<GoogleMapController> _mapController = Completer<GoogleMapController>();
+  @override
+  initState() {
+    super.initState();
+    getMyCurrentLocation();
+  }
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 295,
-      width: 295,
-      child: GoogleMap(
-        mapType: MapType.normal,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {_controller.complete(controller);},
-      ),
+    return Scaffold(
+      body: position!=null
+          ?buildMap()
+          :const Center(child: CircularProgressIndicator(),) ,
     );
   }
+
+  Widget buildMap(){
+    return GoogleMap(
+      mapType: MapType.normal,
+      initialCameraPosition: _myCurrentLocationCameraPosition,
+      zoomControlsEnabled: false,
+      myLocationEnabled: false,
+      myLocationButtonEnabled: false,
+      onMapCreated: (GoogleMapController controller) {
+        _mapController.complete(controller);},
+    );
+  }
+  Future<void> _goToMyCurrentLocation() async {
+    final GoogleMapController controller = await _mapController.future;
+    controller.animateCamera(
+        CameraUpdate.newCameraPosition(_myCurrentLocationCameraPosition));
+  }
 }
+

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:gap/gap.dart';
+import 'package:shiftsync_attendance/features/attendance/presentation/widgets/map_sample.dart';
+import 'package:shiftsync_attendance/features/attendance/presentation/widgets/my_custom_map_widget.dart';
 
 class MyCustomNeumorphicButton extends StatefulWidget {
   final String buttonText;
@@ -25,6 +27,7 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton> {
         onTap: () {
           setState(() {
             isClicked = !isClicked;
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>const MapSample()));
           });
         },
         child: AnimatedContainer(

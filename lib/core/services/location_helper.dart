@@ -6,10 +6,15 @@ class LocationHelper{
     bool isServiceEnabled =await Geolocator.isLocationServiceEnabled();
     if(!isServiceEnabled){
       await Geolocator.requestPermission();
+
+    } else {
+
     }
+
     return await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high
     );
+
   }
 
 }
