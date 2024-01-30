@@ -19,7 +19,8 @@ class AuthRepositoryImpl implements AuthRepository {
     required String password,
   }) async {
     try {
-      final User? user = await firebaseAuthRemoteDataSource.registerWithEmailAndPassword(
+      final User? user =
+          await firebaseAuthRemoteDataSource.registerWithEmailAndPassword(
         fullName: fullName,
         phone: phone,
         gender: gender,
@@ -34,15 +35,16 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, User?>> loginWithEmailAndPassword(String email, String password) async {
+  Future<Either<Failure, User?>> loginWithEmailAndPassword(
+      String email, String password) async {
     try {
-      final User? user = await firebaseAuthRemoteDataSource.loginWithEmailAndPassword(email, password);
+      final User? user = await firebaseAuthRemoteDataSource
+          .loginWithEmailAndPassword(email, password);
       return Right(user);
     } catch (e) {
       return Left(AuthFailure(message: 'Login failed'));
     }
   }
-
 
   @override
   Future<Either<Failure, Unit>> logout() async {
@@ -65,9 +67,11 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> resetPassword(String email, String newPassword, String code) async {
+  Future<Either<Failure, Unit>> resetPassword(
+      String email, String newPassword, String code) async {
     try {
-      await firebaseAuthRemoteDataSource.resetPassword(email, newPassword, code);
+      await firebaseAuthRemoteDataSource.resetPassword(
+          email, newPassword, code);
       return const Right(unit);
     } catch (e) {
       return Left(AuthFailure(message: 'Password reset failed'));
@@ -75,9 +79,11 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> setNewPassword(String oldPassword, String newPassword) async {
+  Future<Either<Failure, Unit>> setNewPassword(
+      String oldPassword, String newPassword) async {
     try {
-      await firebaseAuthRemoteDataSource.setNewPassword(oldPassword, newPassword);
+      await firebaseAuthRemoteDataSource.setNewPassword(
+          oldPassword, newPassword);
       return const Right(unit);
     } catch (e) {
       return Left(AuthFailure(message: 'Setting new password failed'));

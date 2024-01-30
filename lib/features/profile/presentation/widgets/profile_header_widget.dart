@@ -35,7 +35,6 @@ class ProfileHeaderWidget extends StatelessWidget {
                 offset: const Offset(0, 5),
               ),
             ],
-
           ),
           child: IconButton(
             icon: const Icon(

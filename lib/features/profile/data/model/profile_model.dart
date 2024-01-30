@@ -1,23 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../domain/entities/auth_entity.dart';
 
-class AuthModel extends AuthEntity {
-  const AuthModel({
-     super.id,
-     super.fullName,
-     super.phoneNum,
-     super.gender,
-     super.position,
-     super.email,
-     super.image,
-     super.createdAt,
-     super.updatedAt,
+import '../../domain/entities/profile_entities.dart';
+
+class ProfileModel extends ProfileEntity {
+  const ProfileModel({
+    super.id,
+    super.fullName,
+    super.phoneNum,
+    super.gender,
+    super.position,
+    super.email,
+    super.image,
+    super.createdAt,
+    super.updatedAt,
   });
 
-  factory AuthModel.fromFirebaseUser(User user) {
+  factory ProfileModel.fromFirebaseUser(User user) {
     // Extract relevant information from the Firebase User object
     // This method can be customized based on your application's requirements
-    return AuthModel(
+    return ProfileModel(
       id: user.uid,
       fullName: user.displayName ?? '',
       phoneNum: user.phoneNumber ?? '',

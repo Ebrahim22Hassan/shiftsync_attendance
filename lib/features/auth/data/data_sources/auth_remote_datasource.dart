@@ -66,11 +66,21 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
         password: password,
       );
       return userCredential.user;
-    } catch (e) {
-      // Handle login failure, e.g., invalid credentials
-      print('Error during login: $e');
-      return null;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('user-not-found');
+      } else if (e.code == 'wrong-password') {
+        print('wrong-password');
+      }
     }
+    print("Not VALID");
+    return null;
+
+    // catch (e) {
+    //   // Handle login failure, e.g., invalid credentials
+    //   print('Error during login: $e');
+    //   return null;
+    // }
   }
 
   @override

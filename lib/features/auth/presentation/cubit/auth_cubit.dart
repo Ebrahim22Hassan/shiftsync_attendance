@@ -138,10 +138,10 @@ class AuthCubit extends Cubit<AuthState> {
       final result = await logoutUseCase.call();
 
       result.fold(
-            (failure) {
+        (failure) {
           emit(const LogoutFailureState('Logout failed'));
         },
-            (success) {
+        (success) {
           emit(LogoutSuccessState());
         },
       );

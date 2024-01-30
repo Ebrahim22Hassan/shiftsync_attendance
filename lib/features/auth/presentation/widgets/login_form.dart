@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:shiftsync_attendance/features/profile/presentation/pages/profile_screen.dart';
 import '../../../../core/widgets/conditional_builder.dart';
 import '../cubit/auth_cubit.dart';
 import '../../../attendance/presentation/pages/home_page.dart';
@@ -22,6 +23,7 @@ class _LoginFormState extends State<LoginForm> {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is LoginSuccessState) {
+          print(state);
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) => const HomePage(),
@@ -85,20 +87,20 @@ class _LoginFormState extends State<LoginForm> {
                     formKey: formKey,
                     authText: "Login",
                     authCubit: authCubit,
-                    onTap: () {
+                    onTap: () async {
                       // Close the keyboard
                       FocusScope.of(context).unfocus();
                       // Validate the form
-                      if (formKey.currentState?.validate() ?? false) {
-                        formKey.currentState?.save();
+                      if (formKey.currentState!.validate()) {
+                        formKey.currentState!.save();
                         // Perform login
-                        authCubit.loginWithEmailAndPassword(
+                        await authCubit.loginWithEmailAndPassword(
                           email: authCubit.email.text,
                           password: authCubit.passwordRegister.text,
                         );
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
-                            builder: (context) => const HomePage(),
+                            builder: (context) => const ProfileScreen(),
                           ),
                         );
                       } else {
