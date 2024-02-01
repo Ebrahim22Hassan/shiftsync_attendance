@@ -15,9 +15,9 @@ class CustomErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Column(
+    return SizedBox(
+      height: 120,
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -54,33 +54,33 @@ class CustomErrorWidget extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          Container(
-            height: 55,
-            width: context.width * 0.55,
-            margin: const EdgeInsets.symmetric(vertical: 15),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: color ?? Theme.of(context).primaryColor,
-                backgroundColor: color ?? Colors.blue,
-                elevation: 500,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50),
-                ),
-              ),
-              child: const Text(
-                'reload_screen',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700),
-              ),
-              onPressed: () {
-                if (onPress != null) {
-                  onPress!();
-                }
-              },
-            ),
-          )
+          // Container(
+          //   height: 55,
+          //   width: context.width * 0.55,
+          //   margin: const EdgeInsets.symmetric(vertical: 15),
+          //   child: ElevatedButton(
+          //     style: ElevatedButton.styleFrom(
+          //       foregroundColor: color ?? Theme.of(context).primaryColor,
+          //       backgroundColor: color ?? Colors.blue,
+          //       elevation: 500,
+          //       shape: RoundedRectangleBorder(
+          //         borderRadius: BorderRadius.circular(50),
+          //       ),
+          //     ),
+          //     child: const Text(
+          //       'reload_screen',
+          //       style: TextStyle(
+          //           color: Colors.white,
+          //           fontSize: 20,
+          //           fontWeight: FontWeight.w700),
+          //     ),
+          //     onPressed: () {
+          //       if (onPress != null) {
+          //         onPress!();
+          //       }
+          //     },
+          //   ),
+          // )
         ],
       ),
     );

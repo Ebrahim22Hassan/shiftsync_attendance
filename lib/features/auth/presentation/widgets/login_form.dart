@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:shiftsync_attendance/features/profile/presentation/pages/profile_screen.dart';
+import 'package:shiftsync_attendance/features/attendance/presentation/pages/bottom_nav_bar_switch.dart';
 import '../../../../core/widgets/conditional_builder.dart';
 import '../cubit/auth_cubit.dart';
 import '../../../attendance/presentation/pages/home_page.dart';
@@ -100,7 +100,7 @@ class _LoginFormState extends State<LoginForm> {
                         );
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
-                            builder: (context) => const ProfileScreen(),
+                            builder: (context) => const BottomNavBarSwitch(),
                           ),
                         );
                       } else {
