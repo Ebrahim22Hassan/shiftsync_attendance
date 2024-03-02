@@ -1,21 +1,23 @@
-
-
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  TextEditingController? controller;
+  final TextEditingController? controller;
   final String label;
-  IconData? suffixIcon;
-  final IconData prefixIcon;
+  final IconData? suffixIcon;
+  final IconData? prefixIcon;
   final TextInputType keyboardType;
+  final void Function(String)? onChanged;
+  final String? hint;
 
-  CustomTextFormField(
+  const CustomTextFormField(
       {super.key,
       this.controller,
       required this.label,
       this.suffixIcon,
-      required this.prefixIcon,
-      required this.keyboardType});
+      this.prefixIcon,
+      required this.keyboardType,
+      this.onChanged,
+      this.hint});
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +32,16 @@ class CustomTextFormField extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: TextFormField(
+        onChanged: onChanged,
         controller: controller,
         keyboardType: keyboardType,
         decoration: InputDecoration(
-            label: Text(label),
-            suffixIcon: Icon(suffixIcon),
-            prefixIcon: Icon(prefixIcon),
-            border: const OutlineInputBorder()),
+          label: Text(label),
+          suffixIcon: Icon(suffixIcon),
+          prefixIcon: Icon(prefixIcon),
+          border: const OutlineInputBorder(),
+          hintText: hint,
+        ),
       ),
     );
   }

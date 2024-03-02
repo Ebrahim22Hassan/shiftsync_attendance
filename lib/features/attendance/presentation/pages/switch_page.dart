@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:shiftsync_attendance/features/attendance/presentation/pages/home_page.dart';
 import 'package:shiftsync_attendance/features/profile/presentation/pages/profile_screen.dart';
-import '../../../../core/services/di.dart';
-import '../../../profile/presentation/cubit/profile_cubit.dart';
-import 'attendance_history_page.dart';
+import '../../../history/presentation/pages/attendance_report_page.dart';
 
-class BottomNavBarSwitch extends StatefulWidget {
-  const BottomNavBarSwitch({super.key});
+class SwitchPage extends StatefulWidget {
+  const SwitchPage({super.key});
 
   @override
-  State<BottomNavBarSwitch> createState() => _BottomNavBarSwitchState();
+  State<SwitchPage> createState() => _SwitchPageState();
 }
 
-class _BottomNavBarSwitchState extends State<BottomNavBarSwitch> {
+class _SwitchPageState extends State<SwitchPage> {
   int screenIndex = 0;
-  List<Widget> activeScreen = const [HomePage(), ProfileScreen(), AttendanceHistoryPage()];
+  List<Widget> activeScreen = const [
+    HomePage(),
+    ProfileScreen(),
+    AttendanceReportPage()
+  ];
 
   @override
   Widget build(BuildContext context) {
-    double displayWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
+    double displayWidth = MediaQuery.of(context).size.width;
     return SafeArea(
         child: Scaffold(
             body: activeScreen[screenIndex],
@@ -43,7 +41,7 @@ class _BottomNavBarSwitchState extends State<BottomNavBarSwitch> {
                 ),
                 child: Padding(
                   padding:
-                  EdgeInsets.symmetric(horizontal: displayWidth * 0.05),
+                      EdgeInsets.symmetric(horizontal: displayWidth * 0.05),
                   child: SalomonBottomBar(
                     currentIndex: screenIndex,
                     onTap: (index) {
