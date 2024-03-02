@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import '../cubit/auth_cubit.dart';
 
-class CustomAuthButton extends StatelessWidget {
-  const CustomAuthButton({
+class AppCustomButton extends StatelessWidget {
+  const AppCustomButton({
     super.key,
      this.formKey,
-    required this.authCubit,
-    this.onTap, required this.authText,
+     this.authCubit,
+    this.onTap, required this.text,
   });
 
   final GlobalKey<FormState>? formKey;
-  final AuthCubit authCubit;
+  final AuthCubit? authCubit;
   final void Function()? onTap;
-  final String authText;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class CustomAuthButton extends StatelessWidget {
         ),
         child:  Center(
           child: Text(
-            authText,
+            text,
             style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,

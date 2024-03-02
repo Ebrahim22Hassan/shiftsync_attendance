@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import '../pages/edit_profile_screen.dart';
+import 'package:shiftsync_attendance/features/profile/domain/entities/profile_entities.dart';
+import '../../../../const.dart';
+import '../pages/update_profile_screen.dart';
 
 class ProfileHeaderWidget extends StatelessWidget {
-  const ProfileHeaderWidget({super.key});
+  const ProfileHeaderWidget({super.key, required this.profileEntity});
+
+  final ProfileEntity profileEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +47,10 @@ class ProfileHeaderWidget extends StatelessWidget {
               size: 30,
             ),
             onPressed: () {
-              // Navigate to edit profile screen
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const EditProfileScreen()),
+                    builder: (context) =>  UpdateProfileScreen(profileEntity: profileEntity,)),
               );
             },
           ),
@@ -76,7 +79,7 @@ class ProfileHeaderWidget extends StatelessWidget {
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(80),
                       child: Image.network(
-                          'https://cdn-icons-png.freepik.com/512/4086/4086679.png',
+                          profileImage,
                           width: 80,
                           height: 80,
                           fit: BoxFit.fill)),

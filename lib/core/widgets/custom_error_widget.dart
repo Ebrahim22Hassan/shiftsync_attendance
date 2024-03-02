@@ -1,4 +1,3 @@
-import 'package:shiftsync_attendance/core/extensions/mediaquery_extension.dart';
 import 'package:flutter/material.dart';
 
 class CustomErrorWidget extends StatelessWidget {

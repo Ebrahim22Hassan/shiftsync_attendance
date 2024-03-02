@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:shiftsync_attendance/features/attendance/presentation/pages/bottom_nav_bar_switch.dart';
+import 'package:shiftsync_attendance/features/attendance/presentation/pages/switch_page.dart';
 import '../../../../core/widgets/conditional_builder.dart';
 import '../cubit/auth_cubit.dart';
 import '../../../attendance/presentation/pages/home_page.dart';
@@ -56,7 +56,7 @@ class _LoginFormState extends State<LoginForm> {
                         padding: const EdgeInsets.all(8.0),
                         decoration: const BoxDecoration(
                             border:
-                                Border(bottom: BorderSide(color: Colors.grey))),
+                            Border(bottom: BorderSide(color: Colors.grey))),
                         child: TextFormField(
                           controller: authCubit.email,
                           decoration: InputDecoration(
@@ -83,9 +83,9 @@ class _LoginFormState extends State<LoginForm> {
                 ConditionalBuilder(
                   condition: state is! LoginLoadingState,
                   fallback: (context) => const CircularProgressIndicator(),
-                  builder: (context) => CustomAuthButton(
+                  builder: (context) => AppCustomButton(
                     formKey: formKey,
-                    authText: "Login",
+                    text: "Login",
                     authCubit: authCubit,
                     onTap: () async {
                       // Close the keyboard
@@ -100,7 +100,7 @@ class _LoginFormState extends State<LoginForm> {
                         );
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
-                            builder: (context) => const BottomNavBarSwitch(),
+                            builder: (context) => const SwitchPage(),
                           ),
                         );
                       } else {
@@ -131,7 +131,7 @@ class _LoginFormState extends State<LoginForm> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const RegisterScreen()));
+                                    const RegisterScreen()));
                           },
                           child: const Text(
                             "REGISTER NOW",

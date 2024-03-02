@@ -6,9 +6,11 @@ abstract class ProfileRepository {
   Future<Either<Failure, ProfileEntity>> getProfile();
 
   Future<Either<Failure, dynamic>> updateProfile({
-    required mobile,
+    required fullName,
+    required position,
+    required phoneNum,
     required email,
-    required image,
+    image,
   });
 
   Future<Either<Failure, dynamic>> changePassword({

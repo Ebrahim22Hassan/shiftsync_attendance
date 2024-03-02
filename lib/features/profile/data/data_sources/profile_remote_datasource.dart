@@ -5,11 +5,12 @@ import 'package:shiftsync_attendance/features/profile/domain/entities/profile_en
 abstract class ProfileRemoteDataSource {
   Future<ProfileEntity> getProfile();
 
-  Future<dynamic> updateProfile({
-    required mobile,
-    required email,
-    required image,
-  });
+  Future<dynamic> updateProfile(
+      {required fullName,
+      required position,
+      required phoneNum,
+      required email,
+      image});
 
   Future<dynamic> changePassword({
     required oldPassword,
@@ -33,13 +34,39 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
       : _firestore = firestore;
 
   @override
-  Future<ProfileEntity> getProfile() async{
+  Future<ProfileEntity> getProfile() async {
     final userId = FirebaseAuth.instance.currentUser?.uid;
     final doc = await _firestore.collection('users').doc(userId).get();
     if (doc.exists) {
-      return ProfileEntity.fromJson(doc.data()!); // Implement this method in ProfileEntity
+      return ProfileEntity.fromSnapshot(doc);
     } else {
       throw Exception('User profile not found.');
+    }
+  }
+
+  @override
+  Future updateProfile(
+      {required fullName,
+      required position,
+      required phoneNum,
+      required email,
+      image}) async {
+    try {
+      final userId = FirebaseAuth.instance.currentUser?.uid;
+      final userRef = _firestore.collection('users').doc(userId);
+      final updatedData = {
+        'fullName': fullName,
+        'position': position,
+        'phoneNum': phoneNum,
+        'email': email,
+      };
+      await userRef.update(updatedData);
+      if (image != null) {
+        await userRef.update({'profileImage': image});
+      }
+      // Return a success message or updated profile entity if needed
+    } catch (e) {
+      throw Exception('Failed to update profile: $e');
     }
   }
 
@@ -58,12 +85,6 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   @override
   Future changeProfilePicture({required String image}) {
     // TODO: implement changeProfilePicture
-    throw UnimplementedError();
-  }
-
-  @override
-  Future updateProfile({required mobile, required email, required image}) {
-    // TODO: implement updateProfile
     throw UnimplementedError();
   }
 }

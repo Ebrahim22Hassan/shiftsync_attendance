@@ -1,1 +1,2 @@
-const googleApiKey ="AIzaSyCfxYmKubLDw2MtjpjY70jI3hd2bCHtL2M";
+const profileImage =
+    "https://cdn-icons-png.freepik.com/512/4086/4086679.png";

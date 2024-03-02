@@ -18,6 +18,7 @@ import '../../features/auth/domain/usecases/set_new_password_usecase.dart';
 import '../../features/auth/domain/usecases/verify_otp_usecase.dart';
 import '../../features/auth/presentation/cubit/auth_cubit.dart';
 import '../../features/profile/domain/usecases/profile_usecase.dart';
+import '../../features/profile/domain/usecases/update_profile_usecase.dart';
 
 final di = GetIt.instance;
 
@@ -32,6 +33,7 @@ Future<void> init() async {
   di.registerLazySingleton(() => SetNewPasswordUseCase(di()));
   di.registerLazySingleton(() => DeleteAccountUseCase(di()));
   di.registerLazySingleton(() => ProfileUseCase(di()));
+  di.registerLazySingleton(() => UpdateProfileUseCase(di()));
 
   // Repository
   di.registerLazySingleton<AuthRepository>(
@@ -70,6 +72,6 @@ Future<void> init() async {
       ));
 
   di.registerFactory<ProfileCubit>(() => ProfileCubit(
-        profileUseCase: di<ProfileUseCase>(),
+        profileUseCase: di<ProfileUseCase>(), updateProfileUseCase: di<UpdateProfileUseCase>(),
       ));
 }

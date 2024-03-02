@@ -11,9 +11,10 @@ class ProfileRepositoryImpl implements ProfileRepository {
   ProfileRepositoryImpl({required this.profileRemoteDataSources});
 
   @override
-  Future<Either<Failure, ProfileEntity>> getProfile()async {
+  Future<Either<Failure, ProfileEntity>> getProfile() async {
     try {
-      final profile = await profileRemoteDataSources.getProfile(); // Implement this method in the remote data source
+      final profile = await profileRemoteDataSources
+          .getProfile(); // Implement this method in the remote data source
       return Right(profile);
     } catch (e) {
       return Left(ServerFailure('Failed to fetch profile data.'));
@@ -21,28 +22,24 @@ class ProfileRepositoryImpl implements ProfileRepository {
   }
 
   @override
-  Future<Either<Failure, dynamic>> changePassword({required oldPassword, required newPassword}) {
-    // TODO: implement changePassword
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Either<Failure, dynamic>> changeProfileInfo({required int mobile, required String email}) {
-    // TODO: implement changeProfileInfo
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Either<Failure, dynamic>> changeProfilePicture({required String image}) {
-    // TODO: implement changeProfilePicture
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Either<Failure, dynamic>> updateProfile({required mobile, required email, required image}) {
-    // TODO: implement updateProfile
-    throw UnimplementedError();
-  }
+  Future<Either<Failure, dynamic>> updateProfile(
+      {required fullName,
+      required position,
+      required phoneNum,
+      required email,
+      image}) async {
+    try {
+      final profile = await profileRemoteDataSources.updateProfile(
+        fullName: fullName,
+        position: position,
+        phoneNum: phoneNum,
+        email: email,
+        image: image,
+      ); // Implement this method in the remote data source
+      return Right(profile);
+    } catch (e) {
+      return Left(ServerFailure('Failed to fetch profile data.'));
+    }
   }
 
   @override
@@ -65,11 +62,31 @@ class ProfileRepositoryImpl implements ProfileRepository {
     // TODO: implement changeProfilePicture
     throw UnimplementedError();
   }
+}
 
-  @override
-  Future<Either<Failure, dynamic>> updateProfile(
-      {required mobile, required email, required image}) {
-    // TODO: implement updateProfile
-    throw UnimplementedError();
-  }
+@override
+Future<Either<Failure, dynamic>> changePassword(
+    {required oldPassword, required newPassword}) {
+  // TODO: implement changePassword
+  throw UnimplementedError();
+}
 
+@override
+Future<Either<Failure, dynamic>> changeProfileInfo(
+    {required int mobile, required String email}) {
+  // TODO: implement changeProfileInfo
+  throw UnimplementedError();
+}
+
+@override
+Future<Either<Failure, dynamic>> changeProfilePicture({required String image}) {
+  // TODO: implement changeProfilePicture
+  throw UnimplementedError();
+}
+
+@override
+Future<Either<Failure, dynamic>> updateProfile(
+    {required mobile, required email, required image}) {
+  // TODO: implement updateProfile
+  throw UnimplementedError();
+}

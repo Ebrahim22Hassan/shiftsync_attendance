@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:shiftsync_attendance/core/extensions/toast_extenstion.dart';
+import 'package:shiftsync_attendance/features/attendance/presentation/pages/switch_page.dart';
 import '../../../../core/widgets/alerts.dart';
 import '../../../../core/widgets/conditional_builder.dart';
+import '../../../../core/widgets/custom_text_form_field.dart';
 import '../cubit/auth_cubit.dart';
-import '../../../attendance/presentation/pages/home_page.dart';
 import '../pages/login_screen.dart';
-import 'custom_Text_Form_Field.dart';
 import 'custom_auth_button.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -43,7 +43,7 @@ class _RegisterFormState extends State<RegisterForm> {
           cubit.saveUserDataToFirestore(state.authEntity);
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
-              builder: (context) => const HomePage(),
+              builder: (context) => const SwitchPage(),
             ),
           );
         }
@@ -57,7 +57,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   controller: cubit.name,
                   label: "Full Name",
                   prefixIcon: Icons.person,
-                  keyboardType: TextInputType.text),
+                  keyboardType: TextInputType.text,),
               const Gap(20),
               CustomTextFormField(
                   controller: cubit.phoneRegister,
@@ -87,9 +87,9 @@ class _RegisterFormState extends State<RegisterForm> {
                 condition: state is RegisterFailureState ||
                     state is! RegisterLoadingState,
                 fallback: (context) => const CircularProgressIndicator(),
-                builder: (context) => CustomAuthButton(
+                builder: (context) => AppCustomButton(
                   formKey: formKey,
-                  authText: "Register",
+                  text: "Register",
                   authCubit: authCubit,
                   onTap: () {
                     //close keyboard
