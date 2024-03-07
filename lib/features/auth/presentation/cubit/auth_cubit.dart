@@ -97,7 +97,18 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> saveUserDataToFirestore(AuthEntity authEntity) async {
     try {
       final userCollection = FirebaseFirestore.instance.collection('users');
-
+      // Numbering Users in Database
+      // final snapshot = await userCollection.get();
+      // final nextUserID = snapshot.size + 1;
+      //
+      // await userCollection.doc(nextUserID.toString()).set({
+      //   'id': authEntity.id,
+      //   'fullName': authEntity.fullName,
+      //   'phoneNum': authEntity.phoneNum,
+      //   'email': authEntity.email,
+      //   'gender': authEntity.gender,
+      //   'position': authEntity.position,
+      // });
       await userCollection.doc(authEntity.id).set({
         'id': authEntity.id,
         'fullName': authEntity.fullName,

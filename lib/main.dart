@@ -2,11 +2,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:month_year_picker/month_year_picker.dart';
+import 'package:shiftsync_attendance/welcome.dart';
 import 'core/services/applocal.dart';
 import 'core/utils/bloc_observer.dart';
 import 'core/services/di.dart';
 import 'features/attendance/presentation/cubit/map_cubit.dart';
-import 'features/attendance/presentation/pages/switch_page.dart';
 import 'features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,6 +26,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
 // comment
   @override
   Widget build(BuildContext context) {
@@ -73,18 +74,16 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(
-            // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            // useMaterial3: true,
-          ),
-
               // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               // useMaterial3: true,
-          home: const SwitchPage(),
               ),
 
+          // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          // useMaterial3: true,
+          home: const WelcomeScreen(),
         ),
-      );
+      ),
+    );
   }
 }
-
 
