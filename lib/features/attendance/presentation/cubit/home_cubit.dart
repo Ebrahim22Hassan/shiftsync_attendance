@@ -6,14 +6,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
-import 'package:shiftsync_attendance/features/attendance/presentation/cubit/map_state.dart';
+import 'package:shiftsync_attendance/features/attendance/presentation/cubit/home_state.dart';
 import '../../../../core/services/location_helper.dart';
 import '../../data/model/employee_attendence_model.dart';
 
-class MapCubit extends Cubit<MapState> {
-  MapCubit() : super(MapInitialState());
+class HomeCubit extends Cubit<HomeState> {
+  HomeCubit() : super(MapInitialState());
 
-  static MapCubit get(context) => BlocProvider.of<MapCubit>(context);
+  static HomeCubit get(context) => BlocProvider.of<HomeCubit>(context);
   // static const double referenceLatitude = 25.21982131171806;
   // static const double referenceLongitude = 45.8856693885365;
   static Position? position;
@@ -139,7 +139,7 @@ class MapCubit extends Cubit<MapState> {
           .collection(employeeId)
           .doc(DateFormat('dd MMMM yyyy').format(DateTime.now()))
           .update(attendanceData.toMap());
-      print("check-Out is recorded successfully to firebase");
+emit (CheckOutSuccessState());
     } catch (e) {
       print("Error recording check-in: $e");
     }

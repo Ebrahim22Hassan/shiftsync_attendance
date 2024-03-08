@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shiftsync_attendance/features/attendance/presentation/cubit/map_cubit.dart';
-import 'package:shiftsync_attendance/features/attendance/presentation/cubit/map_state.dart';
+import 'package:shiftsync_attendance/features/attendance/presentation/cubit/home_cubit.dart';
+import 'package:shiftsync_attendance/features/attendance/presentation/cubit/home_state.dart';
 
 class AttendanceTimeRow extends StatelessWidget {
   const AttendanceTimeRow({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MapCubit,MapState>(
+    return BlocBuilder<HomeCubit,HomeState>(
       builder: (context,state){
-        MapCubit cubit= MapCubit.get(context);
+        HomeCubit cubit= HomeCubit.get(context);
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [

@@ -5,7 +5,7 @@ import 'package:month_year_picker/month_year_picker.dart';
 import 'core/services/applocal.dart';
 import 'core/utils/bloc_observer.dart';
 import 'core/services/di.dart';
-import 'features/attendance/presentation/cubit/map_cubit.dart';
+import 'features/attendance/presentation/cubit/home_cubit.dart';
 import 'features/attendance/presentation/pages/switch_page.dart';
 import 'features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -26,7 +26,6 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-// comment
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -37,8 +36,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<ProfileCubit>(
           create: (context) => di<ProfileCubit>()..fetchProfile(),
         ),
-        BlocProvider<MapCubit>(
-            create: (context) => MapCubit()..getMyCurrentLocation()),
+        BlocProvider<HomeCubit>(
+            create: (context) => HomeCubit()..getMyCurrentLocation()),
       ],
       child: SafeArea(
         top: false,

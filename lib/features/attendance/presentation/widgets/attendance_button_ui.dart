@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import '../cubit/map_cubit.dart';
-import '../cubit/map_state.dart';
+import '../cubit/home_cubit.dart';
+import '../cubit/home_state.dart';
 
 class AttendanceButtonUI extends StatelessWidget {
   const AttendanceButtonUI({
@@ -13,7 +13,7 @@ class AttendanceButtonUI extends StatelessWidget {
   }) : _animation = animation;
 
   final Animation<double> _animation;
-  final MapCubit cubit;
+  final HomeCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class AttendanceButtonUI extends StatelessWidget {
                       image: AssetImage("assets/images/touch_in.png"),
                     ),
                   ),
-                  BlocBuilder<MapCubit, MapState>(
+                  BlocBuilder<HomeCubit, HomeState>(
                     builder: (context, state) {
                       return Text(
                         cubit.isCheckedIn ? "Check Out" : "Check In",

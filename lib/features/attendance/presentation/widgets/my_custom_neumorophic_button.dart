@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
-import 'package:shiftsync_attendance/features/attendance/presentation/cubit/map_cubit.dart';
+import 'package:shiftsync_attendance/features/attendance/presentation/cubit/home_cubit.dart';
 import 'package:shiftsync_attendance/core/services/biometric_services.dart';
 import 'package:shiftsync_attendance/features/profile/domain/entities/profile_entities.dart';
 import 'attendance_button_ui.dart';
@@ -46,11 +46,10 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
 
   @override
   Widget build(BuildContext context) {
-    MapCubit cubit = MapCubit.get(context);
+    HomeCubit cubit = HomeCubit.get(context);
 
     return GestureDetector(
       onTap: () {
-        print("ButtonIsPressed");
         _handleTap(context);
       },
       child: AttendanceButtonUI(animation: _animation, cubit: cubit),
@@ -58,12 +57,21 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
   }
 
   void _handleTap(BuildContext context) {
-    final cubit = MapCubit.get(context);
+    final cubit = HomeCubit.get(context);
     if (cubit.locationStatus) {
-      cubit.isCheckedIn
-          ? _animationController.reverse()
-          : _animationController.forward();
-      _showBiometricDialog(context, cubit);
+      if(cubit.isCheckedIn){
+        print ("${cubit.isCheckedIn}");
+        _showCheckOutAlertDialog(context, cubit);
+        cubit.changeCheckInOutStatus();
+
+      }else{
+        cubit.employeeCheckInRecord(widget.profileEntity.id);
+        print ("${cubit.isCheckedIn}");
+        cubit.changeCheckInOutStatus();
+        _animationController.forward();
+
+      }
+
     } else {
       _animationController.forward();
       Future.delayed(const Duration(seconds: 1), () {
@@ -73,7 +81,7 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
     }
   }
 
-  void _showBiometricDialog(BuildContext context, MapCubit cubit) {
+  void _showBiometricDialog(BuildContext context, HomeCubit cubit) {
     if (biometricServices.supportState == SupportState.supported) {
       print("SUPPORTED");
       Future.delayed(const Duration(seconds: 2), () {
@@ -98,10 +106,13 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
         );
       });
     } else {
-      print("NOT=====SUPPORTED");
-      cubit.isCheckedIn
-          ? cubit.employeeCheckOutRecord(widget.profileEntity.id)
-          : cubit.employeeCheckInRecord(widget.profileEntity.id);
+
+      if (cubit.isCheckedIn){
+        _showCheckOutAlertDialog(context,cubit);
+      }
+      else{
+      }
+
       cubit.changeCheckInOutStatus();
     }
   }
@@ -110,5 +121,31 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
   void dispose() {
     _animationController.dispose();
     super.dispose();
+  }
+  void _showCheckOutAlertDialog(BuildContext context, HomeCubit cubit) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Confirm Check Out"),
+          content: const Text("Are you sure you want to check out?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                cubit.employeeCheckOutRecord(widget.profileEntity.id);
+              },
+              child: const Text("Yes"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("No"),
+            ),
+          ],
+        );
+      },
+    );
   }
 }
