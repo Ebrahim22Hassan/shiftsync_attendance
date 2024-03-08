@@ -18,11 +18,12 @@ class HomeCubit extends Cubit<HomeState> {
   // static const double referenceLongitude = 45.8856693885365;
   static Position? position;
 
-  static const double referenceLatitude = 23.602371;
-  static const double referenceLongitude = 58.218023; // N e s t o
+  static const double referenceLatitude = 23.634046;
+  static const double referenceLongitude = 58.1145235;
   late final double? distance;
-  final double definedDistance = 12;
+  final double definedDistance = 3;
   bool locationStatus = false;
+  bool timeUp = false;
 
   Future<void> getMyCurrentLocation() async {
     emit(GetMyCurrentLocationLoadingState());
@@ -139,10 +140,13 @@ class HomeCubit extends Cubit<HomeState> {
           .collection(employeeId)
           .doc(DateFormat('dd MMMM yyyy').format(DateTime.now()))
           .update(attendanceData.toMap());
-emit (CheckOutSuccessState());
+      timeUp=true;
+      print("timeUp:$timeUp");
+        emit (CheckOutSuccessState());
     } catch (e) {
       print("Error recording check-in: $e");
     }
+
   }
 
   void calculateTotalHours(String checkInTime, String checkOutTime) {

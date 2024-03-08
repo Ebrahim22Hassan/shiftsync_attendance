@@ -58,26 +58,33 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
 
   void _handleTap(BuildContext context) {
     final cubit = HomeCubit.get(context);
-    if (cubit.locationStatus) {
-      if(cubit.isCheckedIn){
-        print ("${cubit.isCheckedIn}");
-        _showCheckOutAlertDialog(context, cubit);
-        cubit.changeCheckInOutStatus();
+    if(cubit.timeUp){
+      cubit.showToastMessage(
+        "روح يا شيبة"
+      );
+    }
+    else{
+      if (cubit.locationStatus) {
+        if(cubit.isCheckedIn){
+          print ("${cubit.isCheckedIn}");
+          _showCheckOutAlertDialog(context, cubit);
+          cubit.changeCheckInOutStatus();
 
-      }else{
-        cubit.employeeCheckInRecord(widget.profileEntity.id);
-        print ("${cubit.isCheckedIn}");
-        cubit.changeCheckInOutStatus();
+        }else{
+          cubit.employeeCheckInRecord(widget.profileEntity.id);
+          print ("${cubit.isCheckedIn}");
+          cubit.changeCheckInOutStatus();
+          _animationController.forward();
+
+        }
+
+      } else {
         _animationController.forward();
-
+        Future.delayed(const Duration(seconds: 1), () {
+          cubit.showToastMessage("You are not in the location, اسلك");
+          _animationController.reverse();
+        });
       }
-
-    } else {
-      _animationController.forward();
-      Future.delayed(const Duration(seconds: 1), () {
-        cubit.showToastMessage("You are not in the location, اسلك");
-        _animationController.reverse();
-      });
     }
   }
 
