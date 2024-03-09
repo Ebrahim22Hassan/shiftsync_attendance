@@ -1,28 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:shiftsync_attendance/features/attendance/presentation/cubit/home_cubit.dart';
 
 import '../../../../core/services/cache_helper.dart';
 
-class ChangeLangWidget extends StatefulWidget {
+class ChangeLangWidget extends StatelessWidget {
   const ChangeLangWidget({Key? key}) : super(key: key);
 
   @override
-  _ChangeLangWidgetState createState() => _ChangeLangWidgetState();
-}
-
-class _ChangeLangWidgetState extends State<ChangeLangWidget> {
-  String selectedLanguage = 'en';
-
-  @override
   Widget build(BuildContext context) {
+    HomeCubit cubit=HomeCubit.get(context);
     return DropdownButton<String>(
         borderRadius: BorderRadius.circular(8),
-        value: selectedLanguage,
+        value:cubit.selectedLanguage,
         icon: const Icon(Icons.language),
         onChanged: (String? newValue) {
-          setState(() {
-            selectedLanguage = newValue!;
-            CacheHelper.saveData(key: "lang", value: selectedLanguage);
-          });
+          cubit.changeLanguage(newValue);
         },
         items: const [
           DropdownMenuItem(value: "ar", child: Text("Arabic")),
@@ -30,3 +22,4 @@ class _ChangeLangWidgetState extends State<ChangeLangWidget> {
         ]);
   }
 }
+

@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:shiftsync_attendance/features/attendance/presentation/cubit/home_state.dart';
+import '../../../../core/services/cache_helper.dart';
 import '../../../../core/services/location_helper.dart';
 import '../../data/model/employee_attendence_model.dart';
 
@@ -180,5 +181,13 @@ class HomeCubit extends Cubit<HomeState> {
   void changeCheckInOutStatus() {
     isCheckedIn = !isCheckedIn;
     emit(ChangeCheckInOutStatusState());
+  }
+
+  String selectedLanguage = 'en';
+  void changeLanguage(value){
+    selectedLanguage=value;
+    CacheHelper.saveData(key: "lang", value: selectedLanguage);
+    emit(ChangeLanguageState());
+
   }
 }

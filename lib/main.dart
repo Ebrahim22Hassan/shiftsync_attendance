@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:month_year_picker/month_year_picker.dart';
+import 'package:shiftsync_attendance/features/attendance/presentation/cubit/home_state.dart';
 import 'package:shiftsync_attendance/welcome.dart';
 import 'core/services/applocal.dart';
 import 'core/services/cache_helper.dart';
@@ -55,40 +56,44 @@ class MyApp extends StatelessWidget {
         minimum: Platform.isAndroid
             ? EdgeInsets.zero
             : const EdgeInsets.only(bottom: 10),
-        child: MaterialApp(
-          locale:  Locale("${CacheHelper.getData(key: "lang")}"),
-          localizationsDelegates: const [
-            AppLocale.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            MonthYearPickerLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale("en", ""),
-            Locale("ar", ""),
-          ],
-          localeResolutionCallback: (currentLang, supportLang) {
-            if (currentLang != null) {
-              for (Locale locale in supportLang) {
-                if (locale.languageCode == currentLang.languageCode) {
-                  // mySharedPreferences.setString("lang",currentLang.languageCode) ;
-                  return currentLang;
+        child: BlocBuilder<HomeCubit,HomeState>(
+          builder: (context,state){
+          return  MaterialApp(
+              locale:  Locale("${CacheHelper.getData(key: "lang")}"),
+              localizationsDelegates: const [
+                AppLocale.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                MonthYearPickerLocalizations.delegate,
+              ],
+              supportedLocales: const [
+                Locale("en", ""),
+                Locale("ar", ""),
+              ],
+              localeResolutionCallback: (currentLang, supportLang) {
+                if (currentLang != null) {
+                  for (Locale locale in supportLang) {
+                    if (locale.languageCode == currentLang.languageCode) {
+                      // mySharedPreferences.setString("lang",currentLang.languageCode) ;
+                      return currentLang;
+                    }
+                  }
                 }
-              }
-            }
-            return supportLang.first;
-          },
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: ThemeData(
-              // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-              // useMaterial3: true,
+                return supportLang.first;
+              },
+              debugShowCheckedModeBanner: false,
+              title: 'Flutter Demo',
+              theme: ThemeData(
+                // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                // useMaterial3: true,
               ),
 
-          // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          // useMaterial3: true,
-          home: const WelcomeScreen(),
+              // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              // useMaterial3: true,
+              home: const WelcomeScreen(),
+            );
+          },
         ),
       ),
     );
