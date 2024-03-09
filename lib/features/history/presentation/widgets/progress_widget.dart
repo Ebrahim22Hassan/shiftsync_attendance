@@ -49,8 +49,7 @@ class ProgressIndicatorWidget extends StatelessWidget {
                         int day = date.day;
                         if (day <= currentDay) {
                           segmentColors[day - 1] =
-                              (doc['checkInRecord'] != null &&
-                                      doc['checkOutRecord'] != null)
+                              (doc['checkInRecord'] != null)
                                   ? Colors.green
                                   : Colors.red;
                         }
