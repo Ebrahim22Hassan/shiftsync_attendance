@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../core/styles/colors.dart';
-import '../widgets/my_button.dart';
+import '../../../../core/widgets/my_button.dart';
 
 class PasswordChanged extends StatefulWidget {
   static const routeName = "/password-changed";

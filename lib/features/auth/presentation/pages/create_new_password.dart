@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../../core/styles/colors.dart';
 import '../widgets/my_back_button.dart';
-import '../widgets/my_button.dart';
-import '../widgets/text_input.dart';
+import '../../../../core/widgets/my_button.dart';
+import '../../../../core/widgets/custom_text_form_field.dart';
 
 class CreateNewPassword extends StatelessWidget {
   static const routeName = "/create-new-password";
@@ -33,11 +33,11 @@ class CreateNewPassword extends StatelessWidget {
                       .copyWith(color: AppColors().grey),
                 ),
                 const SizedBox(height: 22),
-                const TextInput(
+                const CustomTextFormField(
                   hintText: "New Password",
                   obscureText: true,
                 ),
-                const TextInput(
+                const CustomTextFormField(
                   hintText: "Confirm Password",
                   obscureText: true,
                 ),

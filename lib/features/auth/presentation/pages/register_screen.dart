@@ -7,9 +7,9 @@ import '../../../attendance/presentation/pages/switch_page.dart';
 import '../cubit/auth_cubit.dart';
 import '../widgets/account_info.dart';
 import '../widgets/my_back_button.dart';
-import '../widgets/my_button.dart';
+import '../../../../core/widgets/my_button.dart';
 import '../widgets/social_button.dart';
-import '../widgets/text_input.dart';
+import '../../../../core/widgets/custom_text_form_field.dart';
 
 class RegisterScreen extends StatelessWidget {
   static const routeName = "/register";
@@ -69,27 +69,27 @@ class RegisterScreen extends StatelessWidget {
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 15),
-                    TextInput(
+                    CustomTextFormField(
                       controller: authCubit.name,
                       hintText: "Full Name",
                       keyboardType: TextInputType.text,
                     ),
-                    TextInput(
+                    CustomTextFormField(
                       controller: authCubit.phoneRegister,
                       hintText: "Phone Number",
                       keyboardType: TextInputType.phone,
                     ),
-                    TextInput(
+                    CustomTextFormField(
                       controller: authCubit.email,
                       hintText: "Email",
                     ),
-                    TextInput(
+                    CustomTextFormField(
                       controller: authCubit.passwordRegister,
                       hintText: "Password",
                       obscureText: true,
                       keyboardType: TextInputType.text,
                     ),
-                    const TextInput(
+                    const CustomTextFormField(
                       hintText: "Confirm password",
                       obscureText: true,
                       keyboardType: TextInputType.text,
@@ -98,65 +98,67 @@ class RegisterScreen extends StatelessWidget {
                     ConditionalBuilder(
                         condition: state is RegisterFailureState ||
                             state is! RegisterLoadingState,
-                        fallback: (context) => const CircularProgressIndicator(),
+                        fallback: (context) => const Center(child: CircularProgressIndicator()),
                       builder: (context) {
-                        return MyButton(
-                          key: formKey,
-                          text: "Register",
-                          onPressed: () {
-                            Pattern pattern =
-                                r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                            RegExp regExp = RegExp(pattern.toString());
-                            if (authCubit.name.text.isEmpty) {
-                              context.toast(
-                                text: 'pleaseEnterYourName',
-                                state: ToastStates.error,
-                              );
-                            } else if (authCubit.phoneRegister.text.isEmpty) {
-                              context.toast(
-                                text: 'pleaseEnterYourPhoneNumber',
-                                state: ToastStates.error,
-                              );
-                            } else if (authCubit.phoneRegister.text.length < 9) {
-                              context.toast(
-                                text: 'pleaseThePhoneNumberMustBe9Digits',
-                                state: ToastStates.error,
-                              );
-                            } else if (!authCubit.phoneRegister.text.startsWith('5')) {
-                              context.toast(
-                                text: 'pleaseThePhoneNumberMustStartWith5',
-                                state: ToastStates.error,
-                              );
-                            } else if (authCubit.email.text.isEmpty) {
-                              context.toast(
-                                text: 'pleaseEnterYourEmail',
-                                state: ToastStates.error,
-                              );
-                            } else if (authCubit.email.text.contains(regExp) != true) {
-                              context.toast(
-                                text: 'pleaseEnterValidEmail',
-                                state: ToastStates.error,
-                              );
-                            } else if (authCubit.passwordRegister.text.isEmpty) {
-                              context.toast(
-                                text: 'pleaseEnterYourPassword',
-                                state: ToastStates.error,
-                              );
-                            } else {
-                              authCubit.register(
-                                fullName: authCubit.name.text,
-                                phoneNum: authCubit.phoneRegister.text,
-                                gender: 'male',
-                                position: authCubit.position.text,
-                                email: authCubit.email.text,
-                                password: authCubit.passwordRegister.text,
-                              );
-                            }
-                            // Navigator.of(context).pushNamedAndRemoveUntil(
-                            //   HomePage.routeName,
-                            //   (route) => false,
-                            // );
-                          },
+                        return Center(
+                          child: MyButton(
+                            key: formKey,
+                            text: "Register",
+                            onPressed: () {
+                              Pattern pattern =
+                                  r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                              RegExp regExp = RegExp(pattern.toString());
+                              if (authCubit.name.text.isEmpty) {
+                                context.toast(
+                                  text: 'pleaseEnterYourName',
+                                  state: ToastStates.error,
+                                );
+                              } else if (authCubit.phoneRegister.text.isEmpty) {
+                                context.toast(
+                                  text: 'pleaseEnterYourPhoneNumber',
+                                  state: ToastStates.error,
+                                );
+                              } else if (authCubit.phoneRegister.text.length < 9) {
+                                context.toast(
+                                  text: 'pleaseThePhoneNumberMustBe9Digits',
+                                  state: ToastStates.error,
+                                );
+                              } else if (!authCubit.phoneRegister.text.startsWith('5')) {
+                                context.toast(
+                                  text: 'pleaseThePhoneNumberMustStartWith5',
+                                  state: ToastStates.error,
+                                );
+                              } else if (authCubit.email.text.isEmpty) {
+                                context.toast(
+                                  text: 'pleaseEnterYourEmail',
+                                  state: ToastStates.error,
+                                );
+                              } else if (authCubit.email.text.contains(regExp) != true) {
+                                context.toast(
+                                  text: 'pleaseEnterValidEmail',
+                                  state: ToastStates.error,
+                                );
+                              } else if (authCubit.passwordRegister.text.isEmpty) {
+                                context.toast(
+                                  text: 'pleaseEnterYourPassword',
+                                  state: ToastStates.error,
+                                );
+                              } else {
+                                authCubit.register(
+                                  fullName: authCubit.name.text,
+                                  phoneNum: authCubit.phoneRegister.text,
+                                  gender: 'male',
+                                  position: authCubit.position.text,
+                                  email: authCubit.email.text,
+                                  password: authCubit.passwordRegister.text,
+                                );
+                              }
+                              // Navigator.of(context).pushNamedAndRemoveUntil(
+                              //   HomePage.routeName,
+                              //   (route) => false,
+                              // );
+                            },
+                          ),
                         );
                       }
                     ),

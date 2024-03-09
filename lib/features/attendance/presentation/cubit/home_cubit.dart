@@ -15,6 +15,7 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(MapInitialState());
 
   static HomeCubit get(context) => BlocProvider.of<HomeCubit>(context);
+
   // static const double referenceLatitude = 25.21982131171806;
   // static const double referenceLongitude = 45.8856693885365;
   static Position? position;
@@ -82,9 +83,12 @@ class HomeCubit extends Cubit<HomeState> {
 
   late Timestamp currentTimeAndDate;
   late DateTime currentDate;
-  String? checkInTime ;
-  String? checkOutTime ;
-  String? totalHrs ;
+  String? checkInTime;
+
+  String? checkOutTime;
+
+  String? totalHrs;
+
   late String dateString;
 
   FirebaseFirestore fireStore = FirebaseFirestore.instance;
@@ -115,8 +119,6 @@ class HomeCubit extends Cubit<HomeState> {
     } catch (e) {
       print("Error recording check-in: $e");
     }
-
-
   }
 
   void employeeCheckOutRecord(String employeeId) async {
@@ -141,13 +143,12 @@ class HomeCubit extends Cubit<HomeState> {
           .collection(employeeId)
           .doc(DateFormat('dd MMMM yyyy').format(DateTime.now()))
           .update(attendanceData.toMap());
-      timeUp=true;
+      timeUp = true;
       print("timeUp:$timeUp");
-        emit (CheckOutSuccessState());
+      emit(CheckOutSuccessState());
     } catch (e) {
       print("Error recording check-in: $e");
     }
-
   }
 
   void calculateTotalHours(String checkInTime, String checkOutTime) {
@@ -184,10 +185,10 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   String selectedLanguage = 'en';
-  void changeLanguage(value){
-    selectedLanguage=value;
+
+  void changeLanguage(value) {
+    selectedLanguage = value;
     CacheHelper.saveData(key: "lang", value: selectedLanguage);
     emit(ChangeLanguageState());
-
   }
 }

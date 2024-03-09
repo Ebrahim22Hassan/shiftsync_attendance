@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/styles/colors.dart';
+
 class MainInfoWidget extends StatelessWidget {
   const MainInfoWidget(
       {super.key,
@@ -28,8 +30,12 @@ class MainInfoWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold)),
           const SizedBox(height: 5),
           Text(position,
-              style: const TextStyle(
-                  color: Colors.blue, fontStyle: FontStyle.italic))
+              style:  Theme.of(context)
+                  .textTheme
+                  .titleSmall!
+                  .copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: AppColors().darkGrey))
         ],
       ),
     );

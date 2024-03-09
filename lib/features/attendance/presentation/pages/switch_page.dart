@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:shiftsync_attendance/core/styles/colors.dart';
 import 'package:shiftsync_attendance/features/attendance/presentation/pages/home_page.dart';
 import 'package:shiftsync_attendance/features/profile/presentation/pages/profile_screen.dart';
 import '../../../history/presentation/pages/attendance_report_page.dart';
@@ -53,7 +54,7 @@ class _SwitchPageState extends State<SwitchPage> {
                       SalomonBottomBarItem(
                         icon: const Icon(Icons.home),
                         title: const Text('Home'),
-                        selectedColor: Colors.blue,
+                        selectedColor: AppColors().primary,
                       ),
                       SalomonBottomBarItem(
                         icon: const Icon(Icons.person),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:shiftsync_attendance/core/styles/colors.dart';
 import '../../../profile/domain/entities/profile_entities.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
@@ -65,7 +66,7 @@ class ProgressIndicatorWidget extends StatelessWidget {
 
                     // Function to determine the color of each segment
                     Color customColor(int index) {
-                      return segmentColors[index] ?? Colors.grey;
+                      return segmentColors[index] ?? AppColors().grey;
                     }
 
                     // Calculate the number of attended days

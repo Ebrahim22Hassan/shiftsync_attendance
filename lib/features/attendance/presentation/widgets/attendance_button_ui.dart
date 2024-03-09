@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:shiftsync_attendance/core/styles/colors.dart';
 import '../cubit/home_cubit.dart';
 import '../cubit/home_state.dart';
 
@@ -24,7 +25,7 @@ class AttendanceButtonUI extends StatelessWidget {
     Color endBackgroundColor = Colors.grey;
     Color indicatorBackground = const Color(0xFFB8C7CB);
     Color startProgressColor = const Color(0xFFB8C7CB);
-    Color endProgressColor = Colors.blue;
+    Color endProgressColor = AppColors().primary;
 
     return Center(
       child: AnimatedBuilder(

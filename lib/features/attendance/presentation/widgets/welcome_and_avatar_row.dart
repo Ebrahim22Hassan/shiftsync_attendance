@@ -48,7 +48,7 @@ class WelcomeAndAvatarRow extends StatelessWidget {
             ),
           ],
         ),
-        ChangeLangWidget(),
+        const ChangeLangWidget(),
         // Container(
         //   height: 50,
         //   width: 50,

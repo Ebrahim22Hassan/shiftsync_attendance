@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:shiftsync_attendance/core/styles/colors.dart';
 import '../../../profile/domain/entities/profile_entities.dart';
 import 'history_list_view.dart';
 import '../widgets/month_picker_row.dart';
@@ -40,13 +41,12 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
               color: Colors.white,
             ),
             centerTitle: true,
-            backgroundColor: Colors.deepPurpleAccent,
+            backgroundColor: AppColors().primary,
             title: Text(
               "Attendance Details",
               style: TextStyle(
                 color: Colors.white,
-                fontFamily: "NexaBold",
-                fontSize: screenWidth / 23,
+                fontSize: screenWidth / 25,
               ),
             ),
           ),

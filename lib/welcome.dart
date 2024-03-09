@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shiftsync_attendance/features/auth/presentation/pages/login_screen.dart';
 import 'package:shiftsync_attendance/features/auth/presentation/pages/register_screen.dart';
 import '../../../../assets.dart';
-import 'features/auth/presentation/widgets/my_button.dart';
+import 'core/widgets/my_button.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});

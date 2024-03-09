@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/styles/colors.dart';
+import '../styles/colors.dart';
 
 class MyButton extends StatelessWidget {
   final String text;
@@ -21,7 +21,7 @@ class MyButton extends StatelessWidget {
       padding: EdgeInsets.zero,
       child: Container(
         height: 56,
-        width: double.infinity,
+        width: MediaQuery.of(context).size.width/1.5,
         decoration: BoxDecoration(
           color: outline ? Colors.transparent : colors.dark,
           border: Border.all(color: colors.dark),

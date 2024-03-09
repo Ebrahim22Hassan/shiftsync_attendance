@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/styles/colors.dart';
 import '../widgets/account_info.dart';
 import '../widgets/my_back_button.dart';
-import '../widgets/my_button.dart';
+import '../../../../core/widgets/my_button.dart';
 
 class OTPVerification extends StatelessWidget {
   static const routeName = "/otp-verification";
