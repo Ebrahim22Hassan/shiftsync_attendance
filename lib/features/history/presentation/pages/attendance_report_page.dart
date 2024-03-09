@@ -28,8 +28,7 @@ class AttendanceReportPage extends StatelessWidget {
                     child: Text(
                       "Attendance Report",
                       style: TextStyle(
-                        fontFamily: "NexaBold",
-                        fontSize: screenWidth / 18,
+                        fontSize: screenWidth / 20,
                       ),
                     ),
                   ),
@@ -42,11 +41,11 @@ class AttendanceReportPage extends StatelessWidget {
                       daysNum: 0,
                       icon: Icons.local_hospital_outlined,
                       iconColor: Colors.red),
-                  const CardWidget(
+                   CardWidget(
                       title: 'Late',
                       daysNum: 5,
                       icon: Icons.watch_later_outlined,
-                      iconColor: Colors.red),
+                      iconColor: Colors.lime.shade500),
                 ],
               ),
             );

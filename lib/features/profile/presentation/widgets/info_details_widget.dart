@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shiftsync_attendance/features/profile/presentation/widgets/profile_list_tile.dart';
+
 
 class InfoDetailsWidget extends StatelessWidget {
   const InfoDetailsWidget(
@@ -25,31 +27,22 @@ class InfoDetailsWidget extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    ListTile(
-                      leading: const Icon(Icons.email, color: Colors.teal),
-                      title: const Text("E-Mail"),
-                      subtitle: Text(email),
+                    ProfileListTile(
+                      title: "E-Mail",
+                      subTitle: email,
+                      icon: Icons.email,
                     ),
                     const Divider(),
-                    ListTile(
-                      leading: const Icon(Icons.phone, color: Colors.teal),
-                      title: const Text("Phone Number"),
-                      subtitle: Text(phoneNumber),
+                    ProfileListTile(
+                      title: "Phone Number",
+                      subTitle: phoneNumber,
+                      icon: Icons.phone,
                     ),
                     const Divider(),
-                    const ListTile(
-                      leading: Icon(Icons.person, color: Colors.teal),
-                      title: Text("About"),
-                      subtitle: Text(
-                          "Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
-                    ),
-                    const Divider(),
-                    const ListTile(
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                      leading: Icon(Icons.my_location, color: Colors.teal),
-                      title: Text("Location"),
-                      subtitle: Text("Canada"),
+                    const ProfileListTile(
+                      title: "Branch Location",
+                      subTitle: "Makkah",
+                      icon: Icons.my_location,
                     ),
                   ],
                 )

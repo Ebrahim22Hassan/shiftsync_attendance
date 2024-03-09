@@ -7,9 +7,9 @@ import '../../../attendance/presentation/pages/switch_page.dart';
 import '../cubit/auth_cubit.dart';
 import '../widgets/account_info.dart';
 import '../widgets/my_back_button.dart';
-import '../widgets/my_button.dart';
+import '../../../../core/widgets/my_button.dart';
 import '../widgets/social_button.dart';
-import '../widgets/text_input.dart';
+import '../../../../core/widgets/custom_text_form_field.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = "/login";
@@ -60,11 +60,11 @@ class LoginScreen extends StatelessWidget {
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 15),
-                      TextInput(
+                      CustomTextFormField(
                         controller: authCubit.email,
                         hintText: "Enter your email",
                       ),
-                      TextInput(
+                      CustomTextFormField(
                         controller: authCubit.passwordRegister,
                         hintText: "Enter your password",
                         obscureText: true,
@@ -94,31 +94,33 @@ class LoginScreen extends StatelessWidget {
                       ConditionalBuilder(
                           condition: state is! LoginLoadingState,
                           fallback: (context) =>
-                              const CircularProgressIndicator(),
+                              const Center(child: CircularProgressIndicator()),
                           builder: (context) {
-                            return MyButton(
-                              text: "Login",
-                              onPressed: () async {
-                                // Navigator.of(context).pushNamedAndRemoveUntil(
-                                //   HomePage.routeName,
-                                //   (route) => false,
-                                // );
-                                if (formKey.currentState!.validate()) {
-                                  formKey.currentState!.save();
-                                  // Perform login
-                                  await authCubit.loginWithEmailAndPassword(
-                                    email: authCubit.email.text,
-                                    password: authCubit.passwordRegister.text,
-                                  );
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (context) => const SwitchPage(),
-                                    ),
-                                  );
-                                } else {
-                                  print("NOT VALID");
-                                }
-                              },
+                            return Center(
+                              child: MyButton(
+                                text: "Login",
+                                onPressed: () async {
+                                  // Navigator.of(context).pushNamedAndRemoveUntil(
+                                  //   HomePage.routeName,
+                                  //   (route) => false,
+                                  // );
+                                  if (formKey.currentState!.validate()) {
+                                    formKey.currentState!.save();
+                                    // Perform login
+                                    await authCubit.loginWithEmailAndPassword(
+                                      email: authCubit.email.text,
+                                      password: authCubit.passwordRegister.text,
+                                    );
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                        builder: (context) => const SwitchPage(),
+                                      ),
+                                    );
+                                  } else {
+                                    print("NOT VALID");
+                                  }
+                                },
+                              ),
                             );
                           }),
                       const SizedBox(height: 15),

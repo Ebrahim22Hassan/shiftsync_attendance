@@ -2,18 +2,15 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:month_year_picker/month_year_picker.dart';
-import 'package:shiftsync_attendance/features/attendance/presentation/cubit/home_state.dart';
 import 'package:shiftsync_attendance/welcome.dart';
 import 'core/services/applocal.dart';
 import 'core/services/cache_helper.dart';
+import 'core/styles/app_style.dart';
 import 'core/utils/bloc_observer.dart';
 import 'core/services/di.dart';
-
 import 'features/attendance/presentation/cubit/home_cubit.dart';
+import 'features/attendance/presentation/cubit/home_state.dart';
 import 'features/attendance/presentation/pages/switch_page.dart';
-
-// import 'features/attendance/presentation/cubit/map_cubit.dart';
-
 import 'features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -27,15 +24,12 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await CacheHelper.init();
-
   await init();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-// comment
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +50,10 @@ class MyApp extends StatelessWidget {
         minimum: Platform.isAndroid
             ? EdgeInsets.zero
             : const EdgeInsets.only(bottom: 10),
-        child: BlocBuilder<HomeCubit,HomeState>(
-          builder: (context,state){
-          return  MaterialApp(
-              locale:  Locale("${CacheHelper.getData(key: "lang")}"),
+        child: BlocBuilder<HomeCubit, HomeState>(
+          builder: (context, state) {
+            return MaterialApp(
+              locale: Locale("${CacheHelper.getData(key: "lang")}"),
               localizationsDelegates: const [
                 AppLocale.delegate,
                 GlobalMaterialLocalizations.delegate,
@@ -83,15 +77,9 @@ class MyApp extends StatelessWidget {
                 return supportLang.first;
               },
               debugShowCheckedModeBanner: false,
-              title: 'Flutter Demo',
-              theme: ThemeData(
-                // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-                // useMaterial3: true,
-              ),
-
-              // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-              // useMaterial3: true,
-              home: const WelcomeScreen(),
+              title: 'ShiftSync',
+              theme: AppStyle().theme,
+              home: const SwitchPage(),
             );
           },
         ),
@@ -99,4 +87,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

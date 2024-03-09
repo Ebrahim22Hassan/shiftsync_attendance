@@ -1,48 +1,46 @@
 import 'package:flutter/material.dart';
 
+import '../styles/colors.dart';
+
 class CustomTextFormField extends StatelessWidget {
+  final String hintText;
+  final bool obscureText;
   final TextEditingController? controller;
-  final String label;
-  final IconData? suffixIcon;
-  final IconData? prefixIcon;
-  final TextInputType keyboardType;
   final void Function(String)? onChanged;
-  final String? hint;
+  final TextInputType? keyboardType;
 
   const CustomTextFormField(
       {super.key,
+      required this.hintText,
+      this.obscureText = false,
       this.controller,
-      required this.label,
-      this.suffixIcon,
-      this.prefixIcon,
-      required this.keyboardType,
-      this.onChanged,
-      this.hint});
+      this.keyboardType,
+      this.onChanged});
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    return Container(
-      height: width / 8,
-      width: width / 1.22,
-      alignment: Alignment.center,
-      padding: EdgeInsets.only(right: width / 30),
-      decoration: BoxDecoration(
-        // color: const Color(0xff212428),
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: TextFormField(
-        onChanged: onChanged,
-        controller: controller,
-        keyboardType: keyboardType,
-        decoration: InputDecoration(
-          label: Text(label),
-          suffixIcon: Icon(suffixIcon),
-          prefixIcon: Icon(prefixIcon),
-          border: const OutlineInputBorder(),
-          hintText: hint,
+    return TextField(
+      onChanged: onChanged,
+      controller: controller,
+      obscureText: obscureText,
+      decoration: InputDecoration(
+        fillColor: const Color(0xffF7F8F9),
+        filled: true,
+        hintText: hintText,
+        hintStyle: Theme.of(context)
+            .textTheme
+            .titleMedium!
+            .copyWith(color: AppColors().grey),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: AppColors().border),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: AppColors().primary),
         ),
       ),
+      keyboardType: keyboardType,
     );
   }
 }

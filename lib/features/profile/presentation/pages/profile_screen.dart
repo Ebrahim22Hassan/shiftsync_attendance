@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:shiftsync_attendance/features/auth/presentation/widgets/custom_auth_button.dart';
 import 'package:shiftsync_attendance/features/profile/presentation/cubit/profile_cubit.dart';
 import '../../../../core/widgets/custom_error_widget.dart';
 import '../../../auth/presentation/cubit/auth_cubit.dart';
 import '../../../auth/presentation/pages/login_screen.dart';
+import '../../../../core/widgets/my_button.dart';
 import '../widgets/info_details_widget.dart';
 import '../widgets/main_info_widget.dart';
 import '../widgets/profile_header_widget.dart';
@@ -17,7 +17,6 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double widthC = MediaQuery.of(context).size.width * 100;
-    final authCubit = AuthCubit.get(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -78,12 +77,9 @@ class ProfileScreen extends StatelessWidget {
             if (state is LogoutLoadingState) {
               return const CircularProgressIndicator();
             } else {
-              return AppCustomButton(
-                authCubit: authCubit,
-                text: "Logout",
-                onTap: () {
-                  BlocProvider.of<AuthCubit>(context).logout();
-                },
+              return MyButton(
+                text:"Logout",
+                onPressed: () => BlocProvider.of<AuthCubit>(context).logout(),
               );
             }
           },

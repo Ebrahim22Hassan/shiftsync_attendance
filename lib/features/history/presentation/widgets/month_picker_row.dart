@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:month_year_picker/month_year_picker.dart';
+import 'package:shiftsync_attendance/core/styles/colors.dart';
+
+import '../../../attendance/presentation/cubit/home_cubit.dart';
 
 class MonthPickerRow extends StatelessWidget {
   final String initialMonth;
@@ -26,7 +29,7 @@ class MonthPickerRow extends StatelessWidget {
           child: Text(
             currentMonth,
             style: TextStyle(
-              fontFamily: "NexaBold",
+              fontWeight: FontWeight.w500,
               fontSize: screenWidth / 20,
             ),
           ),
@@ -37,6 +40,7 @@ class MonthPickerRow extends StatelessWidget {
           child: GestureDetector(
             onTap: () async {
               final month = await showMonthYearPicker(
+                locale: Locale(HomeCubit.get(context).selectedLanguage),
                 context: context,
                 initialDate: DateTime.now(),
                 firstDate: DateTime(2022),
@@ -44,25 +48,14 @@ class MonthPickerRow extends StatelessWidget {
                 builder: (context, child) {
                   return Theme(
                     data: Theme.of(context).copyWith(
-                      colorScheme: const ColorScheme.light(
-                        primary: Colors.purpleAccent,
-                        secondary: Colors.purple,
+                      colorScheme:  ColorScheme.light(
+                        primary: AppColors().primary,
+                        secondary: Colors.teal,
                         onSecondary: Colors.white,
                       ),
                       textButtonTheme: TextButtonThemeData(
                         style: TextButton.styleFrom(
                           foregroundColor: Colors.black,
-                        ),
-                      ),
-                      textTheme: const TextTheme(
-                        headlineMedium: TextStyle(
-                          fontFamily: "NexaBold",
-                        ),
-                        labelSmall: TextStyle(
-                          fontFamily: "NexaBold",
-                        ),
-                        labelLarge: TextStyle(
-                          fontFamily: "NexaBold",
                         ),
                       ),
                     ),
@@ -78,7 +71,6 @@ class MonthPickerRow extends StatelessWidget {
             child: Text(
               "Pick a Month",
               style: TextStyle(
-                fontFamily: "NexaBold",
                 fontSize: screenWidth / 20,
               ),
             ),

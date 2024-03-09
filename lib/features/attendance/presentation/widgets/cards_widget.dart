@@ -27,6 +27,7 @@ class CardWidget extends StatelessWidget {
           leading:  Icon(
             icon,
             color: iconColor,
+            size: 28,
           ),
           title: Text(
             title,

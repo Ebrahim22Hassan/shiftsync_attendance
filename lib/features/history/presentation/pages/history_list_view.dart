@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:shiftsync_attendance/core/styles/colors.dart';
 import '../../../profile/domain/entities/profile_entities.dart';
 
 class HistoryListView extends StatelessWidget {
@@ -40,16 +41,16 @@ class HistoryListView extends StatelessWidget {
                         margin:
                             const EdgeInsets.only(top: 12, left: 6, right: 6),
                         height: 130,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
+                        decoration:  BoxDecoration(
+                          color: AppColors().border,
+                          boxShadow: const [
+                             BoxShadow(
                               color: Colors.black26,
                               blurRadius: 10,
                               offset: Offset(2, 2),
                             ),
                           ],
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderRadius: const BorderRadius.all(Radius.circular(20)),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -58,10 +59,10 @@ class HistoryListView extends StatelessWidget {
                             Expanded(
                               flex: 1,
                               child: Container(
-                                decoration: const BoxDecoration(
-                                  color: Colors.purpleAccent,
+                                decoration:  BoxDecoration(
+                                  color: AppColors().primary,
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
+                                     const BorderRadius.all(Radius.circular(20)),
                                 ),
                                 child: Center(
                                   child: Text(

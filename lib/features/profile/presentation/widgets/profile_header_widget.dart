@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shiftsync_attendance/core/styles/colors.dart';
 import 'package:shiftsync_attendance/features/profile/domain/entities/profile_entities.dart';
 import '../../../../const.dart';
 import '../pages/update_profile_screen.dart';
@@ -34,16 +35,16 @@ class ProfileHeaderWidget extends StatelessWidget {
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
-                color: Colors.deepPurpleAccent.withOpacity(0.3),
+                color: AppColors().primary.withOpacity(0.5),
                 blurRadius: 10,
                 offset: const Offset(0, 5),
               ),
             ],
           ),
           child: IconButton(
-            icon: const Icon(
+            icon:  Icon(
               Icons.edit,
-              color: Colors.deepPurpleAccent,
+              color: AppColors().primary,
               size: 30,
             ),
             onPressed: () {
@@ -65,14 +66,14 @@ class ProfileHeaderWidget extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(150),
                 ),
-                color: Colors.deepPurple.shade500,
+                color: AppColors().grey,
                 child: Container(
                   width: 150,
                   height: 150,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(150),
                     border: Border.all(
-                      color: Colors.deepPurpleAccent,
+                      color: AppColors().primary,
                       width: 6.0,
                     ),
                   ),
