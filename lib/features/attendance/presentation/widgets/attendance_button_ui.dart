@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -10,24 +11,39 @@ class AttendanceButtonUI extends StatelessWidget {
     super.key,
     required Animation<double> animation,
     required this.cubit,
+    required this.animationController,
   }) : _animation = animation;
 
   final Animation<double> _animation;
   final HomeCubit cubit;
+  final AnimationController animationController;
 
   @override
   Widget build(BuildContext context) {
-    Color background = const Color(0xffF9F5F6);
+    Color startBackgroundColor = const Color(0xffF9F5F6);
+    Color endBackgroundColor = Colors.grey;
     Color indicatorBackground = const Color(0xFFB8C7CB);
-    // Offset offset = const Offset(26, 26);
-    // double blurRadius = 30;
+    Color startProgressColor = const Color(0xFFB8C7CB);
+    Color endProgressColor = Colors.blue;
+
     return Center(
       child: AnimatedBuilder(
         animation: _animation,
         builder: (context, child) {
-          return BlocBuilder<HomeCubit,HomeState>(
-            builder: (context,state){
-              return  CircularPercentIndicator(
+          Color currentBackgroundColor = Color.lerp(
+            startBackgroundColor,
+            endBackgroundColor,
+            _animation.value,
+          )!;
+          Color currentProgressColor = Color.lerp(
+            startProgressColor,
+            endProgressColor,
+            _animation.value,
+          )!;
+
+          return BlocBuilder<HomeCubit, HomeState>(
+            builder: (context, state) {
+              return CircularPercentIndicator(
                 radius: 110,
                 lineWidth: 10,
                 circularStrokeCap: CircularStrokeCap.round,
@@ -36,49 +52,49 @@ class AttendanceButtonUI extends StatelessWidget {
                   height: 200,
                   width: 200,
                   decoration: BoxDecoration(
-                    color: cubit.timeUp ? Colors.grey : background,
+                    color:currentBackgroundColor,
                     shape: BoxShape.circle,
-                    // boxShadow: [
-                    //   BoxShadow(
-                    //     color: Colors.white,
-                    //     offset: -offset,
-                    //     blurRadius: blurRadius,
-                    //   ),
-                    //   BoxShadow(
-                    //     color: const Color(0xffa7a9af),
-                    //     offset: offset,
-                    //     blurRadius: blurRadius,
-                    //   ),
-                    // ],
                   ),
                   child: Column(
                     children: [
                       const Gap(50),
-                       SizedBox(
+                      SizedBox(
                         height: 70,
-                        child: Image(
-                          image: cubit.timeUp?const AssetImage("assets/images/checked.png"):const AssetImage("assets/images/touch_in.png"),
+                        child: AnimatedSwitcher(
+                          duration: Duration(milliseconds: 1000),
+                          child: cubit.timeUp
+                              ? Image.asset(
+                            "assets/images/checked.png",
+                            key: ValueKey("checked"),
+                          )
+                              : Image.asset(
+                            "assets/images/touch_in.png",
+                            key: ValueKey("touch_in"),
+                          ),
                         ),
                       ),
                       Gap(5),
-                      cubit.timeUp? const Text("Have a nice day",style: TextStyle(color: Colors.white),):Text(
-                        cubit.isCheckedIn ? "Check Out" : "Check In",
-                        style: const TextStyle(fontSize: 18),
+                      AnimatedSwitcher(
+                        duration: Duration(milliseconds: 1000),
+                        child: cubit.timeUp
+                            ? const Text(
+                          "Have a nice day",
+                          style: TextStyle(color: Colors.black),
+                        )
+                            : Text(
+                          cubit.isCheckedIn ? "Check Out" : "Check In",
+                          style: const TextStyle(fontSize: 18),
+                        ),
                       ),
                     ],
                   ),
                 ),
-                progressColor: cubit.timeUp ?   indicatorBackground:Colors.blue
-
+                progressColor: currentProgressColor,
               );
-
             },
-
           );
         },
       ),
     );
   }
-
-
 }

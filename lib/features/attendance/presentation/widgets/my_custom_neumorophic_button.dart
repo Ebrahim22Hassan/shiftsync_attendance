@@ -52,7 +52,7 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
       onTap: () {
         _handleTap(context);
       },
-      child: AttendanceButtonUI(animation: _animation, cubit: cubit),
+      child: AttendanceButtonUI(animation: _animation, cubit: cubit,animationController: _animationController,),
     );
   }
 
@@ -140,7 +140,10 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                cubit.employeeCheckOutRecord(widget.profileEntity.id);
+                _animationController.reverse(); // Reverse animation
+                Future.delayed(const Duration(seconds: 1), () {
+                  cubit.employeeCheckOutRecord(widget.profileEntity.id);
+                });
               },
               child: const Text("Yes"),
             ),
