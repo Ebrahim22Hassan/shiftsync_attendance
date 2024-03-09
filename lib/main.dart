@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:month_year_picker/month_year_picker.dart';
 import 'package:shiftsync_attendance/welcome.dart';
 import 'core/services/applocal.dart';
+import 'core/services/cache_helper.dart';
 import 'core/utils/bloc_observer.dart';
 import 'core/services/di.dart';
 
@@ -24,6 +25,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await CacheHelper.init();
 
   await init();
   runApp(const MyApp());
@@ -54,7 +56,7 @@ class MyApp extends StatelessWidget {
             ? EdgeInsets.zero
             : const EdgeInsets.only(bottom: 10),
         child: MaterialApp(
-          locale: const Locale("en"),
+          locale:  Locale("${CacheHelper.getData(key: "lang")}"),
           localizationsDelegates: const [
             AppLocale.delegate,
             GlobalMaterialLocalizations.delegate,

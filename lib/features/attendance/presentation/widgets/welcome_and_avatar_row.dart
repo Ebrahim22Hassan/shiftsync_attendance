@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/services/applocal.dart';
 import '../../../profile/presentation/cubit/profile_cubit.dart';
+import '../../../profile/presentation/widgets/change_lang_widget.dart';
 
 class WelcomeAndAvatarRow extends StatelessWidget {
   const WelcomeAndAvatarRow({
@@ -47,16 +48,17 @@ class WelcomeAndAvatarRow extends StatelessWidget {
             ),
           ],
         ),
-        Container(
-          height: 50,
-          width: 50,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            image: DecorationImage(
-              image: AssetImage("assets/images/1077012.png"),
-            ),
-          ),
-        ),
+        ChangeLangWidget(),
+        // Container(
+        //   height: 50,
+        //   width: 50,
+        //   decoration: const BoxDecoration(
+        //     shape: BoxShape.circle,
+        //     image: DecorationImage(
+        //       image: AssetImage("assets/images/1077012.png"),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }
