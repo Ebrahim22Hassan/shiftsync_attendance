@@ -41,3 +41,16 @@ class ProfileUpdateFailure extends ProfileState {
   @override
   List<Object?> get props => [message];
 }
+
+class PickingImgSuccessState extends ProfileState {}
+class PickingImgLoadingState extends ProfileState {}
+class PickingImgErrorState extends ProfileState {}
+
+class UploadingImgLoadingState extends ProfileState {}
+class UploadingImgSuccessState extends ProfileState {}
+class UploadingImgErrorState extends ProfileState {}
+
+class DownloadingImgSuccessState extends ProfileState {}
+class DownloadingImgErrorState extends ProfileState {}
+
+

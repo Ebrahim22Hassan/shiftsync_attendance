@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:shiftsync_attendance/features/attendance/presentation/cubit/home_state.dart';
 import '../../../../core/services/cache_helper.dart';
 import '../../../../core/services/location_helper.dart';
+import '../../../../core/styles/colors.dart';
 import '../../data/model/employee_attendence_model.dart';
 
 class HomeCubit extends Cubit<HomeState> {
@@ -16,12 +17,13 @@ class HomeCubit extends Cubit<HomeState> {
 
   static HomeCubit get(context) => BlocProvider.of<HomeCubit>(context);
 
-  static const double referenceLatitude = 25.21982131171806;
-  static const double referenceLongitude = 45.8856693885365;
+  // static const double referenceLatitude = 25.21982131171806;
+  // static const double referenceLongitude = 45.8856693885365;
   static Position? position;
 
-  // static const double referenceLatitude = 23.634046;
-  // static const double referenceLongitude = 58.1145235;
+  static const double referenceLatitude = 23.634046;
+  static const double referenceLongitude = 58.1145235;
+
   late final double? distance;
   final double definedDistance = 3;
   bool locationStatus = false;
@@ -191,4 +193,7 @@ class HomeCubit extends Cubit<HomeState> {
     CacheHelper.saveData(key: "lang", value: selectedLanguage);
     emit(ChangeLanguageState());
   }
+
+
+
 }

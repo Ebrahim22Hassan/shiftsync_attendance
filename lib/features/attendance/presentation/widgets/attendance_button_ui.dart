@@ -21,9 +21,10 @@ class AttendanceButtonUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     Color startBackgroundColor = const Color(0xffF9F5F6);
     Color endBackgroundColor = Colors.grey;
-    Color indicatorBackground = const Color(0xFFB8C7CB);
+    // Color indicatorBackground = const Color(0xFFB8C7CB);
     Color startProgressColor = const Color(0xFFB8C7CB);
     Color endProgressColor = AppColors().primary;
 
@@ -36,11 +37,11 @@ class AttendanceButtonUI extends StatelessWidget {
             endBackgroundColor,
             _animation.value,
           )!;
-          Color currentProgressColor = Color.lerp(
-            startProgressColor,
-            endProgressColor,
-            _animation.value,
-          )!;
+          // Color currentProgressColor = Color.lerp(
+          //   startProgressColor,
+          //   endProgressColor,
+          //   _animation.value,
+          // )!;
 
           return BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) {
@@ -62,21 +63,21 @@ class AttendanceButtonUI extends StatelessWidget {
                       SizedBox(
                         height: 70,
                         child: AnimatedSwitcher(
-                          duration: Duration(milliseconds: 1000),
+                          duration: const Duration(milliseconds: 1000),
                           child: cubit.timeUp
                               ? Image.asset(
                             "assets/images/checked.png",
-                            key: ValueKey("checked"),
+                            key: const ValueKey("checked"),
                           )
                               : Image.asset(
                             "assets/images/touch_in.png",
-                            key: ValueKey("touch_in"),
+                            key: const ValueKey("touch_in"),
                           ),
                         ),
                       ),
-                      Gap(5),
+                      const Gap(5),
                       AnimatedSwitcher(
-                        duration: Duration(milliseconds: 1000),
+                        duration: const Duration(milliseconds: 1000),
                         child: cubit.timeUp
                             ? const Text(
                           "Have a nice day",
@@ -90,7 +91,7 @@ class AttendanceButtonUI extends StatelessWidget {
                     ],
                   ),
                 ),
-                progressColor: currentProgressColor,
+                progressColor: AppColors().primary,
               );
             },
           );

@@ -17,9 +17,9 @@ class MyCustomNeumorphicButton extends StatefulWidget {
 
 class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
     with SingleTickerProviderStateMixin {
+
   late AnimationController _animationController;
   late Animation<double> _animation;
-
   BiometricServices biometricServices = BiometricServices();
 
   @override
@@ -38,7 +38,7 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
 
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 1), // Animation duration of 2 seconds
+      duration: const Duration(seconds: 1),
     );
     _animation =
         Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
@@ -52,32 +52,27 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
       onTap: () {
         _handleTap(context);
       },
-      child: AttendanceButtonUI(animation: _animation, cubit: cubit,animationController: _animationController,),
+      child: AttendanceButtonUI(
+        animation: _animation,
+        cubit: cubit,
+        animationController: _animationController,),
     );
   }
 
   void _handleTap(BuildContext context) {
     final cubit = HomeCubit.get(context);
-    if(cubit.timeUp){
-      cubit.showToastMessage(
-        "روح يا شيبة"
-      );
-    }
-    else{
+    if (cubit.timeUp) {
+      cubit.showToastMessage("روح يا شيبة");
+    } else {
       if (cubit.locationStatus) {
-        if(cubit.isCheckedIn){
-          print ("${cubit.isCheckedIn}");
+        if (cubit.isCheckedIn) {
           _showCheckOutAlertDialog(context, cubit);
-          cubit.changeCheckInOutStatus();
-
-        }else{
+        } else {
           cubit.employeeCheckInRecord(widget.profileEntity.id);
-          print ("${cubit.isCheckedIn}");
           cubit.changeCheckInOutStatus();
           _animationController.forward();
 
         }
-
       } else {
         _animationController.forward();
         Future.delayed(const Duration(seconds: 1), () {
@@ -129,6 +124,7 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
     _animationController.dispose();
     super.dispose();
   }
+
   void _showCheckOutAlertDialog(BuildContext context, HomeCubit cubit) {
     showDialog(
       context: context,
@@ -140,7 +136,11 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                _animationController.reverse(); // Reverse animation
+                print("_animationController.reverse: Before");
+                _animationController.reverse();
+                print("_animationController.reverse: After");
+
+                cubit.changeCheckInOutStatus();
                 Future.delayed(const Duration(seconds: 1), () {
                   cubit.employeeCheckOutRecord(widget.profileEntity.id);
                 });

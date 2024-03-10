@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:month_year_picker/month_year_picker.dart';
+import 'package:shiftsync_attendance/features/attendance/presentation/pages/home_page.dart';
 import 'package:shiftsync_attendance/welcome.dart';
 import 'core/services/applocal.dart';
 import 'core/services/cache_helper.dart';
@@ -82,7 +83,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'ShiftSync',
               theme: AppStyle().theme,
-              home: const WelcomeScreen(),
+              home: const SwitchPage(),
             );
           },
         ),
