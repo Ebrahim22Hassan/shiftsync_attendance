@@ -82,7 +82,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'ShiftSync',
               theme: AppStyle().theme,
-              home: const SwitchPage(),
+              home: const WelcomeScreen(),
             );
           },
         ),

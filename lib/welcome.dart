@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:shiftsync_attendance/features/auth/presentation/pages/login_screen.dart';
 import 'package:shiftsync_attendance/features/auth/presentation/pages/register_screen.dart';
 import '../../../../assets.dart';
@@ -31,65 +32,75 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               const Align(
                   alignment: Alignment.centerRight, child: ChangeLangWidget()),
               const Spacer(flex: 1),
-              CarouselSlider.builder(
-                  carouselController: controller,
-                  itemCount: ImagePaths().carouselImages.length,
-                  itemBuilder: (context, index, realIndex) {
-                    final carouselImage = ImagePaths().carouselImages[index];
-                    return Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          image: DecorationImage(
-                            //fit: BoxFit.cover,
-                            image: AssetImage(carouselImage),
-                          )),
-                    );
-                  },
-                  options: CarouselOptions(
-                    height: 600,
-                    autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 5),
-                    viewportFraction: 0.9,
-                    enlargeCenterPage: true,
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        activateIndex = index;
-                      });
+              Expanded(
+                flex: 2,
+                child: CarouselSlider.builder(
+                    carouselController: controller,
+                    itemCount: ImagePaths().carouselImages.length,
+                    itemBuilder: (context, index, realIndex) {
+                      final carouselImage = ImagePaths().carouselImages[index];
+                      return Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            image: DecorationImage(
+                              //fit: BoxFit.cover,
+                              image: AssetImage(carouselImage),
+                            )),
+                      );
                     },
-                  )),
+                    options: CarouselOptions(
+                      // height: 600,
+                      autoPlay: true,
+                      autoPlayInterval: const Duration(seconds: 5),
+                      viewportFraction: 0.9,
+                      enlargeCenterPage: true,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          activateIndex = index;
+                        });
+                      },
+                    )),
+              ),
               //Image.asset(paths.logo, scale: 4),
               const Spacer(),
-              MyButton(
-                text: getLang(context, "login"),
-                onPressed: () {
-                  // Navigator.of(context).pushNamedAndRemoveUntil(
-                  //   Login.routeName,
-                  //   (route) => true,
-                  // );
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) {
-                      return const LoginScreen();
-                    },
-                  ));
-                },
-              ),
-              const SizedBox(height: 15),
-              MyButton(
-                outline: true,
-                text: getLang(context, "register"),
-                onPressed: () {
-                  // Navigator.of(context).pushNamedAndRemoveUntil(
-                  //   Register.routeName,
-                  //   (route) => true,
-                  // );
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) {
-                      return const RegisterScreen();
-                    },
-                  ));
-                },
-              ),
+              Expanded(
+                flex: 1,
+                child: Column(
+                  children: [
+                    MyButton(
+                      text: getLang(context, "login"),
+                      onPressed: () {
+                        // Navigator.of(context).pushNamedAndRemoveUntil(
+                        //   Login.routeName,
+                        //   (route) => true,
+                        // );
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) {
+                            return const LoginScreen();
+                          },
+                        ));
+                      },
+                    ),
+                    const SizedBox(height: 15),
+                    MyButton(
+                      outline: true,
+                      text: getLang(context, "register"),
+                      onPressed: () {
+                        // Navigator.of(context).pushNamedAndRemoveUntil(
+                        //   Register.routeName,
+                        //   (route) => true,
+                        // );
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) {
+                            return const RegisterScreen();
+                          },
+                        ));
+                      },
+                    ),
+                  ],
+                ),
+              )
               // const Spacer(),
               // CupertinoButton(
               //   onPressed: () {
