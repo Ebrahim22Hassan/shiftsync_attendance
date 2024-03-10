@@ -8,6 +8,7 @@ import 'package:shiftsync_attendance/features/profile/domain/entities/profile_en
 import '../../../../core/services/di.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../cubit/profile_cubit.dart';
+import '../widgets/change_lang_widget.dart';
 import '../widgets/profile_image_stack.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
@@ -54,6 +55,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                 //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   const Padding(
+                    padding: EdgeInsets.all(24.0),
+                    child: Align(
+                        alignment: Alignment.centerRight,
+                        child: ChangeLangWidget()),
+                  ),
+                  const Padding(
                     padding: EdgeInsets.only(top: 45, bottom: 30),
                     child: ProfileImageStack(),
                   ),
@@ -64,7 +71,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       children: [
                         CustomTextFormField(
                           keyboardType: TextInputType.text,
-                          hintText: widget.profileEntity.fullName ?? 'Full Name',
+                          hintText:
+                              widget.profileEntity.fullName ?? 'Full Name',
                           onChanged: (value) {
                             setState(() {
                               fullName = value;
@@ -82,7 +90,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         ),
                         CustomTextFormField(
                           keyboardType: TextInputType.phone,
-                          hintText: widget.profileEntity.phoneNum ?? 'Phone Number',
+                          hintText:
+                              widget.profileEntity.phoneNum ?? 'Phone Number',
                           onChanged: (value) {
                             setState(() {
                               phoneNum = value;

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shiftsync_attendance/core/styles/colors.dart';
 import 'package:shiftsync_attendance/features/profile/domain/entities/profile_entities.dart';
-import '../../../../const.dart';
-import '../pages/update_profile_screen.dart';
+import '../../../../assets.dart';
 
 class ProfileHeaderWidget extends StatelessWidget {
   const ProfileHeaderWidget({super.key, required this.profileEntity});
@@ -15,11 +14,9 @@ class ProfileHeaderWidget extends StatelessWidget {
       children: <Widget>[
         Ink(
           height: 200,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             image: DecorationImage(
-                image: NetworkImage(
-                    'https://images.inc.com/uploaded_files/image/1920x1080/getty_518889586_333442.jpg'),
-                fit: BoxFit.cover),
+                image: AssetImage(ImagePaths().cover), fit: BoxFit.cover),
           ),
         ),
         Ink(
@@ -41,20 +38,22 @@ class ProfileHeaderWidget extends StatelessWidget {
               ),
             ],
           ),
-          child: IconButton(
-            icon:  Icon(
-              Icons.edit,
-              color: AppColors().primary,
-              size: 30,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>  UpdateProfileScreen(profileEntity: profileEntity,)),
-              );
-            },
-          ),
+          // child: IconButton(
+          //   icon: Icon(
+          //     Icons.edit,
+          //     color: AppColors().primary,
+          //     size: 30,
+          //   ),
+          //   onPressed: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //           builder: (context) => UpdateProfileScreen(
+          //                 profileEntity: profileEntity,
+          //               )),
+          //     );
+          //   },
+          // ),
         ),
         Container(
           width: double.infinity,
@@ -78,12 +77,9 @@ class ProfileHeaderWidget extends StatelessWidget {
                     ),
                   ),
                   child: ClipRRect(
-                      borderRadius: BorderRadius.circular(80),
-                      child: Image.network(
-                          profileImage,
-                          width: 80,
-                          height: 80,
-                          fit: BoxFit.fill)),
+                    borderRadius: BorderRadius.circular(80),
+                    child: Image.asset(ImagePaths().profile),
+                  ),
                 ),
               ),
             ],

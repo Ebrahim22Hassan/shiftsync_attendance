@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shiftsync_attendance/core/styles/colors.dart';
-import '../../../../const.dart';
+
+import '../../../../assets.dart';
 
 class ProfileImageStack extends StatelessWidget {
   const ProfileImageStack({
@@ -25,7 +26,7 @@ class ProfileImageStack extends StatelessWidget {
                 CircleAvatar(
                   backgroundColor: AppColors().grey,
                   radius: 74,
-                  backgroundImage: const NetworkImage(profileImage),
+                  backgroundImage: AssetImage(ImagePaths().profile),
                 ),
               ],
             ),

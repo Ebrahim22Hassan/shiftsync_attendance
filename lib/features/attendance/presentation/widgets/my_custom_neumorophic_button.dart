@@ -81,7 +81,7 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
       } else {
         _animationController.forward();
         Future.delayed(const Duration(seconds: 1), () {
-          cubit.showToastMessage("You are not in the location, اسلك");
+          cubit.showToastMessage("You are not in the right location");
           _animationController.reverse();
         });
       }

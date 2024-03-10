@@ -1,5 +1,7 @@
 {
-  "welcomeMessage" : "أهلا ياموظف" ,
+  "welcomeMessage" : "يا هلا" ,
   "homepage" : "الصفحة الرئيسية",
-  "name": "خالد"
+  "name": "خالد",
+  "login": "تسجيل الدخول",
+  "register": "التسجيل"
 }

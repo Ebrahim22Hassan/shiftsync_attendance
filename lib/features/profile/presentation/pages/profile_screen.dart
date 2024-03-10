@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:shiftsync_attendance/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:shiftsync_attendance/features/profile/presentation/pages/update_profile_screen.dart';
 import '../../../../core/widgets/custom_error_widget.dart';
 import '../../../auth/presentation/cubit/auth_cubit.dart';
 import '../../../auth/presentation/pages/login_screen.dart';
@@ -58,31 +59,62 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         const Gap(20),
-        BlocConsumer<AuthCubit, AuthState>(
-          listener: (context, state) {
-            if (state is LogoutSuccessState) {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const LoginScreen()),
-              );
-            } else if (state is LogoutFailureState) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Logout failed: ${state.errorMessage}'),
-                ),
-              );
-            }
-          },
-          builder: (context, state) {
-            if (state is LogoutLoadingState) {
-              return const CircularProgressIndicator();
-            } else {
-              return MyButton(
-                text:"Logout",
-                onPressed: () => BlocProvider.of<AuthCubit>(context).logout(),
-              );
-            }
-          },
+        Column(
+          children: [
+            BlocBuilder<ProfileCubit, ProfileState>(
+              builder: (context, state) {
+                if (state is ProfileLoaded) {
+                  final profile = state.profile;
+                  return MyButton(
+                    outline: true,
+                    text: 'Edit Profile',
+                    onPressed: () {
+                      // Navigator.of(context).pushNamedAndRemoveUntil(
+                      //   Register.routeName,
+                      //   (route) => true,
+                      // );
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) {
+                          return UpdateProfileScreen(profileEntity: profile);
+                        },
+                      ));
+                    },
+                  );
+                } else {
+                  return Container();
+                }
+              },
+            ),
+            const SizedBox(height: 15),
+            BlocConsumer<AuthCubit, AuthState>(
+              listener: (context, state) {
+                if (state is LogoutSuccessState) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()),
+                  );
+                } else if (state is LogoutFailureState) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Logout failed: ${state.errorMessage}'),
+                    ),
+                  );
+                }
+              },
+              builder: (context, state) {
+                if (state is LogoutLoadingState) {
+                  return const CircularProgressIndicator();
+                } else {
+                  return MyButton(
+                    text: "Logout",
+                    onPressed: () =>
+                        BlocProvider.of<AuthCubit>(context).logout(),
+                  );
+                }
+              },
+            ),
+          ],
         )
       ],
     );

@@ -11,7 +11,7 @@ class SocialButton extends StatelessWidget {
   static List<String> socialIcon = [
     IconsPaths().facebookIcon,
     IconsPaths().googleIcon,
-    IconsPaths().appgleIcon,
+    IconsPaths().appleIcon,
   ];
   @override
   Widget build(BuildContext context) {

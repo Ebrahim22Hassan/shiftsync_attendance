@@ -1,6 +1,8 @@
 {
   "welcomeMessage" : "Welcome"  ,
   "homepage" : "homepage",
-  "name": "khaled"
+  "name": "khaled",
+  "login": "Login",
+  "register": "Register"
 
 }

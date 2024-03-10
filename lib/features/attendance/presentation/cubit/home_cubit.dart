@@ -16,12 +16,12 @@ class HomeCubit extends Cubit<HomeState> {
 
   static HomeCubit get(context) => BlocProvider.of<HomeCubit>(context);
 
-  // static const double referenceLatitude = 25.21982131171806;
-  // static const double referenceLongitude = 45.8856693885365;
+  static const double referenceLatitude = 25.21982131171806;
+  static const double referenceLongitude = 45.8856693885365;
   static Position? position;
 
-  static const double referenceLatitude = 23.634046;
-  static const double referenceLongitude = 58.1145235;
+  // static const double referenceLatitude = 23.634046;
+  // static const double referenceLongitude = 58.1145235;
   late final double? distance;
   final double definedDistance = 3;
   bool locationStatus = false;
