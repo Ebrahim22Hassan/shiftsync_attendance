@@ -9,17 +9,17 @@ import 'package:intl/intl.dart';
 import 'package:shiftsync_attendance/features/attendance/presentation/cubit/home_state.dart';
 import '../../../../core/services/cache_helper.dart';
 import '../../../../core/services/location_helper.dart';
-import '../../../../core/styles/colors.dart';
 import '../../data/model/employee_attendence_model.dart';
+
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(MapInitialState());
 
   static HomeCubit get(context) => BlocProvider.of<HomeCubit>(context);
 
+  static Position? position;
   // static const double referenceLatitude = 25.21982131171806;
   // static const double referenceLongitude = 45.8856693885365;
-  static Position? position;
 
   static const double referenceLatitude = 23.634046;
   static const double referenceLongitude = 58.1145235;
@@ -64,7 +64,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   double calculateDistance(double startLatitude, double startLongitude) {
-    const double earthRadius = 6371.0; // Earth's radius in kilometers
+    const double earthRadius = 6371.0;
     double dLat = _degreesToRadians(referenceLatitude - startLatitude);
     double dLon = _degreesToRadians(referenceLongitude - startLongitude);
 
@@ -76,7 +76,7 @@ class HomeCubit extends Cubit<HomeState> {
 
     double c = 2 * atan2(sqrt(a), sqrt(1 - a));
 
-    return earthRadius * c; // Distance in kilometers
+    return earthRadius * c;
   }
 
   double _degreesToRadians(double degrees) {
@@ -86,11 +86,8 @@ class HomeCubit extends Cubit<HomeState> {
   late Timestamp currentTimeAndDate;
   late DateTime currentDate;
   String? checkInTime;
-
   String? checkOutTime;
-
   String? totalHrs;
-
   late String dateString;
 
   FirebaseFirestore fireStore = FirebaseFirestore.instance;
@@ -99,11 +96,11 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       currentTimeAndDate = Timestamp.now();
       currentDate = currentTimeAndDate.toDate();
-      checkInTime = "${currentDate.hour}:${currentDate.minute}";
+      checkInTime = _formatTime(currentDate.hour, currentDate.minute);
       dateString =
-          "${currentDate.year}-${currentDate.month}-${currentDate.day}";
+      "${currentDate.year}-${currentDate.month}-${currentDate.day}";
       CollectionReference attendanceCollection =
-          fireStore.collection('StatusRecord');
+      fireStore.collection('StatusRecord');
 
       EmployeeAttendanceModel attendanceData = EmployeeAttendanceModel(
           id: employeeId,
@@ -127,11 +124,11 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       currentTimeAndDate = Timestamp.now();
       currentDate = currentTimeAndDate.toDate();
-      checkOutTime = "${currentDate.hour}:${currentDate.minute}";
+      checkOutTime = _formatTime(currentDate.hour, currentDate.minute);
       dateString =
-          "${currentDate.year}-${currentDate.month}-${currentDate.day}";
+      "${currentDate.year}-${currentDate.month}-${currentDate.day}";
       CollectionReference attendanceCollection =
-          fireStore.collection('StatusRecord');
+      fireStore.collection('StatusRecord');
       calculateTotalHours(checkInTime!, checkOutTime!);
       EmployeeAttendanceModel attendanceData = EmployeeAttendanceModel(
           id: employeeId,
@@ -154,7 +151,6 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void calculateTotalHours(String checkInTime, String checkOutTime) {
-    // Parse check-in and check-out times
     List<String> checkInParts = checkInTime.split(':');
     List<String> checkOutParts = checkOutTime.split(':');
 
@@ -164,20 +160,32 @@ class HomeCubit extends Cubit<HomeState> {
     int checkOutHour = int.parse(checkOutParts[0]);
     int checkOutMinute = int.parse(checkOutParts[1]);
 
-    // Calculate total minutes
     int totalMinutes =
         (checkOutHour - checkInHour) * 60 + (checkOutMinute - checkInMinute);
 
-    // Calculate hours and minutes
     int totalHours = totalMinutes ~/ 60;
     int remainingMinutes = totalMinutes % 60;
 
-    // Format total hours and minutes
     String formattedHours = totalHours.toString().padLeft(2, '0');
     String formattedMinutes = remainingMinutes.toString().padLeft(2, '0');
     print("total hrs is ${formattedHours + formattedMinutes}");
     totalHrs = '$formattedHours:$formattedMinutes';
   }
+
+  String _formatTime(int hour, int minute) {
+    if (hour >= 12) {
+
+      hour = hour == 12 ? hour : hour - 12;
+    }
+    hour = hour == 0 ? 12 : hour;
+
+    // Padding with zeros and ensuring two-digit format
+    String formattedHour = hour.toString().padLeft(2, '0');
+    String formattedMinute = minute.toString().padLeft(2, '0');
+
+    return '$formattedHour:$formattedMinute';
+  }
+
 
   bool isCheckedIn = false;
 
@@ -191,9 +199,5 @@ class HomeCubit extends Cubit<HomeState> {
   void changeLanguage(value) {
     selectedLanguage = value;
     CacheHelper.saveData(key: "lang", value: selectedLanguage);
-    emit(ChangeLanguageState());
   }
-
-
-
 }
