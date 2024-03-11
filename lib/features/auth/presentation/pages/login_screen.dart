@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shiftsync_attendance/core/services/applocal.dart';
 import 'package:shiftsync_attendance/core/widgets/conditional_builder.dart';
 import '../../../../core/styles/colors.dart';
 import '../../../attendance/presentation/pages/switch_page.dart';
@@ -53,7 +54,7 @@ class LoginScreen extends StatelessWidget {
                     overflowSpacing: 15,
                     children: [
                       Text(
-                        "Welcome back! Glad\nto see you, Again!",
+                        getLang(context, "loginWelcomeMessage"),
                         style: Theme.of(context)
                             .textTheme
                             .headlineLarge!
@@ -62,11 +63,11 @@ class LoginScreen extends StatelessWidget {
                       const SizedBox(height: 15),
                       CustomTextFormField(
                         controller: authCubit.email,
-                        hintText: "Enter your email",
+                        hintText:   getLang(context, "email"),
                       ),
                       CustomTextFormField(
                         controller: authCubit.passwordRegister,
-                        hintText: "Enter your password",
+                        hintText:  getLang(context, "password"),
                         obscureText: true,
                       ),
                       Align(
@@ -80,7 +81,7 @@ class LoginScreen extends StatelessWidget {
                             // );
                           },
                           child: Text(
-                            "Forgot Password?",
+                            getLang(context, "forgetPassword"),
                             style: Theme.of(context)
                                 .textTheme
                                 .titleSmall!
@@ -98,7 +99,7 @@ class LoginScreen extends StatelessWidget {
                           builder: (context) {
                             return Center(
                               child: MyButton(
-                                text: "Login",
+                                text:   getLang(context, "login"),
                                 onPressed: () async {
                                   // Navigator.of(context).pushNamedAndRemoveUntil(
                                   //   HomePage.routeName,
@@ -124,7 +125,7 @@ class LoginScreen extends StatelessWidget {
                             );
                           }),
                       const SizedBox(height: 15),
-                      const SocialButton(orText: "Or Login with"),
+                       SocialButton(orText:   getLang(context, "loginWith"),),
                     ],
                   ),
                 ),

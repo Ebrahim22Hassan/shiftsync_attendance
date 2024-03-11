@@ -199,5 +199,6 @@ class HomeCubit extends Cubit<HomeState> {
   void changeLanguage(value) {
     selectedLanguage = value;
     CacheHelper.saveData(key: "lang", value: selectedLanguage);
+    emit(ChangeLanguageState());
   }
 }

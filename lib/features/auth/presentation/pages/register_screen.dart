@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shiftsync_attendance/core/extensions/toast_extenstion.dart';
 import 'package:shiftsync_attendance/core/widgets/conditional_builder.dart';
+import '../../../../core/services/applocal.dart';
 import '../../../../core/widgets/alerts.dart';
 import '../../../attendance/presentation/pages/switch_page.dart';
 import '../cubit/auth_cubit.dart';
@@ -62,7 +63,7 @@ class RegisterScreen extends StatelessWidget {
                   overflowSpacing: 15,
                   children: [
                     Text(
-                      "Hello! Register to get started",
+                      getLang(context, "registerWelcomeMessage"),
                       style: Theme.of(context)
                           .textTheme
                           .headlineLarge!
@@ -71,26 +72,26 @@ class RegisterScreen extends StatelessWidget {
                     const SizedBox(height: 15),
                     CustomTextFormField(
                       controller: authCubit.name,
-                      hintText: "Full Name",
+                      hintText:   getLang(context, "fullName"),
                       keyboardType: TextInputType.text,
                     ),
                     CustomTextFormField(
                       controller: authCubit.phoneRegister,
-                      hintText: "Phone Number",
+                      hintText:   getLang(context, "phoneNumber"),
                       keyboardType: TextInputType.phone,
                     ),
                     CustomTextFormField(
                       controller: authCubit.email,
-                      hintText: "Email",
+                      hintText:   getLang(context, "email"),
                     ),
                     CustomTextFormField(
                       controller: authCubit.passwordRegister,
-                      hintText: "Password",
+                      hintText:   getLang(context, "password"),
                       obscureText: true,
                       keyboardType: TextInputType.text,
                     ),
-                    const CustomTextFormField(
-                      hintText: "Confirm password",
+                     CustomTextFormField(
+                      hintText:   getLang(context, "confirmPassword"),
                       obscureText: true,
                       keyboardType: TextInputType.text,
                     ),
@@ -103,7 +104,7 @@ class RegisterScreen extends StatelessWidget {
                         return Center(
                           child: MyButton(
                             key: formKey,
-                            text: "Register",
+                            text:  getLang(context, "register"),
                             onPressed: () {
                               Pattern pattern =
                                   r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -163,7 +164,7 @@ class RegisterScreen extends StatelessWidget {
                       }
                     ),
                     const SizedBox(height: 15),
-                    const SocialButton(orText: "Or Register with"),
+                     SocialButton(orText:   getLang(context, "loginWith"),),
                   ],
                 ),
               ),

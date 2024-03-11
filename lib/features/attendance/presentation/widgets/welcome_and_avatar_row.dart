@@ -36,8 +36,8 @@ class WelcomeAndAvatarRow extends StatelessWidget {
                 );
               }
             }),
-            const Text(
-              "Good Morning, Mark Your attendance",
+             Text(
+              getLang(context, "homeWelcomeMessage"),
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 10,

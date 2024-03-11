@@ -3,6 +3,17 @@
   "homepage" : "homepage",
   "name": "khaled",
   "login": "Login",
-  "register": "Register"
-
+  "register": "Register",
+  "loginWelcomeMessage": "Welcome back! Glad\nto see you, Again!",
+  "registerWelcomeMessage": "Hello!\nRegister to get started ",
+  "homeWelcomeMessage": "Good Morning, Mark Your attendance",
+  "forgetPassword": "Forget password?",
+  "password": "Password",
+  "enterPassword": "Enter your password",
+  "confirmPassword": "Confirm password",
+  "email": "Email",
+  "phoneNumber": "Phone Number",
+  "fullName": "Full Name",
+  "registerNow": "Register Now",
+  "loginWith": "Or Login with"
 }

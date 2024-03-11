@@ -1,7 +1,26 @@
 {
-  "welcomeMessage" : "يا هلا" ,
-  "homepage" : "الصفحة الرئيسية",
+  "welcomeMessage": "يا هلا",
+  "homepage": "الصفحة الرئيسية",
   "name": "خالد",
   "login": "تسجيل الدخول",
-  "register": "التسجيل"
+  "register": "التسجيل",
+  "loginWelcomeMessage": "مرحبا بعودتك,\nسعداء لرؤيتك من جديد",
+  "registerWelcomeMessage": "أهلا بك,\nسجل الآن لنبدأ",
+  "homeWelcomeMessage": "صباح الخير,سجل حضورك",
+  "checkIn": "تسجيل الوصول",
+  "checkOut": "تسجيل الإنصراف",
+  "forgetPassword": "نسيت كلمة المرور؟",
+  "password": "كلمة المرور",
+  "enterPassword": "كلمة المرور",
+  "confirmPassword": "تأكيد كلمة المرور",
+  "email": "الإيميل",
+  "phoneNumber": "رقم الهاتف",
+  "fullName": "الإسم بالكامل",
+  "registerNow": "سجل الآن",
+  "loginWith": "سجل الدخول عن طريق",
+  "yes": "نعم",
+  "No": "لا",
+  "confirmCheckOut": "تأكيد الإنصراف",
+  "checkOutMessage": "هل أنت متأكد من المغادرة"
+
 }

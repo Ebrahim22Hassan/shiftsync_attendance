@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:shiftsync_attendance/features/attendance/presentation/cubit/home_cubit.dart';
 import 'package:shiftsync_attendance/core/services/biometric_services.dart';
 import 'package:shiftsync_attendance/features/profile/domain/entities/profile_entities.dart';
+import '../../../../core/services/applocal.dart';
 import 'attendance_button_ui.dart';
 import 'biometric_dialog.dart';
 
@@ -130,8 +131,8 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Confirm Check Out"),
-          content: const Text("Are you sure you want to check out?"),
+          title:  Text(  getLang(context, "confirmCheckOut"),),
+          content:  Text(  getLang(context, "checkOutMessage"),),
           actions: [
             TextButton(
               onPressed: () {
@@ -145,13 +146,13 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
                   cubit.employeeCheckOutRecord(widget.profileEntity.id);
                 });
               },
-              child: const Text("Yes"),
+              child:  Text(  getLang(context, "yes"),),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text("No"),
+              child:  Text(  getLang(context, "no"),),
             ),
           ],
         );
