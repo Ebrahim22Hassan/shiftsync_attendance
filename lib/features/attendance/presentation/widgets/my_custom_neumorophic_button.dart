@@ -146,7 +146,7 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
                   cubit.employeeCheckOutRecord(widget.profileEntity.id);
                 });
               },
-              child:  Text(  getLang(context, "yes"),),
+              child:  Text(  getLang(context,"yes"),),
             ),
             TextButton(
               onPressed: () {

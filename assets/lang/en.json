@@ -15,5 +15,9 @@
   "phoneNumber": "Phone Number",
   "fullName": "Full Name",
   "registerNow": "Register Now",
-  "loginWith": "Or Login with"
+  "loginWith": "Or Login with",
+  "yes": "Yes",
+  "no": "No",
+  "confirmCheckOut": "Confirm Check Out",
+  "checkOutMessage": "Are you sure you want to check out?"
 }
