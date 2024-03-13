@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import '../../../../core/styles/colors.dart';
 import '../widgets/my_back_button.dart';
 import '../../../../core/widgets/my_button.dart';
@@ -32,16 +33,31 @@ class CreateNewPassword extends StatelessWidget {
                       .titleMedium!
                       .copyWith(color: AppColors().grey),
                 ),
-                const SizedBox(height: 22),
-                const CustomTextFormField(
+                const Gap(22),
+                 CustomTextFormField(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'This field can\'t be empty';
+                    } else {
+                      return null;
+                    }
+                  },
                   hintText: "New Password",
                   obscureText: true,
                 ),
-                const CustomTextFormField(
+                 CustomTextFormField(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'This field can\'t be empty';
+                    } else {
+                      return null;
+                    }
+                  },
                   hintText: "Confirm Password",
                   obscureText: true,
                 ),
-                const SizedBox(height: 28),
+                const Gap(28),
+
                 MyButton(
                   text: "Reset Password",
                   onPressed: () {

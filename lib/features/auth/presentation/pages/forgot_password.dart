@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import '../../../../core/styles/colors.dart';
 import '../widgets/account_info.dart';
 import '../widgets/my_back_button.dart';
@@ -43,9 +44,18 @@ class ForgotPassword extends StatelessWidget {
                       .titleMedium!
                       .copyWith(color: AppColors().grey),
                 ),
-                const SizedBox(height: 22),
-                const CustomTextFormField(hintText: "Enter your email"),
-                const SizedBox(height: 28),
+                const Gap(22),
+                 CustomTextFormField(
+                validator:(value) {
+                  if (value!.isEmpty) {
+                    return 'This field can\'t be empty';
+                  } else {
+                    return null;
+                  }
+                },
+                    hintText: "Enter your email"),
+                const Gap(28),
+
                 MyButton(
                   text: "Send Code",
                   onPressed: () {

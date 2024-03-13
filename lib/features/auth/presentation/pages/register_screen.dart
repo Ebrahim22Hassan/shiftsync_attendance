@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:shiftsync_attendance/core/extensions/toast_extenstion.dart';
 import 'package:shiftsync_attendance/core/widgets/conditional_builder.dart';
 import '../../../../core/services/applocal.dart';
@@ -69,33 +70,68 @@ class RegisterScreen extends StatelessWidget {
                           .headlineLarge!
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 15),
+                    const Gap(15),
                     CustomTextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'This field can\'t be empty';
+                        } else {
+                          return null;
+                        }
+                      },
                       controller: authCubit.name,
                       hintText:   getLang(context, "fullName"),
                       keyboardType: TextInputType.text,
                     ),
                     CustomTextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'This field can\'t be empty';
+                        } else {
+                          return null;
+                        }
+                      },
                       controller: authCubit.phoneRegister,
                       hintText:   getLang(context, "phoneNumber"),
                       keyboardType: TextInputType.phone,
                     ),
                     CustomTextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'This field can\'t be empty';
+                        } else {
+                          return null;
+                        }
+                      },
                       controller: authCubit.email,
                       hintText:   getLang(context, "email"),
                     ),
                     CustomTextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'This field can\'t be empty';
+                        } else {
+                          return null;
+                        }
+                      },
                       controller: authCubit.passwordRegister,
                       hintText:   getLang(context, "password"),
                       obscureText: true,
                       keyboardType: TextInputType.text,
                     ),
                      CustomTextFormField(
+                       validator: (value) {
+                         if (value!.isEmpty) {
+                           return 'This field can\'t be empty';
+                         } else {
+                           return null;
+                         }
+                       },
                       hintText:   getLang(context, "confirmPassword"),
                       obscureText: true,
                       keyboardType: TextInputType.text,
                     ),
-                    const SizedBox(height: 5),
+                    const Gap(5),
                     ConditionalBuilder(
                         condition: state is RegisterFailureState ||
                             state is! RegisterLoadingState,
@@ -163,7 +199,7 @@ class RegisterScreen extends StatelessWidget {
                         );
                       }
                     ),
-                    const SizedBox(height: 15),
+                    const Gap(15),
                      SocialButton(orText:   getLang(context, "loginWith"),),
                   ],
                 ),

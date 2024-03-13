@@ -70,6 +70,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       overflowSpacing: 15,
                       children: [
                         CustomTextFormField(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'This field can\'t be empty';
+                            } else {
+                              return null;
+                            }
+                          },
                           keyboardType: TextInputType.text,
                           hintText:
                               widget.profileEntity.fullName ?? 'Full Name',
@@ -80,6 +87,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           },
                         ),
                         CustomTextFormField(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'This field can\'t be empty';
+                            } else {
+                              return null;
+                            }
+                          },
                           keyboardType: TextInputType.text,
                           hintText: widget.profileEntity.position ?? 'Position',
                           onChanged: (value) {
@@ -89,6 +103,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           },
                         ),
                         CustomTextFormField(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'This field can\'t be empty';
+                            } else {
+                              return null;
+                            }
+                          },
                           keyboardType: TextInputType.phone,
                           hintText:
                               widget.profileEntity.phoneNum ?? 'Phone Number',
@@ -99,6 +120,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           },
                         ),
                         CustomTextFormField(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'This field can\'t be empty';
+                            } else {
+                              return null;
+                            }
+                          },
                           keyboardType: TextInputType.emailAddress,
                           hintText: widget.profileEntity.email ?? 'E-Mail',
                           onChanged: (value) {

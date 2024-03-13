@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:shiftsync_attendance/core/services/applocal.dart';
 import 'package:shiftsync_attendance/core/widgets/conditional_builder.dart';
 import '../../../../core/styles/colors.dart';
@@ -35,11 +36,7 @@ class LoginScreen extends StatelessWidget {
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is LoginSuccessState) {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => const SwitchPage(),
-              ),
-            );
+
           }
         },
         builder: (context, state) {
@@ -60,14 +57,28 @@ class LoginScreen extends StatelessWidget {
                             .headlineLarge!
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
-                      const SizedBox(height: 15),
+                      const Gap(15),
                       CustomTextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'This field can\'t be empty';
+                          } else {
+                            return null;
+                          }
+                        },
                         controller: authCubit.email,
-                        hintText:   getLang(context, "email"),
+                        hintText: getLang(context, "email"),
                       ),
                       CustomTextFormField(
+                           validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'This field can\'t be empty';
+                          } else {
+                            return null;
+                          }
+                        },
                         controller: authCubit.passwordRegister,
-                        hintText:  getLang(context, "password"),
+                        hintText: getLang(context, "password"),
                         obscureText: true,
                       ),
                       Align(
@@ -91,7 +102,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 5),
+                      const Gap(5),
                       ConditionalBuilder(
                           condition: state is! LoginLoadingState,
                           fallback: (context) =>
@@ -99,7 +110,7 @@ class LoginScreen extends StatelessWidget {
                           builder: (context) {
                             return Center(
                               child: MyButton(
-                                text:   getLang(context, "login"),
+                                text: getLang(context, "login"),
                                 onPressed: () async {
                                   // Navigator.of(context).pushNamedAndRemoveUntil(
                                   //   HomePage.routeName,
@@ -107,7 +118,7 @@ class LoginScreen extends StatelessWidget {
                                   // );
                                   if (formKey.currentState!.validate()) {
                                     formKey.currentState!.save();
-                                    // Perform login
+
                                     await authCubit.loginWithEmailAndPassword(
                                       email: authCubit.email.text,
                                       password: authCubit.passwordRegister.text,
@@ -117,15 +128,18 @@ class LoginScreen extends StatelessWidget {
                                         builder: (context) => const SwitchPage(),
                                       ),
                                     );
+
                                   } else {
-                                    print("NOT VALID");
+                                    print("LoginPage: Info isNot correct");
                                   }
                                 },
                               ),
                             );
                           }),
-                      const SizedBox(height: 15),
-                       SocialButton(orText:   getLang(context, "loginWith"),),
+                      const Gap(15),
+                      SocialButton(
+                        orText: getLang(context, "loginWith"),
+                      ),
                     ],
                   ),
                 ),

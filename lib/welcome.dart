@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gap/gap.dart';
 import 'package:shiftsync_attendance/features/auth/presentation/pages/login_screen.dart';
 import 'package:shiftsync_attendance/features/auth/presentation/pages/register_screen.dart';
 import '../../../../assets.dart';
@@ -75,14 +76,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         //   Login.routeName,
                         //   (route) => true,
                         // );
-                        Navigator.of(context).push(MaterialPageRoute(
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) {
                             return const LoginScreen();
                           },
                         ));
                       },
                     ),
-                    const SizedBox(height: 15),
+                    const Gap( 15),
                     MyButton(
                       outline: true,
                       text: getLang(context, "register"),
@@ -91,7 +92,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         //   Register.routeName,
                         //   (route) => true,
                         // );
-                        Navigator.of(context).push(MaterialPageRoute(
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) {
                             return const RegisterScreen();
                           },
