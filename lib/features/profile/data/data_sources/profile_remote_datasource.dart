@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shiftsync_attendance/core/services/cache_helper.dart';
 import 'package:shiftsync_attendance/features/profile/domain/entities/profile_entities.dart';
 
 abstract class ProfileRemoteDataSource {
@@ -36,6 +37,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   @override
   Future<ProfileEntity> getProfile() async {
     final userId = FirebaseAuth.instance.currentUser?.uid;
+    CacheHelper.saveData(key: "userId", value: userId);
     final doc = await _firestore.collection('users').doc(userId).get();
     if (doc.exists) {
       return ProfileEntity.fromSnapshot(doc);

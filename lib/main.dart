@@ -25,12 +25,28 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await CacheHelper.init();
+  String? token = CacheHelper.getData(key: "userId");
+  Widget widget;
+
+
+    if (token == null){
+       widget= const WelcomeScreen();
+    } else {
+      widget= const SwitchPage();
+    }
+
+
+
+
   await init();
-  runApp(const MyApp());
+  runApp( MyApp(startScreen: widget,));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Widget startScreen;
+
+  const MyApp({super.key,   required this.startScreen});
+
 
 
 
@@ -83,7 +99,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'ShiftSync',
               theme: AppStyle().theme,
-              home: const WelcomeScreen(),
+              home:  startScreen,
             );
           },
         ),

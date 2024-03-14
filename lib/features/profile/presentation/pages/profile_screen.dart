@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:shiftsync_attendance/core/services/cache_helper.dart';
 import 'package:shiftsync_attendance/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:shiftsync_attendance/features/profile/presentation/pages/update_profile_screen.dart';
 import '../../../../core/widgets/custom_error_widget.dart';
@@ -61,7 +62,7 @@ class ProfileScreen extends StatelessWidget {
         const Gap(20),
         Column(
           children: [
-            BlocBuilder<ProfileCubit, ProfileState>(
+            BlocBuilder<ProfileCubit, ProfileState> (
               builder: (context, state) {
                 if (state is ProfileLoaded) {
                   final profile = state.profile;
@@ -85,7 +86,7 @@ class ProfileScreen extends StatelessWidget {
                 }
               },
             ),
-            const SizedBox(height: 15),
+            const Gap(15),
             BlocConsumer<AuthCubit, AuthState>(
               listener: (context, state) {
                 if (state is LogoutSuccessState) {
@@ -108,8 +109,10 @@ class ProfileScreen extends StatelessWidget {
                 } else {
                   return MyButton(
                     text: "Logout",
-                    onPressed: () =>
-                        BlocProvider.of<AuthCubit>(context).logout(),
+                    onPressed: () {
+                      BlocProvider.of<AuthCubit>(context).logout();
+                      CacheHelper.removeData(key: "userId");
+                    }
                   );
                 }
               },

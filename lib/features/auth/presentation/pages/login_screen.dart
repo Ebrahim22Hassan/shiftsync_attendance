@@ -106,8 +106,8 @@ class LoginScreen extends StatelessWidget {
                       ConditionalBuilder(
                           condition: state is! LoginLoadingState,
                           fallback: (context) =>
-                              const Center(child: CircularProgressIndicator()),
-                          builder: (context) {
+                                 const Center(child: CircularProgressIndicator()),
+                               builder: (context) {
                             return Center(
                               child: MyButton(
                                 text: getLang(context, "login"),
@@ -117,7 +117,7 @@ class LoginScreen extends StatelessWidget {
                                   //   (route) => false,
                                   // );
                                   if (formKey.currentState!.validate()) {
-                                    formKey.currentState!.save();
+                                     formKey.currentState!.save();
 
                                     await authCubit.loginWithEmailAndPassword(
                                       email: authCubit.email.text,
