@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:shiftsync_attendance/core/styles/colors.dart';
 import 'package:shiftsync_attendance/features/profile/domain/entities/profile_entities.dart';
+import 'package:shiftsync_attendance/features/profile/presentation/widgets/profile_image_stack.dart';
 import '../../../../assets.dart';
+import '../pages/update_profile_screen.dart';
 
 class ProfileHeaderWidget extends StatelessWidget {
   const ProfileHeaderWidget({super.key, required this.profileEntity});
@@ -38,22 +41,6 @@ class ProfileHeaderWidget extends StatelessWidget {
               ),
             ],
           ),
-          // child: IconButton(
-          //   icon: Icon(
-          //     Icons.edit,
-          //     color: AppColors().primary,
-          //     size: 30,
-          //   ),
-          //   onPressed: () {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(
-          //           builder: (context) => UpdateProfileScreen(
-          //                 profileEntity: profileEntity,
-          //               )),
-          //     );
-          //   },
-          // ),
         ),
         Container(
           width: double.infinity,
@@ -61,27 +48,27 @@ class ProfileHeaderWidget extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Card(
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(150),
-                ),
-                color: AppColors().grey,
-                child: Container(
-                  width: 150,
-                  height: 150,
-                  decoration: BoxDecoration(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(150),
-                    border: Border.all(
-                      color: AppColors().primary,
-                      width: 6.0,
-                    ),
                   ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(80),
-                    child: Image.asset(ImagePaths().profile),
-                  ),
-                ),
-              ),
+                  color: AppColors().grey,
+                  child: ProfileImageStack(
+                    image: profileEntity.image!.isEmpty
+                        ? AssetImage(ImagePaths().profile)
+                        : NetworkImage(profileEntity.image!) as ImageProvider,
+                    profileEntity: profileEntity,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => UpdateProfileScreen(
+                                  profileEntity: profileEntity,
+                                )),
+                      );
+                    },
+                    child: SvgPicture.asset("assets/images/editIcon.svg"),
+                  )),
             ],
           ),
         )

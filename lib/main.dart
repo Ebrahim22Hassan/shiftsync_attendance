@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:month_year_picker/month_year_picker.dart';
-import 'package:shiftsync_attendance/features/attendance/presentation/pages/home_page.dart';
 import 'package:shiftsync_attendance/welcome.dart';
 import 'core/services/applocal.dart';
 import 'core/services/cache_helper.dart';
@@ -28,28 +27,22 @@ void main() async {
   String? token = CacheHelper.getData(key: "userId");
   Widget widget;
 
-
-    if (token == null){
-       widget= const WelcomeScreen();
-    } else {
-      widget= const SwitchPage();
-    }
-
-
-
+  if (token == null) {
+    widget = const WelcomeScreen();
+  } else {
+    widget = const SwitchPage();
+  }
 
   await init();
-  runApp( MyApp(startScreen: widget,));
+  runApp(MyApp(
+    startScreen: widget,
+  ));
 }
 
 class MyApp extends StatelessWidget {
   final Widget startScreen;
 
-  const MyApp({super.key,   required this.startScreen});
-
-
-
-
+  const MyApp({super.key, required this.startScreen});
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +92,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'ShiftSync',
               theme: AppStyle().theme,
-              home:  startScreen,
+              home: startScreen,
             );
           },
         ),

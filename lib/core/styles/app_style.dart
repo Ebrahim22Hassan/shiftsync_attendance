@@ -8,8 +8,8 @@ class AppStyle {
   ThemeData? theme = ThemeData(
     useMaterial3: true,
     appBarTheme: AppBarTheme(
-      systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: AppColors().primary,
+      systemOverlayStyle: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
       ),
       backgroundColor: Colors.transparent,
       elevation: 0,

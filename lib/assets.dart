@@ -2,6 +2,7 @@ class ImagePaths {
   String get carouselImage1 => 'assets/images/on3.jpg';
   String get logo => "assets/images/logo.png";
   String get profile => "assets/images/profile.png";
+  String get profileNetwork => "https://cdn-icons-png.freepik.com/512/4086/4086679.png";
   String get cover => "assets/images/cover.jpg";
   List<String> get carouselImages => [
     'assets/images/on1.jpg',

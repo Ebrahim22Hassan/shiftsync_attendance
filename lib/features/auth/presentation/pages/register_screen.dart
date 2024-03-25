@@ -13,7 +13,6 @@ import '../../../../core/widgets/alerts.dart';
 import '../../../attendance/presentation/pages/switch_page.dart';
 import '../cubit/auth_cubit.dart';
 import '../widgets/account_info.dart';
-import '../widgets/my_back_button.dart';
 import '../../../../core/widgets/my_button.dart';
 import '../widgets/social_button.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
@@ -109,6 +108,16 @@ class RegisterScreen extends StatelessWidget {
                       controller: authCubit.email,
                       hintText:   getLang(context, "email"),
                     ),
+                    CustomTextFormField(validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'This field can\'t be empty';
+                      } else {
+                        return null;
+                      }
+                    },
+                      controller: authCubit.position,
+                      hintText: "Position",
+                    ),
                     CustomTextFormField(
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -145,6 +154,7 @@ class RegisterScreen extends StatelessWidget {
                             key: formKey,
                             text:  getLang(context, "register"),
                             onPressed: () {
+                              FocusScope.of(context).unfocus();
                               Pattern pattern =
                                   r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                               RegExp regExp = RegExp(pattern.toString());
