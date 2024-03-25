@@ -29,6 +29,9 @@ class HomeCubit extends Cubit<HomeState> {
   bool locationStatus = false;
   bool timeUp = false;
 
+
+
+
   Future<void> getMyCurrentLocation() async {
     emit(GetMyCurrentLocationLoadingState());
     await LocationHelper.getCurrentLocation();

@@ -1,9 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:shiftsync_attendance/core/extensions/toast_extenstion.dart';
 import 'package:shiftsync_attendance/core/widgets/conditional_builder.dart';
+import 'package:shiftsync_attendance/welcome.dart';
+import '../../../../assets.dart';
 import '../../../../core/services/applocal.dart';
+import '../../../../core/styles/colors.dart';
 import '../../../../core/widgets/alerts.dart';
 import '../../../attendance/presentation/pages/switch_page.dart';
 import '../cubit/auth_cubit.dart';
@@ -32,9 +37,7 @@ class RegisterScreen extends StatelessWidget {
           // );
         },
       ),
-      appBar: AppBar(
-        leading: const MyBackButton(),
-      ),
+      appBar: AppBar(leading: _appBar(context),),
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is RegisterSuccessState) {
@@ -207,6 +210,26 @@ class RegisterScreen extends StatelessWidget {
             ],
           );
         },
+      ),
+    );
+  }
+  Widget _appBar(context){
+    return  CupertinoButton(
+      onPressed: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>const WelcomeScreen()));
+      },
+      padding: EdgeInsets.zero,
+      child: Container(
+        width: 41,
+        height: 41,
+        margin: const EdgeInsets.all(7),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: AppColors().border),
+        ),
+        child: Center(
+          child: SvgPicture.asset(IconsPaths().backArrowIcon),
+        ),
       ),
     );
   }

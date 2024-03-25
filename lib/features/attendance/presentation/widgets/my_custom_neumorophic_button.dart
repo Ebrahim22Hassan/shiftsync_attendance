@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:shiftsync_attendance/features/attendance/presentation/cubit/home_cubit.dart';
 import 'package:shiftsync_attendance/core/services/biometric_services.dart';
 import 'package:shiftsync_attendance/features/profile/domain/entities/profile_entities.dart';
+import '../../../../const.dart';
 import '../../../../core/services/applocal.dart';
 import 'attendance_button_ui.dart';
 import 'biometric_dialog.dart';
@@ -18,7 +19,6 @@ class MyCustomNeumorphicButton extends StatefulWidget {
 
 class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
     with SingleTickerProviderStateMixin {
-
   late AnimationController _animationController;
   late Animation<double> _animation;
   BiometricServices biometricServices = BiometricServices();
@@ -29,9 +29,9 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
     biometricServices.localAuthentication
         .isDeviceSupported()
         .then((bool isSupport) => setState(() {
-              biometricServices.supportState =
-                  isSupport ? SupportState.supported : SupportState.unSupported;
-            }));
+      biometricServices.supportState =
+      isSupport ? SupportState.supported : SupportState.unSupported;
+    }));
     biometricServices.checkBiometric();
     biometricServices.getAvailableBiometrics((fn) {
       setState(() {});
@@ -42,12 +42,22 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
       duration: const Duration(seconds: 1),
     );
     _animation =
-        Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
+        Tween<double>(begin: beginningOfProgressDegree, end: endOfProgressDegree).animate(_animationController);
+
+    // Add a listener to animation controller
+    _animationController.addListener(() {
+      setState(() {
+        beginningOfProgressDegree = _animation.value ;
+
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     HomeCubit cubit = HomeCubit.get(context);
+
+    print('Progress Degree: $beginningOfProgressDegree');
 
     return GestureDetector(
       onTap: () {
@@ -56,14 +66,15 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
       child: AttendanceButtonUI(
         animation: _animation,
         cubit: cubit,
-        animationController: _animationController,),
+        animationController: _animationController,
+      ),
     );
   }
 
   void _handleTap(BuildContext context) {
     final cubit = HomeCubit.get(context);
     if (cubit.timeUp) {
-      cubit.showToastMessage("روح يا شيبة");
+      cubit.showToastMessage("Have a nice day");
     } else {
       if (cubit.locationStatus) {
         if (cubit.isCheckedIn) {
@@ -109,12 +120,9 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
         );
       });
     } else {
-
-      if (cubit.isCheckedIn){
-        _showCheckOutAlertDialog(context,cubit);
-      }
-      else{
-      }
+      if (cubit.isCheckedIn) {
+        _showCheckOutAlertDialog(context, cubit);
+      } else {}
 
       cubit.changeCheckInOutStatus();
     }
@@ -131,28 +139,37 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title:  Text(  getLang(context, "confirmCheckOut"),),
-          content:  Text(  getLang(context, "checkOutMessage"),),
+          title: Text(
+            getLang(context, "confirmCheckOut"),
+          ),
+          content: Text(
+            getLang(context, "checkOutMessage"),
+          ),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                print("_animationController.reverse: Before");
-                _animationController.reverse();
-                print("_animationController.reverse: After");
+
+                // _animationController.reverse();
+
+                print('Progress Value  reversing: ${_animation.value}');
 
                 cubit.changeCheckInOutStatus();
                 Future.delayed(const Duration(seconds: 1), () {
                   cubit.employeeCheckOutRecord(widget.profileEntity.id);
                 });
               },
-              child:  Text(  getLang(context,"yes"),),
+              child: Text(
+                getLang(context, "yes"),
+              ),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child:  Text(  getLang(context, "no"),),
+              child: Text(
+                getLang(context, "no"),
+              ),
             ),
           ],
         );
