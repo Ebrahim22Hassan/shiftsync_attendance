@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:month_year_picker/month_year_picker.dart';
 import 'package:shiftsync_attendance/features/attendance/presentation/pages/home_page.dart';
 import 'package:shiftsync_attendance/welcome.dart';
@@ -27,8 +28,6 @@ void main() async {
   await CacheHelper.init();
   String? token = CacheHelper.getData(key: "userId");
   Widget widget;
-
-
     if (token == null){
        widget= const WelcomeScreen();
     } else {
@@ -72,34 +71,42 @@ class MyApp extends StatelessWidget {
             : const EdgeInsets.only(bottom: 10),
         child: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
-            return MaterialApp(
-              locale: Locale("${CacheHelper.getData(key: "lang")}"),
-              localizationsDelegates: const [
-                AppLocale.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-                MonthYearPickerLocalizations.delegate,
-              ],
-              supportedLocales: const [
-                Locale("en", ""),
-                Locale("ar", ""),
-              ],
-              localeResolutionCallback: (currentLang, supportLang) {
-                if (currentLang != null) {
-                  for (Locale locale in supportLang) {
-                    if (locale.languageCode == currentLang.languageCode) {
-                      // mySharedPreferences.setString("lang",currentLang.languageCode) ;
-                      return currentLang;
+            return ScreenUtilInit(
+              designSize: const Size(360, 690),
+              minTextAdapt: true,
+              splitScreenMode: true,
+              builder: (context,child){
+                return  MaterialApp(
+                  locale: Locale("${CacheHelper.getData(key: "lang")}"),
+                  localizationsDelegates: const [
+                    AppLocale.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                    MonthYearPickerLocalizations.delegate,
+                  ],
+                  supportedLocales: const [
+                    Locale("en", ""),
+                    Locale("ar", ""),
+                  ],
+                  localeResolutionCallback: (currentLang, supportLang) {
+                    if (currentLang != null) {
+                      for (Locale locale in supportLang) {
+                        if (locale.languageCode == currentLang.languageCode) {
+                          // mySharedPreferences.setString("lang",currentLang.languageCode) ;
+                          return currentLang;
+                        }
+                      }
                     }
-                  }
-                }
-                return supportLang.first;
+                    return supportLang.first;
+                  },
+                  debugShowCheckedModeBanner: false,
+                  title: 'ShiftSync',
+                  theme: AppStyle().theme,
+                  home:   startScreen,
+                );
               },
-              debugShowCheckedModeBanner: false,
-              title: 'ShiftSync',
-              theme: AppStyle().theme,
-              home:  startScreen,
+
             );
           },
         ),

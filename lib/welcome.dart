@@ -2,11 +2,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:shiftsync_attendance/features/auth/presentation/pages/login_screen.dart';
 import 'package:shiftsync_attendance/features/auth/presentation/pages/register_screen.dart';
 import '../../../../assets.dart';
 import 'core/services/applocal.dart';
+import 'core/styles/app_layout.dart';
 import 'core/widgets/my_button.dart';
 import 'features/profile/presentation/widgets/change_lang_widget.dart';
 
@@ -26,7 +28,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(20.h),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -43,7 +45,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       return Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(12.h),
                             image: DecorationImage(
                               //fit: BoxFit.cover,
                               image: AssetImage(carouselImage),
@@ -63,7 +65,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       },
                     )),
               ),
-              //Image.asset(paths.logo, scale: 4),
               const Spacer(),
               Expanded(
                 flex: 1,
@@ -72,10 +73,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     MyButton(
                       text: getLang(context, "login"),
                       onPressed: () {
-                        // Navigator.of(context).pushNamedAndRemoveUntil(
-                        //   Login.routeName,
-                        //   (route) => true,
-                        // );
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) {
                             return const LoginScreen();
@@ -83,15 +80,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ));
                       },
                     ),
-                    const Gap( 15),
+                    Gap(15.h),
                     MyButton(
                       outline: true,
                       text: getLang(context, "register"),
                       onPressed: () {
-                        // Navigator.of(context).pushNamedAndRemoveUntil(
-                        //   Register.routeName,
-                        //   (route) => true,
-                        // );
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) {
                             return const RegisterScreen();
@@ -102,25 +95,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ],
                 ),
               )
-              // const Spacer(),
-              // CupertinoButton(
-              //   onPressed: () {
-              //     // Navigator.of(context).pushNamedAndRemoveUntil(
-              //     //   HomePage.routeName,
-              //     //   (route) => false,
-              //     // );
-              //   },
-              //   padding: EdgeInsets.zero,
-              //   child: Text(
-              //     "Continue as a guest",
-              //     style: Theme.of(context).textTheme.titleSmall!.copyWith(
-              //           color: colors.primary,
-              //           fontWeight: FontWeight.bold,
-              //           decorationColor: colors.primary,
-              //           decoration: TextDecoration.underline,
-              //         ),
-              //   ),
-              // ),
             ],
           ),
         ),

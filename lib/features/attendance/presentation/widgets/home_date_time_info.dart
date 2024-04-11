@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 
@@ -41,17 +42,17 @@ class _DateTimeInfoState extends State<DateTimeInfo> {
                 child: Center(
                   child: Text(
                     formattedTime,
-                    style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
+                    style:  TextStyle(fontSize: 26.sp, fontWeight: FontWeight.w500),
                   ),
                 ),
               ),
-              const Gap(5),
+               Gap(5.h),
               SizedBox(
                 width: double.infinity,
                 child: Center(
                   child: Text(
                     '$formattedDate, $formattedDay',
-                    style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
+                    style:  TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w400),
                   ),
                 ),
               ),

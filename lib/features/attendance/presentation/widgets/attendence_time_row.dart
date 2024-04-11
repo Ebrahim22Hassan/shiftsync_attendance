@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shiftsync_attendance/features/attendance/presentation/cubit/home_cubit.dart';
 import 'package:shiftsync_attendance/features/attendance/presentation/cubit/home_state.dart';
 
@@ -8,6 +9,8 @@ class AttendanceTimeRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double containerHeight=40.h;
+    double containerWidth=40.w;
     return BlocBuilder<HomeCubit,HomeState>(
       builder: (context,state){
         HomeCubit cubit= HomeCubit.get(context);
@@ -17,8 +20,8 @@ class AttendanceTimeRow extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  height: 50,
-                  width: 50,
+                  height: containerHeight,
+                  width: containerWidth,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
@@ -33,8 +36,8 @@ class AttendanceTimeRow extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  height: 50,
-                  width: 50,
+                  height: containerHeight,
+                  width: containerWidth,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
@@ -49,8 +52,8 @@ class AttendanceTimeRow extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  height: 50,
-                  width: 50,
+                  height: containerHeight,
+                  width: containerWidth,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(

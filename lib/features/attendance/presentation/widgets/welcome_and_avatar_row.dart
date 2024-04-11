@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/services/applocal.dart';
 import '../../../profile/presentation/cubit/profile_cubit.dart';
 
@@ -21,17 +22,18 @@ class WelcomeAndAvatarRow extends StatelessWidget {
                 String userName = state.profile.fullName ?? 'Welcome,';
                 return Text(
                   '${getLang(context, "welcomeMessage")}, $userName',
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 18,
+                    fontSize: 15.sp
+                    ,
                   ),
                 );
               } else {
                 return Text(
                   '${getLang(context, "welcomeMessage")}, Employee',
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                   ),
                 );
               }
@@ -40,15 +42,15 @@ class WelcomeAndAvatarRow extends StatelessWidget {
               getLang(context, "homeWelcomeMessage"),
               style: TextStyle(
                 fontWeight: FontWeight.w600,
-                fontSize: 10,
+                fontSize: 10.sp,
                 color: Colors.grey,
               ),
             ),
           ],
         ),
         Container(
-          height: 50,
-          width: 50,
+          height: 45.h,
+          width: 50.w,
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
             image: DecorationImage(

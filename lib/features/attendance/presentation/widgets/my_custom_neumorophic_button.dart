@@ -57,7 +57,6 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
   Widget build(BuildContext context) {
     HomeCubit cubit = HomeCubit.get(context);
 
-    print('Progress Degree: $beginningOfProgressDegree');
 
     return GestureDetector(
       onTap: () {
@@ -97,7 +96,6 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
 
   void _showBiometricDialog(BuildContext context, HomeCubit cubit) {
     if (biometricServices.supportState == SupportState.supported) {
-      print("SUPPORTED");
       Future.delayed(const Duration(seconds: 2), () {
         showDialog(
           context: context,
@@ -150,9 +148,6 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
               onPressed: () {
                 Navigator.of(context).pop();
 
-                // _animationController.reverse();
-
-                print('Progress Value  reversing: ${_animation.value}');
 
                 cubit.changeCheckInOutStatus();
                 Future.delayed(const Duration(seconds: 1), () {

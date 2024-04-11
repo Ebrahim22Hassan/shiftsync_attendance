@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import '../../../profile/presentation/cubit/profile_cubit.dart';
 import '../widgets/attendence_time_row.dart';
@@ -15,16 +16,16 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding:  EdgeInsets.all(15.w),
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const WelcomeAndAvatarRow(),
-              const Gap(35),
+               Gap(20.h),
               const DateTimeInfo(),
-              const Gap(50),
+               Gap(50.h),
               BlocBuilder<ProfileCubit, ProfileState>(
                 builder: (context, state) {
                   if (state is ProfileLoaded) {
@@ -39,10 +40,10 @@ class HomePage extends StatelessWidget {
                   }
                 },
               ),
-              const Gap(60),
-              const Padding(
-                padding: EdgeInsets.all(8),
-                child: AttendanceTimeRow(),
+               Gap(55.h),
+               Padding(
+                padding: EdgeInsets.all(8.w),
+                child: const AttendanceTimeRow(),
               ),
             ],
           ),

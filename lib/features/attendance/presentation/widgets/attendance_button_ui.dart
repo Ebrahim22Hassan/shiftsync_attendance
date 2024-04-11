@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:shiftsync_attendance/core/styles/colors.dart';
@@ -46,22 +47,22 @@ class AttendanceButtonUI extends StatelessWidget {
           return BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) {
               return CircularPercentIndicator(
-                radius: 110,
-                lineWidth: 10,
+                radius: 100.w,
+                lineWidth: 10.w,
                 circularStrokeCap: CircularStrokeCap.round,
                 percent: _animation.value,
                 center: Container(
-                  height: 200,
-                  width: 200,
+                  height: 175.h,
+                  width: 175.h,
                   decoration: BoxDecoration(
                     color:currentBackgroundColor,
                     shape: BoxShape.circle,
                   ),
                   child: Column(
                     children: [
-                      const Gap(50),
+                       Gap(45.h),
                       SizedBox(
-                        height: 70,
+                        height: 60.h,
                         child: AnimatedSwitcher(
                           duration: const Duration(milliseconds: 1000),
                           child: cubit.timeUp
@@ -75,7 +76,7 @@ class AttendanceButtonUI extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const Gap(5),
+                       Gap(5.h),
                       AnimatedSwitcher(
                         duration: const Duration(milliseconds: 1000),
                         child: cubit.timeUp
@@ -85,7 +86,7 @@ class AttendanceButtonUI extends StatelessWidget {
                         )
                             : Text(
                           cubit.isCheckedIn ? "Check Out" : "Check In",
-                          style: const TextStyle(fontSize: 18),
+                          style:  TextStyle(fontSize: 18.sp),
                         ),
                       ),
                     ],
