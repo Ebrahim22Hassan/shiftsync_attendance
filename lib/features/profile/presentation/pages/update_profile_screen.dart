@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shiftsync_attendance/core/styles/colors.dart';
@@ -5,6 +6,7 @@ import 'package:shiftsync_attendance/core/widgets/conditional_builder.dart';
 import 'package:shiftsync_attendance/features/attendance/presentation/pages/switch_page.dart';
 import 'package:shiftsync_attendance/core/widgets/my_button.dart';
 import 'package:shiftsync_attendance/features/profile/domain/entities/profile_entities.dart';
+import '../../../../assets.dart';
 import '../../../../core/services/di.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../cubit/profile_cubit.dart';
@@ -22,6 +24,7 @@ class UpdateProfileScreen extends StatefulWidget {
 
 class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   String? fullName, position, phoneNum, email;
+  File? _pickedImage;
 
   @override
   Widget build(BuildContext context) {
@@ -50,19 +53,42 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
         ),
         body: BlocBuilder<ProfileCubit, ProfileState>(
           builder: (context, state) {
+            final profileCubit = BlocProvider.of<ProfileCubit>(context);
             return Center(
               child: ListView(
                 //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   const Padding(
-                    padding: EdgeInsets.all(24.0),
+                    padding: EdgeInsets.only(right: 24.0, top: 24.0),
                     child: Align(
                         alignment: Alignment.centerRight,
                         child: ChangeLangWidget()),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 45, bottom: 30),
-                    child: ProfileImageStack(),
+                  ProfileImageStack(
+                    image: _pickedImage != null
+                        ? FileImage(_pickedImage!) as ImageProvider
+                        : widget.profileEntity.image!.isNotEmpty
+                        ? NetworkImage(widget.profileEntity.image!) as ImageProvider
+                        : AssetImage(ImagePaths().profile),
+                    profileEntity: widget.profileEntity,
+                    child: const CircleAvatar(
+                      backgroundColor: Color(0xff35C2C1),
+                      radius: 10.5,
+                      child: Icon(
+                        Icons.add_a_photo,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                    ),
+                    onTap: () async {
+                      final pickedImage = await profileCubit.pickImage();
+                      if (pickedImage != null) {
+                        setState(() {
+                          profileCubit.pickedImg = pickedImage;
+                          _pickedImage = pickedImage;
+                        });
+                      }
+                    },
                   ),
                   Padding(
                     padding: const EdgeInsets.all(50.0),
@@ -143,8 +169,18 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       fallback: (context) => const CircularProgressIndicator(),
                       builder: (context) {
                         return MyButton(
-                            onPressed: () {
-                              BlocProvider.of<ProfileCubit>(context)
+                            onPressed: () async {
+                              FocusScope.of(context).unfocus();
+
+                              final profileCubit =
+                                  BlocProvider.of<ProfileCubit>(context);
+                              if (profileCubit.pickedImg != null) {
+                                profileCubit.imageUrl =
+                                    await profileCubit.uploadImageToFirebase(
+                                        profileCubit.pickedImg!);
+                              }
+
+                              await BlocProvider.of<ProfileCubit>(context)
                                   .updateProfile(
                                 fullName: fullName ??
                                     widget.profileEntity.fullName.toString(),
@@ -154,6 +190,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                     widget.profileEntity.phoneNum.toString(),
                                 email: email ??
                                     widget.profileEntity.email.toString(),
+                                image: profileCubit.imageUrl ??
+                                    widget.profileEntity.image.toString(),
                               );
                               Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => const SwitchPage(),

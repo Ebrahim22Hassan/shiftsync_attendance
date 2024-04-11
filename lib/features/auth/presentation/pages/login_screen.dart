@@ -35,9 +35,7 @@ class LoginScreen extends StatelessWidget {
       appBar: AppBar(leading: const MyBackButton()),
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
-          if (state is LoginSuccessState) {
-
-          }
+          if (state is LoginSuccessState) {}
         },
         builder: (context, state) {
           final authCubit = AuthCubit.get(context);
@@ -70,7 +68,7 @@ class LoginScreen extends StatelessWidget {
                         hintText: getLang(context, "email"),
                       ),
                       CustomTextFormField(
-                           validator: (value) {
+                        validator: (value) {
                           if (value!.isEmpty) {
                             return 'This field can\'t be empty';
                           } else {
@@ -106,8 +104,8 @@ class LoginScreen extends StatelessWidget {
                       ConditionalBuilder(
                           condition: state is! LoginLoadingState,
                           fallback: (context) =>
-                                 const Center(child: CircularProgressIndicator()),
-                               builder: (context) {
+                              const Center(child: CircularProgressIndicator()),
+                          builder: (context) {
                             return Center(
                               child: MyButton(
                                 text: getLang(context, "login"),
@@ -116,8 +114,9 @@ class LoginScreen extends StatelessWidget {
                                   //   HomePage.routeName,
                                   //   (route) => false,
                                   // );
+                                  FocusScope.of(context).unfocus();
                                   if (formKey.currentState!.validate()) {
-                                     formKey.currentState!.save();
+                                    formKey.currentState!.save();
 
                                     await authCubit.loginWithEmailAndPassword(
                                       email: authCubit.email.text,
@@ -125,10 +124,10 @@ class LoginScreen extends StatelessWidget {
                                     );
                                     Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
-                                        builder: (context) => const SwitchPage(),
+                                        builder: (context) =>
+                                            const SwitchPage(),
                                       ),
                                     );
-
                                   } else {
                                     print("LoginPage: Info isNot correct");
                                   }

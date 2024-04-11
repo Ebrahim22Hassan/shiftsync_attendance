@@ -31,7 +31,7 @@ class ProfileEntity {
       phoneNum: data['phoneNum'] ?? '',
       email: data['email'] ?? '',
       gender: data['gender'] ?? '',
-      image: data['image'],
+      image: data['image'] ?? '',
       position: data['position'] ?? '',
       createdAt: data['createdAt'] ?? Timestamp.now(),
       updatedAt: data['updatedAt'] ?? Timestamp.now(),

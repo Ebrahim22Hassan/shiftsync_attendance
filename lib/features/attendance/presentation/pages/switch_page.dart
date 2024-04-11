@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+=======
+import 'package:flutter_bloc/flutter_bloc.dart';
+>>>>>>> 6bac55e1f03ff4ac3b11104afbccee27253a0df8
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:shiftsync_attendance/core/styles/colors.dart';
 import 'package:shiftsync_attendance/features/attendance/presentation/pages/home_page.dart';
 import 'package:shiftsync_attendance/features/profile/presentation/pages/profile_screen.dart';
 import '../../../history/presentation/pages/attendance_report_page.dart';
+import '../../../profile/presentation/cubit/profile_cubit.dart';
 
 class SwitchPage extends StatefulWidget {
   const SwitchPage({Key? key});
@@ -20,6 +25,12 @@ class _SwitchPageState extends State<SwitchPage> {
     ProfileScreen(),
     AttendanceReportPage()
   ];
+
+  @override
+  void initState() {
+    BlocProvider.of<ProfileCubit>(context).fetchProfile();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

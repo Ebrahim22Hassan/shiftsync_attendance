@@ -60,64 +60,72 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         const Gap(20),
-        Column(
-          children: [
-            BlocBuilder<ProfileCubit, ProfileState> (
-              builder: (context, state) {
-                if (state is ProfileLoaded) {
-                  final profile = state.profile;
-                  return MyButton(
-                    outline: true,
-                    text: 'Edit Profile',
-                    onPressed: () {
-                      // Navigator.of(context).pushNamedAndRemoveUntil(
-                      //   Register.routeName,
-                      //   (route) => true,
-                      // );
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) {
-                          return UpdateProfileScreen(profileEntity: profile);
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Row(
+            children: [
+              Expanded(
+                child: BlocBuilder<ProfileCubit, ProfileState>(
+                  builder: (context, state) {
+                    if (state is ProfileLoaded) {
+                      final profile = state.profile;
+                      return MyButton(
+                        outline: true,
+                        text: 'Edit Profile',
+                        onPressed: () {
+                          // Navigator.of(context).pushNamedAndRemoveUntil(
+                          //   Register.routeName,
+                          //   (route) => true,
+                          // );
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) {
+                              return UpdateProfileScreen(
+                                  profileEntity: profile);
+                            },
+                          ));
                         },
-                      ));
-                    },
-                  );
-                } else {
-                  return Container();
-                }
-              },
-            ),
-            const Gap(15),
-            BlocConsumer<AuthCubit, AuthState>(
-              listener: (context, state) {
-                if (state is LogoutSuccessState) {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LoginScreen()),
-                  );
-                } else if (state is LogoutFailureState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Logout failed: ${state.errorMessage}'),
-                    ),
-                  );
-                }
-              },
-              builder: (context, state) {
-                if (state is LogoutLoadingState) {
-                  return const CircularProgressIndicator();
-                } else {
-                  return MyButton(
-                    text: "Logout",
-                    onPressed: () {
-                      BlocProvider.of<AuthCubit>(context).logout();
-                      CacheHelper.removeData(key: "userId");
+                      );
+                    } else {
+                      return Container();
                     }
-                  );
-                }
-              },
-            ),
-          ],
+                  },
+                ),
+              ),
+              const Gap(15),
+              Expanded(
+                child: BlocConsumer<AuthCubit, AuthState>(
+                  listener: (context, state) {
+                    if (state is LogoutSuccessState) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginScreen()),
+                      );
+                    } else if (state is LogoutFailureState) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Logout failed: ${state.errorMessage}'),
+                        ),
+                      );
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is LogoutLoadingState) {
+                      return const CircularProgressIndicator();
+                    } else {
+                      return MyButton(
+                        text: "Logout",
+                        onPressed: () {
+                          BlocProvider.of<AuthCubit>(context).logout();
+                          CacheHelper.removeData(key: "userId");
+                        },
+                      );
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
         )
       ],
     );

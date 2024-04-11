@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
@@ -32,58 +31,49 @@ class ProfileCubit extends Cubit<ProfileState> {
     required String position,
     required String phoneNum,
     required String email,
+    required String image,
   }) async {
     emit(ProfileUpdateLoading());
     final result = await updateProfileUseCase(
         fullName: fullName,
         position: position,
         phoneNum: phoneNum,
-        email: email);
+        email: email,
+        image: image);
     result.fold(
       (failure) =>
           emit(const ProfileUpdateFailure('Failed to fetch profile data.')),
-      (profile) => emit(ProfileUpdateSuccess()),
+      (profile) async {
+        emit(ProfileUpdateSuccess());
+        await fetchProfile();
+      },
     );
   }
 
   var picker = ImagePicker();
   File? pickedImg;
-  String? storageImg;
-  Future pickImg() async {
-    emit(PickingImgLoadingState());
+  String? imageUrl;
+
+  Future<File?> pickImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
-      pickedImg = File(pickedFile.path );
-      emit(PickingImgSuccessState());
-    } else {
-      print('No Image Selected');
-      emit(PickingImgErrorState());
+      pickedImg = File(pickedFile.path);
+      return pickedImg;
     }
+    return null;
   }
 
-  void uploadAndDownloadUserImg(){
-    emit( UploadingImgLoadingState());
-    firebase_storage.FirebaseStorage.instance
-        .ref()
-        .child("user/${Uri.file(pickedImg!.path).pathSegments.last}")
-        .putFile(pickedImg!)
-        .then((value){
-        emit(UploadingImgSuccessState());
-        value.ref.getDownloadURL().then((value) {
-          storageImg=value;
-          emit(DownloadingImgSuccessState());
-      }
-      )
-          .catchError((error){
-          emit(DownloadingImgErrorState());
-          print(error.toString());
-      });
+  Future<String?> uploadImageToFirebase(File imageFile) async {
+    try {
+      final ref = firebase_storage.FirebaseStorage.instance
+          .ref('images')
+          .child(DateTime.now().millisecondsSinceEpoch.toString());
+      await ref.putFile(imageFile);
+      final imageUrl = await ref.getDownloadURL();
+      return imageUrl;
+    } catch (e) {
+      print('Error uploading image: $e');
+      return null;
     }
-
-    ).catchError((error){
-      emit(UploadingImgErrorState());
-    });
   }
-
-
 }

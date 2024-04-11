@@ -61,10 +61,11 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
         'position': position,
         'phoneNum': phoneNum,
         'email': email,
+        'image': image
       };
       await userRef.update(updatedData);
       if (image != null) {
-        await userRef.update({'profileImage': image});
+        await userRef.update({'image': image});
       }
       // Return a success message or updated profile entity if needed
     } catch (e) {
