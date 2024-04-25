@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:shiftsync_attendance/core/services/applocal.dart';
 import 'package:shiftsync_attendance/core/widgets/conditional_builder.dart';
+import 'package:shiftsync_attendance/features/auth/presentation/pages/register_screen.dart';
 import '../../../../core/styles/colors.dart';
 import '../../../attendance/presentation/pages/switch_page.dart';
 import '../cubit/auth_cubit.dart';
@@ -26,13 +28,12 @@ class LoginScreen extends StatelessWidget {
         text1: "Don’t have an account?",
         text2: "Register Now",
         onTap: () {
-          //   return Navigator.of(context).pushNamedAndRemoveUntil(
-          //   Register.routeName,
-          //   (route) => true,
-          // );
+         Navigator.push(context, MaterialPageRoute(builder: (context)=>const RegisterScreen()));
         },
       ),
-      appBar: AppBar(leading: const MyBackButton()),
+      appBar: AppBar(
+          // leading: const MyBackButton()
+      ),
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is LoginSuccessState) {}
@@ -55,7 +56,7 @@ class LoginScreen extends StatelessWidget {
                             .headlineLarge!
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
-                      const Gap(15),
+                       Gap(15.h),
                       CustomTextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -100,7 +101,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const Gap(5),
+                       Gap(5.h),
                       ConditionalBuilder(
                           condition: state is! LoginLoadingState,
                           fallback: (context) =>
@@ -135,7 +136,7 @@ class LoginScreen extends StatelessWidget {
                               ),
                             );
                           }),
-                      const Gap(15),
+                       Gap(15.h),
                       SocialButton(
                         orText: getLang(context, "loginWith"),
                       ),

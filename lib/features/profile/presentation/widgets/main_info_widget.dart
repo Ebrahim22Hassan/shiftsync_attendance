@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../core/styles/colors.dart';
 
@@ -19,16 +21,16 @@ class MainInfoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width,
-      margin: const EdgeInsets.all(10),
+      margin:  EdgeInsets.all(8.h),
       alignment: AlignmentDirectional.center,
       child: Column(
         children: <Widget>[
           Text(fullName,
-              style: const TextStyle(
-                  fontSize: 20,
+              style:  TextStyle(
+                  fontSize: 16.sp,
                   color: Colors.teal,
                   fontWeight: FontWeight.bold)),
-          const SizedBox(height: 5),
+           Gap(5.h),
           Text(position,
               style:  Theme.of(context)
                   .textTheme

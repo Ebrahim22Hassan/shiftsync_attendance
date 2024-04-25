@@ -147,12 +147,9 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-
-
                 cubit.changeCheckInOutStatus();
-                Future.delayed(const Duration(seconds: 1), () {
-                  cubit.employeeCheckOutRecord(widget.profileEntity.id);
-                });
+                cubit.employeeCheckOutRecord(widget.profileEntity.id);
+
               },
               child: Text(
                 getLang(context, "yes"),

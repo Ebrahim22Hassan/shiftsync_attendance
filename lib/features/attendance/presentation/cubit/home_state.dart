@@ -1,10 +1,15 @@
-import 'package:flutter/material.dart';
 
-abstract class HomeState {}
+ abstract class HomeState {
 
-class MapInitialState extends HomeState {}
+ }
 
-class GetMyCurrentLocationState extends HomeState {}
+class MapInitialState extends HomeState {
+
+}
+
+class GetMyCurrentLocationState extends HomeState {
+
+}
 
 class GetMyCurrentLocationLoadingState extends HomeState {}
 

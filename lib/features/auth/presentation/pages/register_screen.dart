@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:shiftsync_attendance/core/extensions/toast_extenstion.dart';
 import 'package:shiftsync_attendance/core/widgets/conditional_builder.dart';
+import 'package:shiftsync_attendance/features/auth/presentation/pages/login_screen.dart';
 import 'package:shiftsync_attendance/welcome.dart';
 import '../../../../assets.dart';
 import '../../../../core/services/applocal.dart';
@@ -30,10 +31,8 @@ class RegisterScreen extends StatelessWidget {
         text1: "Already have an account?",
         text2: "Login Now",
         onTap: () {
-          //   return Navigator.of(context).pushNamedAndRemoveUntil(
-          //   Login.routeName,
-          //   (route) => true,
-          // );
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginScreen()));
+
         },
       ),
       appBar: AppBar(leading: _appBar(context),),

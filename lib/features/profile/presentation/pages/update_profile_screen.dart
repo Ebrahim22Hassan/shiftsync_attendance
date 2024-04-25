@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shiftsync_attendance/core/styles/colors.dart';
 import 'package:shiftsync_attendance/core/widgets/conditional_builder.dart';
 import 'package:shiftsync_attendance/features/attendance/presentation/pages/switch_page.dart';
@@ -34,7 +35,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight),
           child: Material(
-            elevation: 5,
+            elevation: 5.h,
             child: AppBar(
               iconTheme: const IconThemeData(
                 color: Colors.white,
@@ -58,9 +59,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               child: ListView(
                 //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(right: 24.0, top: 24.0),
-                    child: Align(
+                   Padding(
+                    padding: EdgeInsets.only(right: 24.0.w, top: 24.0.h),
+                    child: const Align(
                         alignment: Alignment.centerRight,
                         child: ChangeLangWidget()),
                   ),
@@ -166,7 +167,19 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   ),
                   ConditionalBuilder(
                       condition: state is! ProfileUpdateLoading,
-                      fallback: (context) => const CircularProgressIndicator(),
+                      fallback: (context) => Container(
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        child: SizedBox(
+                          width: 30.0,
+                          height: 30.0,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 3.0,
+                            // valueColor: AlwaysStoppedAnimation<Color>(Colors.blue), // Set desired color
+                          ),
+                        ),
+                      )
+                      ,
                       builder: (context) {
                         return MyButton(
                             onPressed: () async {

@@ -5,7 +5,7 @@ import 'package:shiftsync_attendance/features/attendance/presentation/cubit/home
 import 'package:shiftsync_attendance/features/attendance/presentation/cubit/home_state.dart';
 
 class AttendanceTimeRow extends StatelessWidget {
-  const AttendanceTimeRow({super.key});
+  const   AttendanceTimeRow({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -111,7 +111,7 @@ class HomeCubit extends Cubit<HomeState> {
           checkOutRecord: checkOutTime,
           checkInRecord: checkInTime,
           totalHrs: totalHrs);
-
+int x=6;
       await attendanceCollection
           .doc(employeeId)
           .collection(employeeId)

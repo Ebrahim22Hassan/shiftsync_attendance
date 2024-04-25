@@ -24,6 +24,8 @@ class EmployeeAttendanceModel {
     };
   }
 
+
+
   factory EmployeeAttendanceModel.fromMap(Map<String, dynamic> json) {
     return EmployeeAttendanceModel(
       id: json['id'],
@@ -34,3 +36,5 @@ class EmployeeAttendanceModel {
     );
   }
 }
+
+

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:shiftsync_attendance/core/services/cache_helper.dart';
 import 'package:shiftsync_attendance/features/profile/presentation/cubit/profile_cubit.dart';
@@ -59,9 +60,9 @@ class ProfileScreen extends StatelessWidget {
             },
           ),
         ),
-        const Gap(20),
+         Gap(20.h),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding:  EdgeInsets.symmetric(horizontal: 20.0.w),
           child: Row(
             children: [
               Expanded(
@@ -99,7 +100,7 @@ class ProfileScreen extends StatelessWidget {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const LoginScreen()),
+                            builder: (context) =>  const LoginScreen()),
                       );
                     } else if (state is LogoutFailureState) {
                       ScaffoldMessenger.of(context).showSnackBar(

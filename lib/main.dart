@@ -27,7 +27,6 @@ void main() async {
   await CacheHelper.init();
   String? token = CacheHelper.getData(key: "userId");
   Widget widget;
-<<<<<<< HEAD
     if (token == null){
        widget= const WelcomeScreen();
     } else {
@@ -36,19 +35,20 @@ void main() async {
 
 
 
-=======
 
   if (token == null) {
     widget = const WelcomeScreen();
   } else {
     widget = const SwitchPage();
   }
->>>>>>> 6bac55e1f03ff4ac3b11104afbccee27253a0df8
 
   await init();
   runApp(MyApp(
     startScreen: widget,
   ));
+
+
+
 }
 
 class MyApp extends StatelessWidget {
@@ -109,17 +109,10 @@ class MyApp extends StatelessWidget {
                   debugShowCheckedModeBanner: false,
                   title: 'ShiftSync',
                   theme: AppStyle().theme,
-                  home:   startScreen,
+                  home:  startScreen,
                 );
               },
-<<<<<<< HEAD
 
-=======
-              debugShowCheckedModeBanner: false,
-              title: 'ShiftSync',
-              theme: AppStyle().theme,
-              home: startScreen,
->>>>>>> 6bac55e1f03ff4ac3b11104afbccee27253a0df8
             );
           },
         ),

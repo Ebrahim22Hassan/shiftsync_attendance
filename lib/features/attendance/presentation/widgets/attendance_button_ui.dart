@@ -86,7 +86,7 @@ class AttendanceButtonUI extends StatelessWidget {
                         )
                             : Text(
                           cubit.isCheckedIn ? "Check Out" : "Check In",
-                          style:  TextStyle(fontSize: 18.sp),
+                          style:  TextStyle(fontSize: 15.sp),
                         ),
                       ),
                     ],

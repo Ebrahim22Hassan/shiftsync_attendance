@@ -53,7 +53,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       );
                     },
                     options: CarouselOptions(
-                      height: 500,
+                      height: 500.h,
                       autoPlay: true,
                       autoPlayInterval: const Duration(seconds: 5),
                       viewportFraction: 0.9,
