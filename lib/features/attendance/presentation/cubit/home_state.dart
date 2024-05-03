@@ -4,11 +4,9 @@
  }
 
 class MapInitialState extends HomeState {
-
 }
 
 class GetMyCurrentLocationState extends HomeState {
-
 }
 
 class GetMyCurrentLocationLoadingState extends HomeState {}
@@ -24,3 +22,4 @@ class CheckOutSuccessState extends HomeState {}
 class ChangeLanguageState extends HomeState {}
 
 
+class DefineNewDayState extends HomeState{}

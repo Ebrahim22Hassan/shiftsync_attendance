@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:shiftsync_attendance/features/attendance/presentation/cubit/home_state.dart';
+import '../../../../const.dart';
 import '../../../../core/services/cache_helper.dart';
 import '../../../../core/services/location_helper.dart';
 import '../../data/model/employee_attendence_model.dart';
@@ -25,14 +26,25 @@ class HomeCubit extends Cubit<HomeState> {
   static const double referenceLongitude = 58.1145235;
 
   late final double? distance;
-  final double definedDistance = 3;
+  final double definedDistance = 1;
   bool locationStatus = false;
   bool timeUp = false;
+  bool newDay = false;
 
-
+ void defineNewDayState(){
+   CacheHelper.getData(key:"todayDate")==CacheHelper.getData(key:"newDate")
+       ?newDay=false
+       :newDay=true;
+   emit(DefineNewDayState());
+   print("newDate State $newDay");
+ }
 
 
   Future<void> getMyCurrentLocation() async {
+    DateTime now = DateTime.now();
+    String newDate = DateFormat('yyyy-MM-dd').format(now);
+    CacheHelper.saveData(key: "newDate", value: newDate);
+
     emit(GetMyCurrentLocationLoadingState());
     await LocationHelper.getCurrentLocation();
     position = await Geolocator.getCurrentPosition().whenComplete(() async {
@@ -88,6 +100,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   late Timestamp currentTimeAndDate;
   late DateTime currentDate;
+
   String? checkInTime;
   String? checkOutTime;
   String? totalHrs;
@@ -111,7 +124,6 @@ class HomeCubit extends Cubit<HomeState> {
           checkOutRecord: checkOutTime,
           checkInRecord: checkInTime,
           totalHrs: totalHrs);
-int x=6;
       await attendanceCollection
           .doc(employeeId)
           .collection(employeeId)
@@ -146,7 +158,11 @@ int x=6;
           .doc(DateFormat('dd MMMM yyyy').format(DateTime.now()))
           .update(attendanceData.toMap());
       timeUp = true;
-      print("timeUp:$timeUp");
+
+      DateTime now = DateTime.now();
+      String todayDate = DateFormat('yyyy-MM-dd').format(now);
+      CacheHelper.saveData(key: "todayDate", value: todayDate);
+      // CacheHelper.saveData(key: "todayDate", value: currentDate.toString());
       emit(CheckOutSuccessState());
     } catch (e) {
       print("Error recording check-in: $e");

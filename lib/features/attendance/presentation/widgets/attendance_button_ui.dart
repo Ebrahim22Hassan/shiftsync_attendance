@@ -47,7 +47,7 @@ class AttendanceButtonUI extends StatelessWidget {
           return BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) {
               return CircularPercentIndicator(
-                radius: 100.w,
+                radius: 100.r,
                 lineWidth: 10.w,
                 circularStrokeCap: CircularStrokeCap.round,
                 percent: _animation.value,

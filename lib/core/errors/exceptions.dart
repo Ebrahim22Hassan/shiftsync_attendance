@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 
 class ServerException extends Equatable implements Exception {
   final String? message;
+
   const ServerException([this.message]);
 
   @override
@@ -13,6 +14,7 @@ class ServerException extends Equatable implements Exception {
 }
 
 class FetchDataException extends ServerException {
+
   const FetchDataException([String? message])
       : super('Error During Fetching Data: $message');
 }

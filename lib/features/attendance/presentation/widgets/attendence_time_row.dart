@@ -61,7 +61,8 @@ class AttendanceTimeRow extends StatelessWidget {
                     ),
                   ),
                 ),
-                 Text("\"${cubit.totalHrs??"--:--"}\""),
+                 Text(
+                     "\"${cubit.totalHrs==null||cubit.newDay==true?"--:--":cubit.totalHrs}\""),
                 const Text("Total hrs"),
               ],
             ),

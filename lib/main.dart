@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
           create: (context) => di<ProfileCubit>()..fetchProfile(),
         ),
         BlocProvider<HomeCubit>(
-            create: (context) => HomeCubit()..getMyCurrentLocation()),
+            create: (context) => HomeCubit()..getMyCurrentLocation()..defineNewDayState()),
       ],
       child: SafeArea(
         top: false,

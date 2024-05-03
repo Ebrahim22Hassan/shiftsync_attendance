@@ -22,7 +22,8 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
   late AnimationController _animationController;
   late Animation<double> _animation;
   BiometricServices biometricServices = BiometricServices();
-
+  // double beginningOfProgressDegree = 0.0;
+  // double endOfProgressDegree = 1.0;
   @override
   void initState() {
     super.initState();
