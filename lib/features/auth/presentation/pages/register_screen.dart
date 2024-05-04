@@ -81,7 +81,7 @@ class RegisterScreen extends StatelessWidget {
                         }
                       },
                       controller: authCubit.name,
-                      hintText:   getLang(context, "fullName"),
+                      labelText:   getLang(context, "fullName"),
                       keyboardType: TextInputType.text,
                     ),
                     CustomTextFormField(
@@ -93,7 +93,7 @@ class RegisterScreen extends StatelessWidget {
                         }
                       },
                       controller: authCubit.phoneRegister,
-                      hintText:   getLang(context, "phoneNumber"),
+                      labelText:   getLang(context, "phoneNumber"),
                       keyboardType: TextInputType.phone,
                     ),
                     CustomTextFormField(
@@ -105,7 +105,7 @@ class RegisterScreen extends StatelessWidget {
                         }
                       },
                       controller: authCubit.email,
-                      hintText:   getLang(context, "email"),
+                      labelText:   getLang(context, "email"),
                     ),
                     CustomTextFormField(validator: (value) {
                       if (value!.isEmpty) {
@@ -115,7 +115,7 @@ class RegisterScreen extends StatelessWidget {
                       }
                     },
                       controller: authCubit.position,
-                      hintText: "Position",
+                      labelText: "Position",
                     ),
                     CustomTextFormField(
                       validator: (value) {
@@ -126,7 +126,7 @@ class RegisterScreen extends StatelessWidget {
                         }
                       },
                       controller: authCubit.passwordRegister,
-                      hintText:   getLang(context, "password"),
+                      labelText:   getLang(context, "password"),
                       obscureText: true,
                       keyboardType: TextInputType.text,
                     ),
@@ -138,7 +138,7 @@ class RegisterScreen extends StatelessWidget {
                            return null;
                          }
                        },
-                      hintText:   getLang(context, "confirmPassword"),
+                      labelText:   getLang(context, "confirmPassword"),
                       obscureText: true,
                       keyboardType: TextInputType.text,
                     ),

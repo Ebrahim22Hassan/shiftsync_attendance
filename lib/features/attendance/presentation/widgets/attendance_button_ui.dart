@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:shiftsync_attendance/core/services/applocal.dart';
 import 'package:shiftsync_attendance/core/styles/colors.dart';
 import '../cubit/home_cubit.dart';
 import '../cubit/home_state.dart';
@@ -80,12 +81,12 @@ class AttendanceButtonUI extends StatelessWidget {
                       AnimatedSwitcher(
                         duration: const Duration(milliseconds: 1000),
                         child: cubit.timeUp
-                            ? const Text(
-                          "Have a nice day",
-                          style: TextStyle(color: Colors.black),
+                            ?  Text(
+                          getLang(context,"haveANiceDay"),
+                          style: const TextStyle(color: Colors.black),
                         )
                             : Text(
-                          cubit.isCheckedIn ? "Check Out" : "Check In",
+                          cubit.isCheckedIn ?  getLang(context,"checkOut") :  getLang(context,"checkIn"),
                           style:  TextStyle(fontSize: 15.sp),
                         ),
                       ),

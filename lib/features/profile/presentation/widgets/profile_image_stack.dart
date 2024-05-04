@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shiftsync_attendance/core/styles/colors.dart';
 import '../../domain/entities/profile_entities.dart';
 
@@ -28,23 +29,23 @@ class ProfileImageStack extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundColor: AppColors().primary,
-                  radius: 75,
+                  radius: 60.r,
                 ),
                 CircleAvatar(
                   backgroundColor: AppColors().grey,
-                  radius: 70,
+                  radius: 55.r,
                   backgroundImage:image,
                 ),
               ],
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.only(
-                bottom: 7,
+              padding:  EdgeInsetsDirectional.only(
+                bottom: 7.h,
                 end: 7,
               ),
               child: SizedBox(
-                height: 33,
-                width: 33,
+                height: 33.h,
+                width: 33.w,
                 child: GestureDetector(
                   onTap: onTap,
                   child: child,

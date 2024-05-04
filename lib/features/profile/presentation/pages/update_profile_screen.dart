@@ -105,8 +105,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             }
                           },
                           keyboardType: TextInputType.text,
-                          hintText:
-                              widget.profileEntity.fullName ?? 'Full Name',
+                          labelText:
+                              'Full Name',
                           onChanged: (value) {
                             setState(() {
                               fullName = value;
@@ -122,7 +122,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             }
                           },
                           keyboardType: TextInputType.text,
-                          hintText: widget.profileEntity.position ?? 'Position',
+                          labelText: 'Position',
                           onChanged: (value) {
                             setState(() {
                               position = value;
@@ -138,8 +138,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             }
                           },
                           keyboardType: TextInputType.phone,
-                          hintText:
-                              widget.profileEntity.phoneNum ?? 'Phone Number',
+                          labelText:
+                             'Phone Number',
                           onChanged: (value) {
                             setState(() {
                               phoneNum = value;
@@ -155,7 +155,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             }
                           },
                           keyboardType: TextInputType.emailAddress,
-                          hintText: widget.profileEntity.email ?? 'E-Mail',
+                          labelText:'E-Mail',
                           onChanged: (value) {
                             setState(() {
                               email = value;
@@ -171,10 +171,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         width: double.infinity,
                         alignment: Alignment.center,
                         child: SizedBox(
-                          width: 30.0,
-                          height: 30.0,
+                          width: 30.0.w,
+                          height: 30.0.h,
                           child: CircularProgressIndicator(
-                            strokeWidth: 3.0,
+                            strokeWidth: 3.0.r,
                             // valueColor: AlwaysStoppedAnimation<Color>(Colors.blue), // Set desired color
                           ),
                         ),

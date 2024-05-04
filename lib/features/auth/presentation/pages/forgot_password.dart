@@ -53,7 +53,7 @@ class ForgotPassword extends StatelessWidget {
                     return null;
                   }
                 },
-                    hintText: "Enter your email"),
+                    labelText: "Enter your email"),
                 const Gap(28),
 
                 MyButton(

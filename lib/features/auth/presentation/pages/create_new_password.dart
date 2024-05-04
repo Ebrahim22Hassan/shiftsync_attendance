@@ -42,7 +42,7 @@ class CreateNewPassword extends StatelessWidget {
                       return null;
                     }
                   },
-                  hintText: "New Password",
+                  labelText: "New Password",
                   obscureText: true,
                 ),
                  CustomTextFormField(
@@ -53,7 +53,7 @@ class CreateNewPassword extends StatelessWidget {
                       return null;
                     }
                   },
-                  hintText: "Confirm Password",
+                  labelText: "Confirm Password",
                   obscureText: true,
                 ),
                 const Gap(28),

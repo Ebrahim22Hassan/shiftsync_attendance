@@ -8,10 +8,10 @@ import '../../../../assets.dart';
 import '../pages/update_profile_screen.dart';
 
 class ProfileHeaderWidget extends StatelessWidget {
-   ProfileHeaderWidget({super.key, required this.profileEntity});
+  ProfileHeaderWidget({super.key, required this.profileEntity});
 
   final ProfileEntity profileEntity;
-  double inkHeight=200.h;
+  double inkHeight = 100.h;
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +24,12 @@ class ProfileHeaderWidget extends StatelessWidget {
                 image: AssetImage(ImagePaths().cover), fit: BoxFit.cover),
           ),
         ),
-        Ink(
-          height: inkHeight,
-          decoration: const BoxDecoration(
-            color: Colors.black38,
-          ),
-        ),
+        // Ink(
+        //   height: inkHeight,
+        //   decoration: const BoxDecoration(
+        //     color: Colors.black38,
+        //   ),
+        // ),
         Container(
           margin: EdgeInsets.only(
               top: 20.h, left: MediaQuery.of(context).size.width - 70),
@@ -39,14 +39,14 @@ class ProfileHeaderWidget extends StatelessWidget {
               BoxShadow(
                 color: AppColors().primary.withOpacity(0.5),
                 blurRadius: 10,
-                offset:  Offset(0.w, 5.h),
+                offset: Offset(0.w, 5.h),
               ),
             ],
           ),
         ),
         Container(
           width: double.infinity,
-          margin:  EdgeInsets.only(top: 140.h),
+          margin: EdgeInsets.only(top: 60.h),
           child: Column(
             children: <Widget>[
               Card(

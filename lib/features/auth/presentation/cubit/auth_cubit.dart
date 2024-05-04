@@ -152,12 +152,19 @@ class AuthCubit extends Cubit<AuthState> {
         (failure) {
           emit(const LogoutFailureState('Logout failed'));
         },
+
         (success) {
+          clearCredentials();
           emit(LogoutSuccessState());
         },
       );
     } catch (e) {
       emit(const LogoutFailureState('Logout failed'));
     }
+  }
+
+  void clearCredentials() {
+    email.clear();
+    passwordRegister.clear();
   }
 }

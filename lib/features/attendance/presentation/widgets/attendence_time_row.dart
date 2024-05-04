@@ -4,16 +4,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shiftsync_attendance/features/attendance/presentation/cubit/home_cubit.dart';
 import 'package:shiftsync_attendance/features/attendance/presentation/cubit/home_state.dart';
 
+import '../../../../core/services/applocal.dart';
+
 class AttendanceTimeRow extends StatelessWidget {
-  const   AttendanceTimeRow({super.key});
+  const AttendanceTimeRow({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double containerHeight=40.h;
-    double containerWidth=40.w;
-    return BlocBuilder<HomeCubit,HomeState>(
-      builder: (context,state){
-        HomeCubit cubit= HomeCubit.get(context);
+    double containerHeight = 40.h;
+    double containerWidth = 40.w;
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (context, state) {
+        HomeCubit cubit = HomeCubit.get(context);
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -29,8 +31,8 @@ class AttendanceTimeRow extends StatelessWidget {
                     ),
                   ),
                 ),
-                 Text("\"${cubit.checkInTime??"--:--"}\""),
-                const Text("Check In"),
+                Text("\"${cubit.checkInTime ?? "--:--"}\""),
+                Text(getLang(context, "checkInTime")),
               ],
             ),
             Column(
@@ -45,8 +47,8 @@ class AttendanceTimeRow extends StatelessWidget {
                     ),
                   ),
                 ),
-                 Text("\"${cubit.checkOutTime??"--:--"}\""),
-                const Text("Check Out"),
+                Text("\"${cubit.checkOutTime ?? "--:--"}\""),
+                Text(getLang(context, "checkOutTime")),
               ],
             ),
             Column(
@@ -61,15 +63,14 @@ class AttendanceTimeRow extends StatelessWidget {
                     ),
                   ),
                 ),
-                 Text(
-                     "\"${cubit.totalHrs==null||cubit.newDay==true?"--:--":cubit.totalHrs}\""),
-                const Text("Total hrs"),
+                Text(
+                    "\"${cubit.totalHrs == null || cubit.newDay == true ? "--:--" : cubit.totalHrs}\""),
+                Text(getLang(context, "totalHrs")),
               ],
             ),
           ],
         );
       },
-
     );
   }
 }

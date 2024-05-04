@@ -108,8 +108,10 @@ class MyApp extends StatelessWidget {
                   },
                   debugShowCheckedModeBanner: false,
                   title: 'ShiftSync',
+
                   theme: AppStyle().theme,
                   home:  startScreen,
+
                 );
               },
 

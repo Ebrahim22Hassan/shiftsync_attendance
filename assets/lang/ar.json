@@ -7,8 +7,10 @@
   "loginWelcomeMessage": "مرحبا بعودتك,\nسعداء لرؤيتك من جديد",
   "registerWelcomeMessage": "أهلا بك,\nسجل الآن لنبدأ",
   "homeWelcomeMessage": "صباح الخير,سجل حضورك",
-  "checkIn": "تسجيل الوصول",
+  "checkIn": "تسجيل الحضور",
+  "checkInTime": "الحضور",
   "checkOut": "تسجيل الإنصراف",
+  "checkOutTime": "الإنصراف",
   "forgetPassword": "نسيت كلمة المرور؟",
   "password": "كلمة المرور",
   "enterPassword": "كلمة المرور",
@@ -22,7 +24,8 @@
   "no": "لا",
   "confirmCheckOut": "تأكيد الإنصراف",
   "checkOutMessage": "هل أنت متأكد من المغادرة",
-  "haveANiceDay": "يوم سعيد"
+  "haveANiceDay": "يوم سعيد",
+  "totalHrs": "ساعات العمل"
 
 
 }

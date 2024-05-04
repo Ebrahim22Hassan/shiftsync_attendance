@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -13,23 +14,37 @@ class AccountInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: RichText(
-        textAlign: TextAlign.center,
-        text: TextSpan(
-          style: Theme.of(context).textTheme.titleMedium,
-          children: <TextSpan>[
-            TextSpan(text: "$text1\t"),
-            TextSpan(
-              text: text2,
-              style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    color: AppColors().primary,
-                    fontWeight: FontWeight.bold,
-                  ),
-              recognizer: TapGestureRecognizer()..onTap = onTap,
-            ),
-          ],
-        ),
-      ),
+      child: Row(
+        children: [
+          Text("$text1\t"),
+          const Spacer(),
+          GestureDetector(
+            onTap: onTap,
+            child: Text(text2, style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                            color: AppColors().primary,
+                            fontWeight: FontWeight.bold,
+                          ),),
+          )
+        ],
+      )
+
+      // RichText(
+      //   textAlign: TextAlign.center,
+      //   text: TextSpan(
+      //     style: Theme.of(context).textTheme.titleMedium,
+      //     children: <TextSpan>[
+      //       TextSpan(text: "$text1\t"),
+      //       TextSpan(
+      //         text: text2,
+      //         style: Theme.of(context).textTheme.titleMedium!.copyWith(
+      //               color: AppColors().primary,
+      //               fontWeight: FontWeight.bold,
+      //             ),
+      //         recognizer: TapGestureRecognizer()..onTap = onTap,
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }

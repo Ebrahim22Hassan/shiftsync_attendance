@@ -20,5 +20,11 @@
   "no": "No",
   "confirmCheckOut": "Confirm Check Out",
   "checkOutMessage": "Are you sure you want to check out?",
-  "haveANiceDay": "Have a nice day"
+  "haveANiceDay": "Have a nice day",
+  "checkIn": "check In",
+  "checkInTime": "check In",
+  "checkOut": "check Out",
+  "checkOutTime": "check Out",
+  "totalHrs": "total Hrs"
+
 }

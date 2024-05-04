@@ -24,16 +24,16 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     return Scaffold(
-      bottomNavigationBar: AccountInfo(
-        text1: "Don’t have an account?",
-        text2: "Register Now",
-        onTap: () {
-         Navigator.push(context, MaterialPageRoute(builder: (context)=>const RegisterScreen()));
-        },
-      ),
-      appBar: AppBar(
-          // leading: const MyBackButton()
-      ),
+      // bottomNavigationBar: AccountInfo(
+      //   text1: "Don’t have an account?",
+      //   text2: "Register Now",
+      //   onTap: () {
+      //    Navigator.push(context, MaterialPageRoute(builder: (context)=>const RegisterScreen()));
+      //   },
+      // ),
+      // appBar: AppBar(
+      //     // leading: const MyBackButton()
+      // ),
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is LoginSuccessState) {}
@@ -45,18 +45,20 @@ class LoginScreen extends StatelessWidget {
             child: ListView(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding:  EdgeInsets.all(20.0.r),
                   child: OverflowBar(
                     overflowSpacing: 15,
                     children: [
+                      Gap(20.h),
+
                       Text(
                         getLang(context, "loginWelcomeMessage"),
                         style: Theme.of(context)
                             .textTheme
                             .headlineLarge!
-                            .copyWith(fontWeight: FontWeight.bold),
+                            .copyWith(fontWeight: FontWeight.bold,),
                       ),
-                       Gap(15.h),
+                       Gap(30.h),
                       CustomTextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -66,7 +68,7 @@ class LoginScreen extends StatelessWidget {
                           }
                         },
                         controller: authCubit.email,
-                        hintText: getLang(context, "email"),
+                        labelText: getLang(context, "email"),
                       ),
                       CustomTextFormField(
                         validator: (value) {
@@ -77,7 +79,7 @@ class LoginScreen extends StatelessWidget {
                           }
                         },
                         controller: authCubit.passwordRegister,
-                        hintText: getLang(context, "password"),
+                        labelText: getLang(context, "password"),
                         obscureText: true,
                       ),
                       Align(
@@ -137,9 +139,18 @@ class LoginScreen extends StatelessWidget {
                             );
                           }),
                        Gap(15.h),
-                      SocialButton(
-                        orText: getLang(context, "loginWith"),
+                      Center(
+                        child: AccountInfo(
+                          text1: "Don’t have an account?",
+                          text2: "Register Now",
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const RegisterScreen()));
+                          },
+                        ),
                       ),
+                      // SocialButton(
+                      //   orText: getLang(context, "loginWith"),
+                      // ),
                     ],
                   ),
                 ),

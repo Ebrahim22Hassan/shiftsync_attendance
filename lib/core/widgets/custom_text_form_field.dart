@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../styles/colors.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  final String hintText;
+  final String labelText;
   final bool obscureText;
   final TextEditingController? controller;
   final void Function(String)? onChanged;
@@ -12,7 +13,7 @@ class CustomTextFormField extends StatelessWidget {
 
   const CustomTextFormField({
     super.key,
-    required this.hintText,
+    required this.labelText,
     required this.validator,
     this.obscureText = false,
     this.controller,
@@ -30,17 +31,17 @@ class CustomTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         fillColor: const Color(0xffF7F8F9),
         filled: true,
-        hintText: hintText,
-        hintStyle: Theme.of(context)
-            .textTheme
-            .titleMedium!
-            .copyWith(color: AppColors().grey),
+        labelText: labelText,
+        // hintStyle: Theme.of(context)
+        //     .textTheme
+        //     .titleMedium!
+        //     .copyWith(color: AppColors().grey),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(8.r),
           borderSide: BorderSide(color: AppColors().border),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(8.r),
           borderSide: BorderSide(color: AppColors().primary),
         ),
       ),
