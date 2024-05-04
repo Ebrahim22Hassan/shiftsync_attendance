@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:shiftsync_attendance/core/extensions/toast_extenstion.dart';
@@ -27,14 +28,14 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     return Scaffold(
-      bottomNavigationBar: AccountInfo(
-        text1: "Already have an account?",
-        text2: "Login Now",
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginScreen()));
-
-        },
-      ),
+      // bottomNavigationBar: AccountInfo(
+      //   text1: "Already have an account?",
+      //   text2: "Login Now",
+      //   onTap: () {
+      //     Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginScreen()));
+      //
+      //   },
+      // ),
       appBar: AppBar(leading: _appBar(context),),
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
@@ -212,7 +213,19 @@ class RegisterScreen extends StatelessWidget {
                       }
                     ),
                     const Gap(15),
-                     SocialButton(orText:   getLang(context, "loginWith"),),
+                     // SocialButton(orText:   getLang(context, "loginWith"),),
+                    Center(
+                      child: AccountInfo(
+                      text1: "Already have an account?",
+                        text2: "Login Now",
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginScreen()));
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -229,8 +242,8 @@ class RegisterScreen extends StatelessWidget {
       },
       padding: EdgeInsets.zero,
       child: Container(
-        width: 41,
-        height: 41,
+        width: 41.w,
+        height: 41.h,
         margin: const EdgeInsets.all(7),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),

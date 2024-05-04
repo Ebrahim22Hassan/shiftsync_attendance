@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../core/styles/colors.dart';
 
@@ -17,7 +19,7 @@ class AccountInfo extends StatelessWidget {
       child: Row(
         children: [
           Text("$text1\t"),
-          const Spacer(),
+           Gap(5.w),
           GestureDetector(
             onTap: onTap,
             child: Text(text2, style: Theme.of(context).textTheme.titleSmall!.copyWith(

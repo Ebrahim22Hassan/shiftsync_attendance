@@ -32,6 +32,7 @@ class CustomTextFormField extends StatelessWidget {
         fillColor: const Color(0xffF7F8F9),
         filled: true,
         labelText: labelText,
+        // labelStyle: TextStyle(color: AppColors().primary),
         // hintStyle: Theme.of(context)
         //     .textTheme
         //     .titleMedium!

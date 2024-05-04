@@ -32,8 +32,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              const Align(
-                  alignment: Alignment.centerRight, child: ChangeLangWidget()),
+              // const Align(
+              //     alignment: Alignment.centerRight, child: ChangeLangWidget()),
               const Spacer(flex: 1),
               Expanded(
                 flex: 2,
