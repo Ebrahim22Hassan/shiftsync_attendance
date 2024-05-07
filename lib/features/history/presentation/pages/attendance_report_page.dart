@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../profile/presentation/cubit/profile_cubit.dart';
-import '../../../attendance/presentation/widgets/cards_widget.dart';
+import '../widgets/cards_widget.dart';
 import '../widgets/progress_widget.dart';
 
 class AttendanceReportPage extends StatelessWidget {

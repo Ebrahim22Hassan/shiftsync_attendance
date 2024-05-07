@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
@@ -12,13 +13,16 @@ import '../../../../core/services/cache_helper.dart';
 import '../../../../core/services/location_helper.dart';
 import '../../data/model/employee_attendence_model.dart';
 
-
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(MapInitialState());
+  HomeCubit() : super(MapInitialState()) {
+
+    _checkTimeAndUpdate();
+  }
 
   static HomeCubit get(context) => BlocProvider.of<HomeCubit>(context);
 
   static Position? position;
+
   // static const double referenceLatitude = 25.21982131171806;
   // static const double referenceLongitude = 45.8856693885365;
 
@@ -29,22 +33,23 @@ class HomeCubit extends Cubit<HomeState> {
   final double definedDistance = 1;
   bool locationStatus = false;
   bool timeUp = false;
-  bool newDay = false;
 
- void defineNewDayState(){
-   CacheHelper.getData(key:"todayDate")==CacheHelper.getData(key:"newDate")
-       ?newDay=false
-       :newDay=true;
-   emit(DefineNewDayState());
-   print("newDate State $newDay");
- }
-
+  void _checkTimeAndUpdate() {
+    Timer.periodic(const Duration(minutes: 1), (timer) {
+      DateTime now = DateTime.now();
+      if (now.hour == 13 && now.minute == 20) {
+        totalHrs =checkInTime=checkOutTime= null;
+        checkInTime = null;
+        checkOutTime = null;
+        timeUp = false;
+        endOfProgressDegree = 1;
+        beginningOfProgressDegree = 0;
+        emit(DefineNewDayState());
+      } //
+    });
+  }
 
   Future<void> getMyCurrentLocation() async {
-    DateTime now = DateTime.now();
-    String newDate = DateFormat('yyyy-MM-dd').format(now);
-    CacheHelper.saveData(key: "newDate", value: newDate);
-
     emit(GetMyCurrentLocationLoadingState());
     await LocationHelper.getCurrentLocation();
     position = await Geolocator.getCurrentPosition().whenComplete(() async {
@@ -75,7 +80,7 @@ class HomeCubit extends Cubit<HomeState> {
         timeInSecForIosWeb: 2,
         backgroundColor: locationStatus ? Colors.green : Colors.red,
         textColor: Colors.white,
-        fontSize: 16.0);
+        fontSize: 16.0.sp);
   }
 
   double calculateDistance(double startLatitude, double startLongitude) {
@@ -114,9 +119,9 @@ class HomeCubit extends Cubit<HomeState> {
       currentDate = currentTimeAndDate.toDate();
       checkInTime = _formatTime(currentDate.hour, currentDate.minute);
       dateString =
-      "${currentDate.year}-${currentDate.month}-${currentDate.day}";
+          "${currentDate.year}-${currentDate.month}-${currentDate.day}";
       CollectionReference attendanceCollection =
-      fireStore.collection('StatusRecord');
+          fireStore.collection('StatusRecord');
 
       EmployeeAttendanceModel attendanceData = EmployeeAttendanceModel(
           id: employeeId,
@@ -141,9 +146,9 @@ class HomeCubit extends Cubit<HomeState> {
       currentDate = currentTimeAndDate.toDate();
       checkOutTime = _formatTime(currentDate.hour, currentDate.minute);
       dateString =
-      "${currentDate.year}-${currentDate.month}-${currentDate.day}";
+          "${currentDate.year}-${currentDate.month}-${currentDate.day}";
       CollectionReference attendanceCollection =
-      fireStore.collection('StatusRecord');
+          fireStore.collection('StatusRecord');
       calculateTotalHours(checkInTime!, checkOutTime!);
       EmployeeAttendanceModel attendanceData = EmployeeAttendanceModel(
           id: employeeId,
@@ -158,12 +163,8 @@ class HomeCubit extends Cubit<HomeState> {
           .doc(DateFormat('dd MMMM yyyy').format(DateTime.now()))
           .update(attendanceData.toMap());
       timeUp = true;
+      emit(ChangeTimeUpState());
 
-      DateTime now = DateTime.now();
-      String todayDate = DateFormat('yyyy-MM-dd').format(now);
-      CacheHelper.saveData(key: "todayDate", value: todayDate);
-      // CacheHelper.saveData(key: "todayDate", value: currentDate.toString());
-      emit(CheckOutSuccessState());
     } catch (e) {
       print("Error recording check-in: $e");
     }
@@ -187,13 +188,11 @@ class HomeCubit extends Cubit<HomeState> {
 
     String formattedHours = totalHours.toString().padLeft(2, '0');
     String formattedMinutes = remainingMinutes.toString().padLeft(2, '0');
-    print("total hrs is ${formattedHours + formattedMinutes}");
     totalHrs = '$formattedHours:$formattedMinutes';
   }
 
   String _formatTime(int hour, int minute) {
     if (hour >= 12) {
-
       hour = hour == 12 ? hour : hour - 12;
     }
     hour = hour == 0 ? 12 : hour;
@@ -204,7 +203,6 @@ class HomeCubit extends Cubit<HomeState> {
 
     return '$formattedHour:$formattedMinute';
   }
-
 
   bool isCheckedIn = false;
 

@@ -21,22 +21,23 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
+
   BiometricServices biometricServices = BiometricServices();
-  // double beginningOfProgressDegree = 0.0;
-  // double endOfProgressDegree = 1.0;
+
   @override
   void initState() {
     super.initState();
-    biometricServices.localAuthentication
-        .isDeviceSupported()
-        .then((bool isSupport) => setState(() {
-      biometricServices.supportState =
-      isSupport ? SupportState.supported : SupportState.unSupported;
-    }));
-    biometricServices.checkBiometric();
-    biometricServices.getAvailableBiometrics((fn) {
-      setState(() {});
-    }, mounted);
+
+    // biometricServices.localAuthentication
+    //     .isDeviceSupported()
+    //     .then((bool isSupport) => setState(() {
+    //   biometricServices.supportState =
+    //   isSupport ? SupportState.supported : SupportState.unSupported;
+    // }));
+    // biometricServices.checkBiometric();
+    // biometricServices.getAvailableBiometrics((fn) {
+    //   setState(() {});
+    // }, mounted);
 
     _animationController = AnimationController(
       vsync: this,
@@ -44,12 +45,9 @@ class _MyCustomNeumorphicButtonState extends State<MyCustomNeumorphicButton>
     );
     _animation =
         Tween<double>(begin: beginningOfProgressDegree, end: endOfProgressDegree).animate(_animationController);
-
-    // Add a listener to animation controller
     _animationController.addListener(() {
       setState(() {
         beginningOfProgressDegree = _animation.value ;
-
       });
     });
   }

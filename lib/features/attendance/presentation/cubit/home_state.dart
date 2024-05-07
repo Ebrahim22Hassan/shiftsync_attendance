@@ -23,3 +23,4 @@ class ChangeLanguageState extends HomeState {}
 
 
 class DefineNewDayState extends HomeState{}
+class ChangeTimeUpState extends HomeState{}

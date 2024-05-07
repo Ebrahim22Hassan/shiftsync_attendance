@@ -42,6 +42,7 @@ class _HomePageState extends State<HomePage> {
                  Gap(20.h),
                 const DateTimeInfo(),
                  Gap(50.h),
+
                 BlocBuilder<ProfileCubit, ProfileState>(
                   builder: (context, state) {
                     if (state is ProfileLoaded) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class MyCustomBottomNavigationBar extends StatefulWidget {
@@ -17,8 +18,8 @@ class MyCustomBottomNavigationBarState
   Widget build(BuildContext context) {
     double displayWidth = MediaQuery.of(context).size.width;
     return Container(
-        margin: EdgeInsets.all(displayWidth * 0.05),
-        height: displayWidth * 0.155,
+        margin: EdgeInsets.all((displayWidth * 0.05).h),
+        height: (displayWidth * 0.155).h,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -28,10 +29,10 @@ class MyCustomBottomNavigationBarState
               offset: const Offset(0, 10),
             ),
           ],
-          borderRadius: BorderRadius.circular(50),
+          borderRadius: BorderRadius.circular(50.r),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: displayWidth * 0.05),
+          padding: EdgeInsets.symmetric(horizontal: (displayWidth * 0.05).w),
           child: SalomonBottomBar(
             currentIndex: currentIndex,
             onTap: (index) {

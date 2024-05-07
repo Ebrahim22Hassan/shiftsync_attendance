@@ -27,8 +27,8 @@ class AttendanceButtonUI extends StatelessWidget {
     Color startBackgroundColor = const Color(0xffF9F5F6);
     Color endBackgroundColor = Colors.grey;
     // Color indicatorBackground = const Color(0xFFB8C7CB);
-    Color startProgressColor = const Color(0xFFB8C7CB);
-    Color endProgressColor = AppColors().primary;
+    // Color startProgressColor = const Color(0xFFB8C7CB);
+    // Color endProgressColor = AppColors().primary;
 
     return Center(
       child: AnimatedBuilder(
@@ -48,13 +48,13 @@ class AttendanceButtonUI extends StatelessWidget {
           return BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) {
               return CircularPercentIndicator(
-                radius: 100.r,
+                radius: 97.r,
                 lineWidth: 10.w,
                 circularStrokeCap: CircularStrokeCap.round,
                 percent: _animation.value,
                 center: Container(
                   height: 175.h,
-                  width: 175.h,
+                  width: 175.w,
                   decoration: BoxDecoration(
                     color:currentBackgroundColor,
                     shape: BoxShape.circle,
@@ -80,7 +80,7 @@ class AttendanceButtonUI extends StatelessWidget {
                        Gap(5.h),
                       AnimatedSwitcher(
                         duration: const Duration(milliseconds: 1000),
-                        child: cubit.timeUp
+                        child: (cubit.timeUp)
                             ?  Text(
                           getLang(context,"haveANiceDay"),
                           style: const TextStyle(color: Colors.black),
